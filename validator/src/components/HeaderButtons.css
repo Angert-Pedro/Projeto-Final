@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    /* Adiciona um espaço entre o ícone e o texto */
     padding: 0.5rem 1rem;
     text-decoration: none;
     color: black;

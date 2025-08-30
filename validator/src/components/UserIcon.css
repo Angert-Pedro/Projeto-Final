@@ -1,11 +1,9 @@
 .user-icon {
     width: 40px;
-    /* Ou o tamanho que você preferir */
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
     border: 2.5px solid black;
-    /* Garante que a imagem não saia do círculo */
 }
 
 .user-icon img {
