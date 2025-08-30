@@ -9,10 +9,11 @@ function EditProfile() {
       <h2>Editar perfil</h2>
       <img src={UserEditIcon} alt="" className="editPhoto" />
       <div>
-        <EditField inputType="text" placeholder="Joao Pedro Cabral" />
-        <EditField inputType="email" placeholder="joaoPedro@gmail.com" />
-        <EditField inputType="password" placeholder="*******" />
-        <EditField inputType="number" placeholder="(61) 97896-9879" />
+        <EditField inputType="text" placeholder="Digite seu Nome" />
+        <EditField inputType="text" placeholder="Digite seu Usuario" />
+        <EditField inputType="password" placeholder="Digite sua Senha" />
+        <EditField inputType="email" placeholder="Digite seu Email" />
+        <EditField inputType="number" placeholder="Digite seu Telefone" />
       </div>
     </div>
   );
