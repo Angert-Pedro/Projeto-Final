@@ -1,0 +1,94 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\M\u00E1rio\\source\\repos\\Projeto-Final\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{57D8AD8D-CACD-4548-B8F6-9F82C32942B4}|API.Validator.csproj|c:\\users\\m\u00E1rio\\source\\repos\\projeto-final\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57D8AD8D-CACD-4548-B8F6-9F82C32942B4}|API.Validator.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57D8AD8D-CACD-4548-B8F6-9F82C32942B4}|API.Validator.csproj|c:\\users\\m\u00E1rio\\source\\repos\\projeto-final\\validator.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{57D8AD8D-CACD-4548-B8F6-9F82C32942B4}|API.Validator.csproj|solutionrelative:validator.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57D8AD8D-CACD-4548-B8F6-9F82C32942B4}|API.Validator.csproj|c:\\users\\m\u00E1rio\\source\\repos\\projeto-final\\api.validator.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{57D8AD8D-CACD-4548-B8F6-9F82C32942B4}|API.Validator.csproj|solutionrelative:api.validator.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA68F9CD-1C3C-4A87-ABFC-ADA8E38A8E88}|..\\API.Criptografia\\API.Criptografia.csproj|c:\\users\\m\u00E1rio\\source\\repos\\api.criptografia\\api.criptografia.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Validator.http",
+              "DocumentMoniker": "C:\\Users\\M\u00E1rio\\source\\repos\\Projeto-Final\\Validator.http",
+              "RelativeDocumentMoniker": "Validator.http",
+              "ToolTip": "C:\\Users\\M\u00E1rio\\source\\repos\\Projeto-Final\\Validator.http",
+              "RelativeToolTip": "Validator.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-09-01T16:33:25.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "API.Validator",
+              "DocumentMoniker": "C:\\Users\\M\u00E1rio\\Source\\Repos\\Projeto-Final\\API.Validator.csproj",
+              "RelativeDocumentMoniker": "API.Validator.csproj",
+              "ToolTip": "C:\\Users\\M\u00E1rio\\Source\\Repos\\Projeto-Final\\API.Validator.csproj",
+              "RelativeToolTip": "API.Validator.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-01T16:33:21.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\M\u00E1rio\\source\\repos\\Projeto-Final\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\M\u00E1rio\\source\\repos\\Projeto-Final\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T16:33:19.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "API.Criptografia",
+              "DocumentMoniker": "C:\\Users\\M\u00E1rio\\Source\\Repos\\API.Criptografia\\API.Criptografia.csproj",
+              "RelativeDocumentMoniker": "..\\API.Criptografia\\API.Criptografia.csproj",
+              "ToolTip": "C:\\Users\\M\u00E1rio\\Source\\Repos\\API.Criptografia\\API.Criptografia.csproj",
+              "RelativeToolTip": "..\\API.Criptografia\\API.Criptografia.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-01T16:33:06.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
