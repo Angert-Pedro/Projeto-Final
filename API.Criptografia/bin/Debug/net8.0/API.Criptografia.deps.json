@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "API.Criptografia/1.0.0": {
+        "runtime": {
+          "API.Criptografia.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "API.Criptografia/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
