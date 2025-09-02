@@ -5,15 +5,15 @@ VisualStudioVersion = 17.14.36119.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Validator", "API.Validator.csproj", "{57D8AD8D-CACD-4548-B8F6-9F82C32942B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Models", "..\API.Models\API.Models.csproj", "{E950655D-A9C2-4D33-9495-C5B9CDE1D3EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Models", "API.Models\API.Models.csproj", "{E950655D-A9C2-4D33-9495-C5B9CDE1D3EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.DAL", "..\API.DAL\API.DAL.csproj", "{1D5DA1FB-3FCA-47C4-A342-7A904D4C1FD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.DAL", "API.DAL\API.DAL.csproj", "{1D5DA1FB-3FCA-47C4-A342-7A904D4C1FD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Criptografia", "..\API.Criptografia\API.Criptografia.csproj", "{BA68F9CD-1C3C-4A87-ABFC-ADA8E38A8E88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Criptografia", "API.Criptografia\API.Criptografia.csproj", "{BA68F9CD-1C3C-4A87-ABFC-ADA8E38A8E88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.TesteAutomatizado", "..\API.TesteAutomatizado\API.TesteAutomatizado.csproj", "{BB4A7242-656A-4816-84B9-B1604483A74C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.TesteAutomatizado", "API.TesteAutomatizado\API.TesteAutomatizado.csproj", "{BB4A7242-656A-4816-84B9-B1604483A74C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Services", "..\API.Services\API.Services.csproj", "{A12F439D-07CD-4A8B-BBE6-185F0D805B61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Services", "API.Services\API.Services.csproj", "{A12F439D-07CD-4A8B-BBE6-185F0D805B61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
