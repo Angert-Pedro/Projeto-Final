@@ -1,0 +1,22 @@
+.container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.buttons-box {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
