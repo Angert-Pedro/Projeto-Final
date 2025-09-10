@@ -1,25 +1,56 @@
+import React from "react";
 import {
-  Image,
-  View,
-  Text,
   TouchableOpacity,
-  TouchableOpacityProps,
-  ImageSourcePropType,
+  Text,
+  StyleSheet,
+  View,
+  ViewStyle,
+  TextStyle,
 } from "react-native";
-import "./styles";
+import { IconName } from "@/helpers/iconNames";
+import { FontAwesome } from "@expo/vector-icons";
 
-type Props = TouchableOpacityProps & {
-  ButtonText: string;
-  ButtonIcon: ImageSourcePropType;
+type HeaderButtonProps = {
+  icon: IconName;
+  label: string;
+  onPress?: () => void;
+  containerStyle?: ViewStyle;
+  textStyle?: TextStyle;
+  iconSize?: number;
+  iconColor?: string;
 };
 
-export default function HeaderButton({ ButtonText, ButtonIcon }: Props) {
+const HeaderButton: React.FC<HeaderButtonProps> = ({
+  icon,
+  label,
+  onPress,
+  containerStyle,
+  textStyle,
+  iconSize = 24,
+  iconColor = "#000",
+}) => {
   return (
-    <View>
-      <TouchableOpacity>
-        <Image source={ButtonIcon} alt="" />
-        <Text>{ButtonText}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      style={[styles.container, containerStyle]}
+      onPress={onPress}
+    >
+      <FontAwesome name={icon} size={iconSize} color={iconColor} />
+      <Text style={[styles.text, textStyle]}>{label}</Text>
+    </TouchableOpacity>
   );
-}
+};
+
+export default HeaderButton;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 8,
+  },
+  text: {
+    marginLeft: 8,
+    fontSize: 16,
+    color: "#000",
+  },
+});

@@ -12,3 +12,7 @@ config.resolver.assetExts = config.resolver.assetExts.filter(
 config.resolver.sourceExts.push("svg");
 
 module.exports = config;
+
+resolver: {
+  sourceExts: ["tsx", "ts", "js", "jsx", "json", "web.tsx", "native.tsx"];
+}
