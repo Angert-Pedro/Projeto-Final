@@ -1,5 +1,9 @@
 export type IconName =
   | 'menu'
+  | 'headphones'
+  | 'comments'
+  | 'file-text'
+  | 'user'
   | 'map'
   | 'search'
   | 'home'

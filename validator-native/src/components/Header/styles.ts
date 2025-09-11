@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   headerContainerWeb: {
-    // Estilo WEB
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -14,32 +13,28 @@ export const styles = StyleSheet.create({
     gap: 20,
     alignItems: "center",
   },
-  // buttonsBox: {
-  //   flexDirection: 'row', 
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   paddingHorizontal: 16,
-  //   paddingVertical: 12,
-  // },
 
-    // Estilo MOBILE
-  containerMobile: {
+  // Sidebar
+  overlay: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
   },
-  logoBox: {
-    alignItems: "center",
-    paddingVertical: 12,
+  sidebar: {
+    width: '75%',
+    height: '100%',
+    backgroundColor: '#fff',
+    padding: 20,
   },
-  
-  // Estilo LAYOUT
-   container: { flex: 1, backgroundColor: "#fff" },
-  content: { flex: 1 },
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#ddd",
+  closeButton: {
+    alignSelf: 'flex-start',
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginTop: 20,
+    marginBottom: 10,
   },
 });
