@@ -57,7 +57,6 @@ export default function Index() {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate(item.screen as never)}
-            style={styles.imageContainer}
           >
             <Image source={item.image} style={styles.image} />
             <Text style={{ marginTop: 5, marginLeft: 2, fontSize: 20, fontWeight: "semibold" }}>
@@ -73,7 +72,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   main:{
     backgroundColor: "#d3d3d3",
-    flex: 1,
+    height: "100%",
   },
   title: {
     fontSize: 25,
@@ -82,10 +81,6 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 20,
-  },
-  imageContainer: {
-    borderRadius: 12,
-    overflow: "hidden",
   },
   image: {
     width: 150,
