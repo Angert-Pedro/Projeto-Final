@@ -42,7 +42,7 @@ export default function Index() {
   const navigation = useNavigation();
 
   return (
-    <View>
+    <View style={styles.main}>
       <Header />
       <Text style={styles.title}>
         Filmes em cartaz
@@ -71,6 +71,10 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+  main:{
+    backgroundColor: "#d3d3d3",
+    flex: 1,
+  },
   title: {
     fontSize: 25,
     fontWeight: "semibold",
