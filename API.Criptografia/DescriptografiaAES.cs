@@ -9,7 +9,7 @@ namespace API.Criptografia
 {
     public class DescriptografiaAES
     {
-        private string DescriptografarAES(string valorCriptografado)
+        protected string DescriptografarAES(string valorCriptografado)
         {
             using var aes = Aes.Create();
             aes.Key = Config.Chave;

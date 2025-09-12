@@ -13,7 +13,7 @@ namespace API.DAL
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Evento> Evento { get; set; }
         public DbSet<Ingresso> Ingresso { get; set; }
-        public DbSet<Localizacao> Local { get; set; }
+        public DbSet<Localizacao> Localizacao { get; set; }
         public DbSet<Pessoa> Pessoa { get; set; }
         private string connectionString = "Data Source=(localdb)\\Local;Initial Catalog=Validator;Integrated Security=True;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

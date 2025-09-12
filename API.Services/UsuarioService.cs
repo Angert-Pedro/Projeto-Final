@@ -7,36 +7,29 @@ namespace API.Services
 {
     public class UsuarioService : BaseService<Usuario>, IUsuarioService
     {
+        private readonly DAL<Usuario> _dal;
         public UsuarioService(DAL<Usuario> dal) : base(dal)
         {
             _dal = dal;
         }
-        private readonly DAL<Usuario> _dal;
         public int DuracaoSessao { get; set; }
         protected DateTime HorarioEntrou { get; set; }
         protected bool UsuarioLogado { get; set; }
-        public bool executarLogin(string usuario, string senha)
+        public bool executarLogin(string login, string senha)
         {
-            if (_dal.verificarExistencia(usuario) != null)
+            Usuario usuario = new Usuario(login, senha);
+            if (_dal.listarPor(x => x.Login == usuario.Login && base.DescriptografarAES(x.Senha) == usuario.Senha) != null)
             {
                 this.HorarioEntrou = DateTime.Now;
                 this.UsuarioLogado = true;
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         public void executarLogout(string usuario)
         {
             this.DuracaoSessao = (int)(DateTime.Now - this.HorarioEntrou).TotalSeconds;
             this.UsuarioLogado = false;
-        }
-
-        public Usuario consultarUsuario(string usuario)
-        {
-            return _dal.listarPor(user=>user.Login == usuario);
         }
 
         public void criarUsuario(Usuario usuario)
@@ -51,20 +44,6 @@ namespace API.Services
             CriptografiaAES cripto = new CriptografiaAES();
             cripto.CriptografarAES(usuario.Senha);
             _dal.alterar(usuario);
-        }
-
-        public bool excluirUsuario(string nome)
-        {
-            Usuario usuario = _dal.verificarExistencia(nome);
-            if (usuario != null)
-            {
-                _dal.excluir(usuario);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }

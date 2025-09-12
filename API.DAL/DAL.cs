@@ -19,9 +19,9 @@ namespace API.DAL
             return context.Set<T>().FirstOrDefault(condicao);
         }
 
-        public T? verificarExistencia(string valor)
+        public T? verificarExistencia(T? entidade)
         {
-            return context.Set<T>().FirstOrDefault(x=>x.Equals(valor));
+            return context.Set<T>().FirstOrDefault(x=>x.Equals(entidade));
         }
 
         protected void enviarNotificacao(Notificacao mensagem)

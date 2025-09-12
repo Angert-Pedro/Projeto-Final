@@ -11,6 +11,11 @@ namespace API.Models
     public class Usuario
     {
         public Usuario(){}
+        public Usuario(string login, string senha)
+        {
+            this.Login = login;
+            this.Senha = senha;
+        }
         [JsonIgnore]
         public int Id { get; set; }
         public string Login { get; set; } = "";

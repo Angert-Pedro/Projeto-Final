@@ -8,7 +8,7 @@ namespace API.Services.Interfaces
 {
     internal interface IUsuarioService
     {
-        bool executarLogin(string usuario, string senha);
-        void executarLogout(string usuario);
+        bool executarLogin(string login, string senha);
+        void executarLogout(string login);
     }
 }
