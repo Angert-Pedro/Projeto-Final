@@ -1,0 +1,18 @@
+export type IconName =
+  | 'menu'
+  | 'headphones'
+  | 'comments'
+  | 'file-text'
+  | 'user'
+  | 'map'
+  | 'search'
+  | 'home'
+  | 'label'
+  | 'settings'
+  | 'zoom-out-map'
+  | 'account-circle'
+  | 'favorite'
+  | 'notifications'
+  | 'info'
+  | 'ticket'
+  | 'id-card';
