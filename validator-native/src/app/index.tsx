@@ -55,17 +55,18 @@ export default function Index() {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate(item.screen as never)}
-            style={{ alignItems: "center" }}
+            style={{ alignItems: "center", height: 1 }}
           >
             <Image
               source={item.image}
-              style={{ width: 120, height: 180, borderRadius: 8 }}
+              style={{ width: 170, height: 250, borderRadius: 8 }}
             />
             <Text
               style={{
                 marginTop: 5,
-                fontSize: 16,
-                fontWeight: "600",
+                fontSize: 20,
+                fontWeight: "500",
+                letterSpacing: 0.8,
                 textAlign: "center",
               }}
             >
@@ -74,6 +75,39 @@ export default function Index() {
           </TouchableOpacity>
         )}
       />
+      <Text style={styles.title}>Eventos próximos</Text>
+      <FlatList
+        data={data}
+        horizontal
+        pagingEnabled={false}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ paddingHorizontal: 10 }}
+        ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate(item.screen as never)}
+            style={{ alignItems: "center", height: 120 }}
+          >
+            <Image
+              source={item.image}
+              style={{ width: 170, height: 250, borderRadius: 8 }}
+            />
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 20,
+                fontWeight: "500",
+                letterSpacing: 0.8, 
+                textAlign: "center",
+              }}
+            >
+              {item.title}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
+      
     </View>
   );
 }
@@ -88,12 +122,8 @@ const styles = StyleSheet.create({
     fontWeight: "semibold",
     margin: 20,
   },
-  container: {
-    marginTop: 20,
-  },
   image: {
     width: 150,
-    height: 200,
     borderRadius: 12,
   },
 });
