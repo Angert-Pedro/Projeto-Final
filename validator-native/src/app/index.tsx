@@ -37,29 +37,38 @@ const data = [
   },
 ];
 
-
 export default function Index() {
   const navigation = useNavigation();
 
   return (
     <View style={styles.main}>
       <Header />
-      <Text style={styles.title}>
-        Filmes em cartaz
-      </Text>
+      <Text style={styles.title}>Filmes em cartaz</Text>
       <FlatList
         data={data}
         horizontal
-        keyExtractor={(item) => item.id}
+        pagingEnabled={false}
         showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{ paddingHorizontal: 10 }}
         ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate(item.screen as never)}
+            style={{ alignItems: "center" }}
           >
-            <Image source={item.image} style={styles.image} />
-            <Text style={{ marginTop: 5, marginLeft: 2, fontSize: 20, fontWeight: "semibold" }}>
+            <Image
+              source={item.image}
+              style={{ width: 120, height: 180, borderRadius: 8 }}
+            />
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 16,
+                fontWeight: "600",
+                textAlign: "center",
+              }}
+            >
               {item.title}
             </Text>
           </TouchableOpacity>
@@ -70,7 +79,7 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
-  main:{
+  main: {
     backgroundColor: "#d3d3d3",
     height: "100%",
   },
@@ -87,4 +96,4 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 12,
   },
-})
+});
