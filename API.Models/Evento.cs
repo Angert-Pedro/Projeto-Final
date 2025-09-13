@@ -15,12 +15,12 @@ namespace API.Models
         }
         [JsonIgnore]
         public int Id { get; set; }
-        public string? NomeEvento { get; set; }
-        public DateTime Data { get; set; }
-        public virtual Localizacao? Localizacao { get; set; }
+        public string? Nome { get; set; }
+        public DateTime Data_Evento { get; set; }
+        public virtual Localizacao? Localizacao_ { get; set; }
         public string? UrlBanner { get; set; }
-        public int QuantidadeIngressos { get; set; }
-        public DateTime HorarioInicio { get; set; }
-        public DateTime HorarioFinal { get; set; }
+        public int Capacidade_Max { get; set; }
+        public DateTime Horario_Inicio { get; set; }
+        public DateTime Horario_Final { get; set; }
     }
 }
