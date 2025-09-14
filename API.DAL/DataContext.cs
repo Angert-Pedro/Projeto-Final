@@ -20,5 +20,13 @@ namespace API.DAL
         {
             optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Pessoa>()
+                .HasIndex(p => p.Cpf)
+                .IsUnique();
+        }
     }
 }

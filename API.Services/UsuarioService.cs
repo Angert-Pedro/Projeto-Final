@@ -8,9 +8,11 @@ namespace API.Services
     public class UsuarioService : BaseService<Usuario>, IUsuarioService
     {
         private readonly DAL<Usuario> _dal;
-        public UsuarioService(DAL<Usuario> dal) : base(dal)
+        private readonly DAL<Pessoa> _dalPessoa;
+        public UsuarioService(DAL<Usuario> dal, DAL<Pessoa> dalPessoa) : base(dal)
         {
             _dal = dal;
+            _dalPessoa = dalPessoa;
         }
         public int DuracaoSessao { get; set; }
         protected DateTime HorarioEntrou { get; set; }
@@ -41,9 +43,35 @@ namespace API.Services
 
         public void atualizarUsuario(Usuario usuario)
         {
+            //Consulta pessoa existente
+            var pessoaExistente = _dalPessoa.listarPor(x => x.Cpf == usuario.Pessoa_.Cpf);
+
+            //Caso exista a pessoa cadastrada ao usuário, atualizar, senão, inserir
+            if (pessoaExistente!= null)
+            {
+                pessoaExistente.Nome = usuario.Pessoa_.Nome;
+                pessoaExistente.Email = usuario.Pessoa_.Email;
+                pessoaExistente.Numero = usuario.Pessoa_.Numero;
+                pessoaExistente.Data_Nasc = usuario.Pessoa_.Data_Nasc;
+
+                usuario.Pessoa_ = pessoaExistente;
+                _dalPessoa.alterar(usuario.Pessoa_);
+            }
+
+            //Criptografar a senha informada, mesmo que não seja alterada
             CriptografiaAES cripto = new CriptografiaAES();
-            cripto.CriptografarAES(usuario.Senha);
-            _dal.alterar(usuario);
+            usuario.Senha = cripto.CriptografarAES(usuario.Senha);
+
+            //Atualizar os dados do usuário existente
+            var usuarioExistente = _dal.listarPor(x => x.Login == usuario.Login);
+
+            if (usuarioExistente == null)
+                throw new Exception("Usuário não encontrado.");
+
+            usuarioExistente.Login = usuario.Login;
+            usuarioExistente.Senha = usuario.Senha;
+
+            _dal.alterar(usuarioExistente);
         }
     }
 }
