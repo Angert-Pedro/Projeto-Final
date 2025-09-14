@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Injeção de dependências
+//InjeÃ§Ã£o de dependÃªncias
 builder.Services.AddScoped<DataContext>();
 builder.Services.AddScoped(typeof(DAL<>));
 builder.Services.AddScoped(typeof(BaseService<>));
