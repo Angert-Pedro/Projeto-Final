@@ -21,3 +21,15 @@ C:\Users\Mário\source\repos\Projeto-Final\API.Criptografia\obj\Debug\net8.0\API
 C:\Users\Mário\source\repos\Projeto-Final\API.Criptografia\obj\Debug\net8.0\refint\API.Criptografia.dll
 C:\Users\Mário\source\repos\Projeto-Final\API.Criptografia\obj\Debug\net8.0\API.Criptografia.pdb
 C:\Users\Mário\source\repos\Projeto-Final\API.Criptografia\obj\Debug\net8.0\ref\API.Criptografia.dll
+D:\Nova pasta\API.Criptografia\bin\Debug\net8.0\API.Criptografia.deps.json
+D:\Nova pasta\API.Criptografia\bin\Debug\net8.0\API.Criptografia.dll
+D:\Nova pasta\API.Criptografia\bin\Debug\net8.0\API.Criptografia.pdb
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.AssemblyInfoInputs.cache
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.AssemblyInfo.cs
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.csproj.CoreCompileInputs.cache
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.sourcelink.json
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.dll
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\refint\API.Criptografia.dll
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.pdb
+D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\ref\API.Criptografia.dll

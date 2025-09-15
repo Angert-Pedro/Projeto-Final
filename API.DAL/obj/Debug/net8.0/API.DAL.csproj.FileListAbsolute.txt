@@ -33,3 +33,21 @@ C:\Users\Mário\source\repos\Projeto-Final\API.DAL\obj\Debug\net8.0\refint\API.D
 C:\Users\Mário\source\repos\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.pdb
 C:\Users\Mário\source\repos\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.genruntimeconfig.cache
 C:\Users\Mário\source\repos\Projeto-Final\API.DAL\obj\Debug\net8.0\ref\API.DAL.dll
+D:\Nova pasta\API.DAL\bin\Debug\net8.0\API.DAL.deps.json
+D:\Nova pasta\API.DAL\bin\Debug\net8.0\API.DAL.runtimeconfig.json
+D:\Nova pasta\API.DAL\bin\Debug\net8.0\API.DAL.dll
+D:\Nova pasta\API.DAL\bin\Debug\net8.0\API.DAL.pdb
+D:\Nova pasta\API.DAL\bin\Debug\net8.0\API.Models.dll
+D:\Nova pasta\API.DAL\bin\Debug\net8.0\API.Models.pdb
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.csproj.AssemblyReference.cache
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.AssemblyInfoInputs.cache
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.AssemblyInfo.cs
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.csproj.CoreCompileInputs.cache
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.sourcelink.json
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.csproj.Up2Date
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.dll
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\refint\API.DAL.dll
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.pdb
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.genruntimeconfig.cache
+D:\Nova pasta\API.DAL\obj\Debug\net8.0\ref\API.DAL.dll

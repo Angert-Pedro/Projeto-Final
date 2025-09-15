@@ -21,3 +21,15 @@ C:\Users\Mário\source\repos\Projeto-Final\API.Models\obj\Debug\net8.0\API.Model
 C:\Users\Mário\source\repos\Projeto-Final\API.Models\obj\Debug\net8.0\refint\API.Models.dll
 C:\Users\Mário\source\repos\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.pdb
 C:\Users\Mário\source\repos\Projeto-Final\API.Models\obj\Debug\net8.0\ref\API.Models.dll
+D:\Nova pasta\API.Models\bin\Debug\net8.0\API.Models.deps.json
+D:\Nova pasta\API.Models\bin\Debug\net8.0\API.Models.dll
+D:\Nova pasta\API.Models\bin\Debug\net8.0\API.Models.pdb
+D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.AssemblyInfoInputs.cache
+D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.AssemblyInfo.cs
+D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.csproj.CoreCompileInputs.cache
+D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.sourcelink.json
+D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.dll
+D:\Nova pasta\API.Models\obj\Debug\net8.0\refint\API.Models.dll
+D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.pdb
+D:\Nova pasta\API.Models\obj\Debug\net8.0\ref\API.Models.dll

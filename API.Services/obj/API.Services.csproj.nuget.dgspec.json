@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Services\\API.Services.csproj": {}
+    "D:\\Nova pasta\\API.Services\\API.Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj": {
+    "D:\\Nova pasta\\API.Criptografia\\API.Criptografia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj",
+        "projectUniqueName": "D:\\Nova pasta\\API.Criptografia\\API.Criptografia.csproj",
         "projectName": "API.Criptografia",
-        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj",
-        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Criptografia\\obj\\",
+        "projectPath": "D:\\Nova pasta\\API.Criptografia\\API.Criptografia.csproj",
+        "packagesPath": "C:\\Users\\thiad\\.nuget\\packages\\",
+        "outputPath": "D:\\Nova pasta\\API.Criptografia\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thiad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -65,24 +65,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj": {
+    "D:\\Nova pasta\\API.DAL\\API.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj",
+        "projectUniqueName": "D:\\Nova pasta\\API.DAL\\API.DAL.csproj",
         "projectName": "API.DAL",
-        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj",
-        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\obj\\",
+        "projectPath": "D:\\Nova pasta\\API.DAL\\API.DAL.csproj",
+        "packagesPath": "C:\\Users\\thiad\\.nuget\\packages\\",
+        "outputPath": "D:\\Nova pasta\\API.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thiad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -97,8 +97,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj": {
-                "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj"
+              "D:\\Nova pasta\\API.Models\\API.Models.csproj": {
+                "projectPath": "D:\\Nova pasta\\API.Models\\API.Models.csproj"
               }
             }
           }
@@ -156,24 +156,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj": {
+    "D:\\Nova pasta\\API.Models\\API.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
+        "projectUniqueName": "D:\\Nova pasta\\API.Models\\API.Models.csproj",
         "projectName": "API.Models",
-        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
-        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\obj\\",
+        "projectPath": "D:\\Nova pasta\\API.Models\\API.Models.csproj",
+        "packagesPath": "C:\\Users\\thiad\\.nuget\\packages\\",
+        "outputPath": "D:\\Nova pasta\\API.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thiad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -221,24 +221,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Services\\API.Services.csproj": {
+    "D:\\Nova pasta\\API.Services\\API.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Services\\API.Services.csproj",
+        "projectUniqueName": "D:\\Nova pasta\\API.Services\\API.Services.csproj",
         "projectName": "API.Services",
-        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Services\\API.Services.csproj",
-        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Services\\obj\\",
+        "projectPath": "D:\\Nova pasta\\API.Services\\API.Services.csproj",
+        "packagesPath": "C:\\Users\\thiad\\.nuget\\packages\\",
+        "outputPath": "D:\\Nova pasta\\API.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thiad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -253,14 +253,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj": {
-                "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj"
+              "D:\\Nova pasta\\API.Criptografia\\API.Criptografia.csproj": {
+                "projectPath": "D:\\Nova pasta\\API.Criptografia\\API.Criptografia.csproj"
               },
-              "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj": {
-                "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj"
+              "D:\\Nova pasta\\API.DAL\\API.DAL.csproj": {
+                "projectPath": "D:\\Nova pasta\\API.DAL\\API.DAL.csproj"
               },
-              "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj": {
-                "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj"
+              "D:\\Nova pasta\\API.Models\\API.Models.csproj": {
+                "projectPath": "D:\\Nova pasta\\API.Models\\API.Models.csproj"
               }
             }
           }
@@ -296,7 +296,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

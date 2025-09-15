@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj": {}
+    "D:\\Nova pasta\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj": {
+    "D:\\Nova pasta\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
+        "projectUniqueName": "D:\\Nova pasta\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
         "projectName": "API.TesteAutomatizado",
-        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
-        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.TesteAutomatizado\\obj\\",
+        "projectPath": "D:\\Nova pasta\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
+        "packagesPath": "C:\\Users\\thiad\\.nuget\\packages\\",
+        "outputPath": "D:\\Nova pasta\\API.TesteAutomatizado\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thiad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
