@@ -1,8 +1,18 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/";
 import { useNavigation } from "@react-navigation/native";
-import { FlatList, Text, TouchableOpacity, View, Image } from "react-native";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const data = [
   {
@@ -23,107 +33,99 @@ const data = [
     image: require("../assets/karatekid.jpg"),
     screen: "KarateScreen",
   },
-  {
-    id: "4",
-    title: "Karate Kid",
-    image: require("../assets/karatekid.jpg"),
-    screen: "KarateScreen",
-  },
-  {
-    id: "5",
-    title: "Karate Kid",
-    image: require("../assets/karatekid.jpg"),
-    screen: "KarateScreen",
-  },
 ];
 
 export default function Index() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.main}>
-      <Header />
-      <Text style={styles.title}>Filmes em cartaz</Text>
-      <FlatList
-        data={data}
-        horizontal
-        pagingEnabled={false}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={{ paddingHorizontal: 10 }}
-        ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate(item.screen as never)}
-            style={{ alignItems: "center", height: 1 }}
-          >
-            <Image
-              source={item.image}
-              style={{ width: 170, height: 250, borderRadius: 8 }}
+    <AuthProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <Header />
+
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {/* O wrapper para o conteúdo que vai "empurrar" o footer para baixo */}
+          <View style={styles.contentWrapper}>
+            <Text style={styles.title}>Filmes em cartaz</Text>
+            <FlatList
+              data={data}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={styles.listPadding}
+              ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(item.screen as never)}
+                  style={styles.cardContainer}
+                >
+                  <Image source={item.image} style={styles.cardImage} />
+                  <Text style={styles.cardTitle}>{item.title}</Text>
+                </TouchableOpacity>
+              )}
             />
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 20,
-                fontWeight: "500",
-                letterSpacing: 0.8,
-                textAlign: "center",
-              }}
-            >
-              {item.title}
-            </Text>
-          </TouchableOpacity>
-        )}
-      />
-      <Text style={styles.title}>Eventos próximos</Text>
-      <FlatList
-        data={data}
-        horizontal
-        pagingEnabled={false}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={{ paddingHorizontal: 10 }}
-        ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate(item.screen as never)}
-            style={{ alignItems: "center", height: 120 }}
-          >
-            <Image
-              source={item.image}
-              style={{ width: 170, height: 250, borderRadius: 8 }}
+
+            <Text style={styles.title}>Eventos próximos</Text>
+            <FlatList
+              data={data}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item) => `event-${item.id}`}
+              contentContainerStyle={styles.listPadding}
+              ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(item.screen as never)}
+                  style={styles.cardContainer}
+                >
+                  <Image source={item.image} style={styles.cardImage} />
+                  <Text style={styles.cardTitle}>{item.title}</Text>
+                </TouchableOpacity>
+              )}
             />
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 20,
-                fontWeight: "500",
-                letterSpacing: 0.8, 
-                textAlign: "center",
-              }}
-            >
-              {item.title}
-            </Text>
-          </TouchableOpacity>
-        )}
-      />
-      
-    </View>
+          </View>
+
+          <Footer navigation={navigation} />
+        </ScrollView>
+      </SafeAreaView>
+    </AuthProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  main: {
+  safeArea: {
+    flex: 1,
     backgroundColor: "#d3d3d3",
-    height: "100%",
   },
+  scrollContainer: {
+    flexGrow: 1, // MUITO IMPORTANTE: Permite que o container cresça
+    justifyContent: "space-between", // Empurra o conteúdo e o footer para as extremidades
+  },
+  contentWrapper: {},
   title: {
     fontSize: 25,
-    fontWeight: "semibold",
+    fontWeight: "600",
     margin: 20,
+    color: "#333",
   },
-  image: {
-    width: 150,
-    borderRadius: 12,
+  listPadding: {
+    paddingHorizontal: 10,
+  },
+  cardContainer: {
+    alignItems: "center",
+    width: 170,
+  },
+  cardImage: {
+    width: "100%",
+    height: 250,
+    borderRadius: 8,
+  },
+  cardTitle: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: "500",
+    letterSpacing: 0.5,
+    textAlign: "center",
+    color: "#1C1C1E",
   },
 });
