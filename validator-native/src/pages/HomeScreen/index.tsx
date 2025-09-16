@@ -18,25 +18,25 @@ const data = [
   {
     id: "1",
     title: "Premonição 6",
-    image: require("../assets/premonicao.jpg"),
+    image: require("../../assets/premonicao.jpg"),
     screen: "PremonicaoScreen",
   },
   {
     id: "2",
     title: "Vitória",
-    image: require("../assets/vitoria.jpg"),
+    image: require("../../assets/vitoria.jpg"),
     screen: "VitoriaScreen",
   },
   {
     id: "3",
     title: "Karate Kid",
-    image: require("../assets/karatekid.jpg"),
+    image: require("../../assets/karatekid.jpg"),
     screen: "KarateScreen",
   },
   {
     id: "4",
     title: "Karate Kid",
-    image: require("../assets/karatekid.jpg"),
+    image: require("../../assets/karatekid.jpg"),
     screen: "KarateScreen",
   },
 ];
@@ -50,13 +50,12 @@ export default function Index() {
         <Header />
 
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          {/* O wrapper para o conteúdo que vai "empurrar" o footer para baixo */}
           <View style={styles.contentWrapper}>
             <Text style={styles.title}>Filmes em cartaz</Text>
             <FlatList
               data={data}
               horizontal
-              pagingEnabled={false} // se quiser que pare "item por item", pode colocar true
+              pagingEnabled={false}
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item) => item.id.toString()}
               contentContainerStyle={{ paddingHorizontal: 10 }}
@@ -88,7 +87,7 @@ export default function Index() {
             <FlatList
               data={data}
               horizontal
-              pagingEnabled={false} // se quiser que pare "item por item", pode colocar true
+              pagingEnabled={false}
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item) => item.id.toString()}
               contentContainerStyle={{ paddingHorizontal: 10 }}
@@ -130,8 +129,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#d3d3d3",
   },
   scrollContainer: {
-    flexGrow: 1, // MUITO IMPORTANTE: Permite que o container cresça
-    justifyContent: "space-between", // Empurra o conteúdo e o footer para as extremidades
+    flexGrow: 1,
+    justifyContent: "space-between",
   },
   contentWrapper: {},
   title: {
