@@ -17,9 +17,9 @@ namespace API.Services
         public int DuracaoSessao { get; set; }
         protected DateTime HorarioEntrou { get; set; }
         protected bool UsuarioLogado { get; set; }
-        public bool executarLogin(Usuario usuario)
+        public bool executarLogin(Usuario usuario, string senha)
         {
-            if (_dal.listarPor(x => x.Login == usuario.Login && base.DescriptografarAES(x.Senha) == base.DescriptografarAES(usuario.Senha)) != null)
+            if (_dal.listarPor(x => x.Login == usuario.Login && base.DescriptografarAES(x.Senha) == senha) != null)
             {
                 this.HorarioEntrou = DateTime.Now;
                 this.UsuarioLogado = true;

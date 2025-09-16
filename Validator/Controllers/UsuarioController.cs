@@ -102,11 +102,11 @@ namespace API.Validator.Controllers
             {
                 Usuario usuarioLogin = new Usuario();
                 usuarioLogin = _baseService.listarPor(x => x.Login == usuario.Login);
-                if (usuarioLogin.Usuario_logado == OperacaoLogin.Login)
-                    return BadRequest("Usuário já está logado!");
                 if (usuarioLogin != null)
                 {
-                    if(_service.executarLogin(usuarioLogin))
+                    if (usuarioLogin.Usuario_logado == OperacaoLogin.Login)
+                        return BadRequest("Usuário já está logado!");
+                    if(_service.executarLogin(usuarioLogin, usuario.Senha))
                         return Ok("Usuário logado!");
                     else
                         return BadRequest("Usuário ou senha incorretos!");
@@ -127,10 +127,10 @@ namespace API.Validator.Controllers
             {
                 Usuario usuarioLogin = new Usuario();
                 usuarioLogin = _baseService.listarPor(x => x.Login == usuario);
-                if (usuarioLogin.Usuario_logado == OperacaoLogin.Logout)
-                    return BadRequest("Usuário não está logado!");
                 if (usuarioLogin != null)
                 {
+                    if (usuarioLogin.Usuario_logado == OperacaoLogin.Logout)
+                        return BadRequest("Usuário não está logado!");
                     _service.executarLogout(usuarioLogin);
                     return Ok("Usuário deslogado com sucesso!");
                 }
