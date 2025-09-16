@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   Alert,
   KeyboardAvoidingView,
@@ -13,7 +12,7 @@ import {
 } from "react-native";
 import FormField from "@/components/FormField";
 import { FontAwesome } from "@expo/vector-icons";
-// import { AntDesign } from "@expo/vector-icons";
+import Logo from "@/assets/logoValidator.svg";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -36,13 +35,7 @@ const LoginScreen = () => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           {/* 1. Logo e Títulos */}
           <View style={styles.logoContainer}>
-            <Text style={styles.logoText}>VALIDATOR</Text>
-            <FontAwesome
-              name="check-circle"
-              size={30}
-              color="#34C759"
-              style={styles.logoIcon}
-            />
+            <Logo />
           </View>
 
           <Text style={styles.title}>Login</Text>
@@ -70,6 +63,28 @@ const LoginScreen = () => {
               forgotText="Esqueceu sua senha?"
               onForgotPress={handleForgotPassword}
             />
+            <TouchableOpacity
+              onPress={handleLogin}
+              style={{
+                backgroundColor: "#34C759",
+                paddingVertical: 15,
+                borderRadius: 8,
+                alignItems: "center",
+                marginTop: 20,
+              }}
+            >
+              <Text
+                style={{
+                  color: "#FFF",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Entrar
+              </Text>
+            </TouchableOpacity>
+
+
           </View>
 
           <View style={styles.separatorContainer}>
