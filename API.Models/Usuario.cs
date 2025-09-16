@@ -20,6 +20,13 @@ namespace API.Models
         public int Id { get; set; }
         public string Login { get; set; } = "";
         public string Senha { get; set; } = "";
+        [JsonIgnore]
+        public OperacaoLogin Usuario_logado { get; set; } = OperacaoLogin.Logout;
         public virtual Pessoa? Pessoa_ { get; set; }
+    }
+    public enum OperacaoLogin
+    {
+        Logout = 0,
+        Login = 1
     }
 }

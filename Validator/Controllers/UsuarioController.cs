@@ -4,6 +4,7 @@ using API.Services;
 using API.Validator.Request;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace API.Validator.Controllers
 {
@@ -99,12 +100,39 @@ namespace API.Validator.Controllers
         {
             try
             {
-                if (_baseService.listarPor(x => x.Login == usuario.Login) != null)
+                Usuario usuarioLogin = new Usuario();
+                usuarioLogin = _baseService.listarPor(x => x.Login == usuario.Login);
+                if (usuarioLogin.Usuario_logado == OperacaoLogin.Login)
+                    return BadRequest("Usuário já está logado!");
+                if (usuarioLogin != null)
                 {
-                    if(_service.executarLogin(usuario.Login, usuario.Senha))
+                    if(_service.executarLogin(usuarioLogin))
                         return Ok("Usuário logado!");
                     else
                         return BadRequest("Usuário ou senha incorretos!");
+                }
+                else
+                    return NotFound("Usuário não encontrado!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
+            }
+        }
+
+        [HttpPost("executarLogout")]
+        public IActionResult executarLogout([FromBody] string usuario)
+        {
+            try
+            {
+                Usuario usuarioLogin = new Usuario();
+                usuarioLogin = _baseService.listarPor(x => x.Login == usuario);
+                if (usuarioLogin.Usuario_logado == OperacaoLogin.Logout)
+                    return BadRequest("Usuário não está logado!");
+                if (usuarioLogin != null)
+                {
+                    _service.executarLogout(usuarioLogin);
+                    return Ok("Usuário deslogado com sucesso!");
                 }
                 else
                     return NotFound("Usuário não encontrado!");

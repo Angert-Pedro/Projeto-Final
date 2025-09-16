@@ -1,4 +1,5 @@
-﻿using System;
+﻿using API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace API.Services.Interfaces
 {
     internal interface IUsuarioService
     {
-        bool executarLogin(string login, string senha);
-        void executarLogout(string login);
+        bool executarLogin(Usuario usuario);
+        void executarLogout(Usuario usuario);
     }
 }
