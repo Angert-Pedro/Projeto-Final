@@ -1,32 +1,25 @@
-// .box-editField {
-//     border-bottom: 1.5px solid #000;
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//     padding: 0.5rem;
-//     margin: 1rem 0;
-// }
-
-// .box-editField input {
-//     border: none;
-//     outline: none;
-//     background-color: transparent;
-//     width: 100%;
-//     font-size: 1rem;
-// }
-
-// .edit-field-container input::placeholder {
-//     color: #000;
-//     opacity: 1;
-// }
-
-// .box-editField img {
-//     width: 1.5rem;
-//     height: 1.5rem;
-// }
-
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    
-})
+  container: {
+    width: "100%",
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 14,
+    color: "#666",
+    marginBottom: 4,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#DDD",
+    paddingBottom: 8,
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+    color: "#333",
+  },
+});
