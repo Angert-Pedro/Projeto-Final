@@ -2,8 +2,11 @@ using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace API.Validator.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
@@ -15,17 +18,35 @@ namespace API.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpPost("criarEvento")]
+        public IActionResult criarEvento([FromBody] Evento evento)
         {
-            return Ok(_service.Listar());
+            try
+            {
+                _service.inserir(evento);
+                return Ok("Evento cadastrado com sucesso!");
+            } 
+            catch(Exception ex)
+            {
+                return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
+            }
         }
 
-        [HttpPost]
-        public IActionResult Create([FromBody] Evento evento)
+        [HttpGet("ObterEventos")]
+        public IActionResult obterEventos()
         {
-            _service.Inserir(evento);
-            return Ok(evento);
+            try
+            {
+                IEnumerable<Evento> listaEventos = _service.listar();
+                if (listaEventos.Count() > 0)
+                    return Ok(listaEventos);
+                else
+                    return NotFound("Nenhum evento encontrado!");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
+            }
         }
     }
 }
