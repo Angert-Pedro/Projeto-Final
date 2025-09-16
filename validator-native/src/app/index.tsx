@@ -33,6 +33,12 @@ const data = [
     image: require("../assets/karatekid.jpg"),
     screen: "KarateScreen",
   },
+  {
+    id: "4",
+    title: "Karate Kid",
+    image: require("../assets/karatekid.jpg"),
+    screen: "KarateScreen",
+  },
 ];
 
 export default function Index() {
@@ -50,17 +56,30 @@ export default function Index() {
             <FlatList
               data={data}
               horizontal
+              pagingEnabled={false} // se quiser que pare "item por item", pode colocar true
               showsHorizontalScrollIndicator={false}
-              keyExtractor={(item) => item.id}
-              contentContainerStyle={styles.listPadding}
+              keyExtractor={(item) => item.id.toString()}
+              contentContainerStyle={{ paddingHorizontal: 10 }}
               ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => navigation.navigate(item.screen as never)}
-                  style={styles.cardContainer}
+                  style={{ alignItems: "center" }}
                 >
-                  <Image source={item.image} style={styles.cardImage} />
-                  <Text style={styles.cardTitle}>{item.title}</Text>
+                  <Image
+                    source={item.image}
+                    style={{ width: 120, height: 180, borderRadius: 8 }}
+                  />
+                  <Text
+                    style={{
+                      marginTop: 5,
+                      fontSize: 16,
+                      fontWeight: "600",
+                      textAlign: "center",
+                    }}
+                  >
+                    {item.title}
+                  </Text>
                 </TouchableOpacity>
               )}
             />
@@ -69,17 +88,30 @@ export default function Index() {
             <FlatList
               data={data}
               horizontal
+              pagingEnabled={false} // se quiser que pare "item por item", pode colocar true
               showsHorizontalScrollIndicator={false}
-              keyExtractor={(item) => `event-${item.id}`}
-              contentContainerStyle={styles.listPadding}
+              keyExtractor={(item) => item.id.toString()}
+              contentContainerStyle={{ paddingHorizontal: 10 }}
               ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => navigation.navigate(item.screen as never)}
-                  style={styles.cardContainer}
+                  style={{ alignItems: "center" }}
                 >
-                  <Image source={item.image} style={styles.cardImage} />
-                  <Text style={styles.cardTitle}>{item.title}</Text>
+                  <Image
+                    source={item.image}
+                    style={{ width: 120, height: 180, borderRadius: 8 }}
+                  />
+                  <Text
+                    style={{
+                      marginTop: 5,
+                      fontSize: 16,
+                      fontWeight: "600",
+                      textAlign: "center",
+                    }}
+                  >
+                    {item.title}
+                  </Text>
                 </TouchableOpacity>
               )}
             />
