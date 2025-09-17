@@ -13,18 +13,51 @@ import {
 import FormField from "@/components/FormField";
 import { FontAwesome } from "@expo/vector-icons";
 import Logo from "@/assets/logoValidator.svg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState("");
+  const navigation = useNavigation();
+  const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
 
-  // Funções para lidar com os cliques (placeholders)
-  const handleLogin = () => Alert.alert("Login", `Email: ${email}`);
-  const handleFacebookLogin = () => Alert.alert("Login com Facebook");
   const handleGoogleLogin = () => Alert.alert("Login com Google");
   const handleSignUp = () => Alert.alert("Navegar para Cadastro");
-  const handleForgotPassword = () =>
-    Alert.alert("Navegar para Recuperar Senha");
+  const handleFacebookLogin = () => Alert.alert("Login com Facebook");
+  const handleForgotPassword = () => Alert.alert("Navegar para Recuperar Senha");
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("https://localhost:7221/Usuario/executarLogin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          usuario: usuario,
+          senha: password,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Usuário ou senha inválidos");
+      }
+  
+      // Aqui pegamos o texto em vez de JSON
+      const result = await response.text();
+  
+      if (result === "Usuário logado!") {
+        await AsyncStorage.setItem("authToken", "true");
+
+        navigation.navigate("home" as never);
+      } else {
+        throw new Error("Resposta inválida do servidor");
+      }
+    } catch (error: any) {
+      Alert.alert("Erro", error.message || "Não foi possível realizar o login.");
+    }
+  };
+  
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -47,10 +80,9 @@ const LoginScreen = () => {
           <View style={styles.formContainer}>
             <FormField
               label=""
-              placeholder="Email"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
+              placeholder="Usuário"
+              value={usuario}
+              onChangeText={setUsuario}
               forgotText="Esqueceu seu usuário?"
               onForgotPress={handleForgotPassword}
             />
@@ -83,8 +115,6 @@ const LoginScreen = () => {
                 Entrar
               </Text>
             </TouchableOpacity>
-
-
           </View>
 
           <View style={styles.separatorContainer}>
