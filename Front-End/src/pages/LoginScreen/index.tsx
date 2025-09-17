@@ -18,7 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const [usuario, setUsuario] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const handleGoogleLogin = () => Alert.alert("Login com Google");
@@ -34,8 +34,8 @@ const LoginScreen = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          usuario: usuario,
-          senha: password,
+          Login: login,
+          Senha: password,
         }),
       });
   
@@ -81,8 +81,8 @@ const LoginScreen = () => {
             <FormField
               label=""
               placeholder="Usuário"
-              value={usuario}
-              onChangeText={setUsuario}
+              value={login}
+              onChangeText={setLogin}
               forgotText="Esqueceu seu usuário?"
               onForgotPress={handleForgotPassword}
             />
