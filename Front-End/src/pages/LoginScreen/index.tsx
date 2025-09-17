@@ -9,12 +9,22 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  ToastAndroid,
 } from "react-native";
 import FormField from "@/components/FormField";
 import { FontAwesome } from "@expo/vector-icons";
 import Logo from "@/assets/logoValidator.svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
+
+const showError = (msg : any) => {
+  if (Platform.OS === "android") {
+    ToastAndroid.show(msg, ToastAndroid.LONG); // LONG ≈ 3,5s
+  } else {
+    Alert.alert("Erro", msg); // iOS não tem Toast nativo
+  }
+};
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -38,13 +48,19 @@ const LoginScreen = () => {
           Senha: password,
         }),
       });
-  
-      if (!response.ok) {
-        throw new Error("Usuário ou senha inválidos");
-      }
-  
+
       // Aqui pegamos o texto em vez de JSON
       const result = await response.text();
+  
+      if (!response.ok) {
+        Toast.show({
+          type: "error",
+          text1: "Erro na tentativa de login",
+          text2: result,
+          visibilityTime: 4000,
+        });
+        return;
+      }
   
       if (result === "Usuário logado!") {
         await AsyncStorage.setItem("authToken", "true");
