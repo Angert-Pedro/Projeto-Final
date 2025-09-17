@@ -17,21 +17,22 @@ namespace API.Services
         public int DuracaoSessao { get; set; }
         protected DateTime HorarioEntrou { get; set; }
         protected bool UsuarioLogado { get; set; }
-        public bool executarLogin(string login, string senha)
+        public bool executarLogin(Usuario usuario, string senha)
         {
-            Usuario usuario = new Usuario(login, senha);
-            if (_dal.listarPor(x => x.Login == usuario.Login && base.DescriptografarAES(x.Senha) == usuario.Senha) != null)
+            if (_dal.listarPor(x => x.Login == usuario.Login && base.DescriptografarAES(x.Senha) == senha) != null)
             {
                 this.HorarioEntrou = DateTime.Now;
                 this.UsuarioLogado = true;
+                _dal.logarDeslogarUsuario(usuario,OperacaoLogin.Login);
                 return true;
             }
             return false;
         }
-        public void executarLogout(string usuario)
+        public void executarLogout(Usuario usuario)
         {
             this.DuracaoSessao = (int)(DateTime.Now - this.HorarioEntrou).TotalSeconds;
             this.UsuarioLogado = false;
+            _dal.logarDeslogarUsuario(usuario, OperacaoLogin.Logout);
         }
 
         public void criarUsuario(Usuario usuario)

@@ -29,6 +29,22 @@ namespace API.DAL
             context.Set<Notificacao>().Add(mensagem);
         }
 
+        public void logarDeslogarUsuario(Usuario usuario, OperacaoLogin operacao)
+        {
+            if (operacao == 0)
+            {
+                usuario.Usuario_logado = OperacaoLogin.Logout;
+                context.Set<Usuario>().Update(usuario);
+                context.SaveChanges();
+            } else
+            {
+                int valor = (int)operacao;
+                usuario.Usuario_logado = (OperacaoLogin)valor;
+                context.Set<Usuario>().Update(usuario);
+                context.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region CRUD
