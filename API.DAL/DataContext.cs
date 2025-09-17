@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace API.DAL
         public DbSet<Ingresso> Ingresso { get; set; }
         public DbSet<Localizacao> Localizacao { get; set; }
         public DbSet<Pessoa> Pessoa { get; set; }
-        private string connectionString = "Data Source=(localdb)\\Local;Initial Catalog=Validator;Integrated Security=True;";
+        public DbSet<Validacao> Validacao { get; set; }
+        private string connectionString = "Data Source=THIAGOBOTAFOFO;Initial Catalog=Validator;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
@@ -27,6 +29,22 @@ namespace API.DAL
             modelBuilder.Entity<Pessoa>()
                 .HasIndex(p => p.Cpf)
                 .IsUnique();
+        }
+
+        // Método de diagnóstico: tenta abrir a conexão e lança a exceção em caso de falha
+        public void TestarConexao()
+        {
+            try
+            {
+                using var conn = new SqlConnection(connectionString);
+                conn.Open(); // lança SqlException em caso de problema
+                // opcional: conn.Close();
+            }
+            catch (Exception)
+            {
+                // rethrow para que quem chamar receba a exceção completa para log
+                throw;
+            }
         }
     }
 }

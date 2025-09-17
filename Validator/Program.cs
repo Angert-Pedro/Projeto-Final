@@ -16,6 +16,7 @@ builder.Services.AddScoped<DataContext>();
 builder.Services.AddScoped(typeof(DAL<>));
 builder.Services.AddScoped(typeof(BaseService<>));
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<ValidacaoService>(); // <-- adicione esta linha
 
 var app = builder.Build();
 
