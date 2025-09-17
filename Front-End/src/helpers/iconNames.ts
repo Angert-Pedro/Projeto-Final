@@ -15,4 +15,15 @@ export type IconName =
   | 'notifications'
   | 'info'
   | 'ticket'
-  | 'id-card';
+  | 'id-card'
+  | 'lock'
+  | 'log-out'
+  | 'log-in'
+  | 'user-plus'
+  | 'user-minus'
+  | 'check-circle'
+  | 'x-circle'
+  | 'alert-circle'
+  | 'circle-check'
+  | 'facebook-f'
+  | 'google';
