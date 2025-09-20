@@ -34,6 +34,8 @@ namespace API.Validator.Controllers
                 }
                 else
                 {
+                    if(_baseServicePessoa.listarPor(x => x.Cpf == usuario.Pessoa_.Cpf) != null)
+                        return BadRequest("CPF já cadastrado!");
                     _service.criarUsuario(usuario);
                     return Ok("Usuário criado com sucesso!");
                 }

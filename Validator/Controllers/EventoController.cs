@@ -1,21 +1,22 @@
 using API.Models;
 using API.Services;
+using API.Validator.Request;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace API.Validator.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class EventoController : ControllerBase
     {
         private readonly BaseService<Evento> _service;
-
-        public EventoController(BaseService<Evento> service)
+        private readonly BaseService<Localizacao> _localizacaoService;
+        public EventoController(BaseService<Evento> service, BaseService<Localizacao> localizacaoService)
         {
             _service = service;
+            _localizacaoService = localizacaoService;
         }
 
         [HttpPost("criarEvento")]

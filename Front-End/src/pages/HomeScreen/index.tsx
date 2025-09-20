@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   FlatList,
@@ -14,35 +14,32 @@ import Footer from "@/components/Footer/";
 import { useNavigation } from "@react-navigation/native";
 import { AuthProvider } from "@/contexts/AuthContext";
 
-const data = [
-  {
-    id: "1",
-    title: "Premonição 6",
-    image: require("../../assets/premonicao.jpg"),
-    screen: "PremonicaoScreen",
-  },
-  {
-    id: "2",
-    title: "Vitória",
-    image: require("../../assets/vitoria.jpg"),
-    screen: "VitoriaScreen",
-  },
-  {
-    id: "3",
-    title: "Karate Kid",
-    image: require("../../assets/karatekid.jpg"),
-    screen: "KarateScreen",
-  },
-  {
-    id: "4",
-    title: "Karate Kid",
-    image: require("../../assets/karatekid.jpg"),
-    screen: "KarateScreen",
-  },
-];
-
 export default function Index() {
+  const [data, setData] = useState<any[]>([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchEventos = async () => {
+      try {
+        const response = await fetch("https://localhost:7221/Evento/obterEventos"); // ajuste a URL
+        const eventos = await response.json();
+
+        // adapta os dados do backend para o formato usado no carrossel
+        const mappedData = eventos.map((item: any) => ({
+          id: item.id,
+          title: item.nome,
+          image: { uri: item.urlBanner }, // ← usa a url que vem do banco
+          screen: "DetalhesEvento",       // você pode definir uma tela padrão
+        }));
+
+        setData(mappedData);
+      } catch (error) {
+        console.error("Erro ao carregar eventos:", error);
+      }
+    };
+
+    fetchEventos();
+  }, []);
 
   return (
     <AuthProvider>
