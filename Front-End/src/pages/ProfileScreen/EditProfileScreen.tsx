@@ -14,6 +14,7 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import EditProfileForm from "@/components/EditProfileForm";
 import CheckIdScreen from "@/pages/ValidateID";
+import Header from "@/components/Header/Header";
 
 // Nossas abas
 const TABS = [
@@ -49,55 +50,10 @@ const ProfileScreen = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
-        {user?.role === "organizer" && (
-          <>
-            <Text style={styles.pageTitle}>Organizador</Text>
-
-            <View style={styles.tabsContainer}>
-              {TABS.map((tab) => (
-                <TouchableOpacity
-                  key={tab.key}
-                  onPress={() => setActiveTab(tab.key)}
-                >
-                  <Text
-                    style={[
-                      styles.tab,
-                      activeTab === tab.key && styles.activeTab,
-                    ]}
-                  >
-                    {tab.title}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </>
-        )}
-
-        {/* 4. Renderização condicional do conteúdo da Aba */}
-        {user?.role === "user" && (
-          <EditProfileForm
-          // ... props
-          />
-        )}
-
-        {user?.role === "organizer" && (
-          <>
-            {activeTab === "edit" && (
-              <EditProfileForm
-              // ... props (você precisará carregar os dados para este formulário)
-              />
-            )}
-            {activeTab === "check" && <CheckIdScreen />}
-            {activeTab === "history" && (
-              <Text>Tela de Histórico em construção...</Text>
-            )}
-            {activeTab === "reports" && (
-              <Text>Tela de Relatórios em construção...</Text>
-            )}
-          </>
-        )}
-      </ScrollView>
+      <Header />
+      <Text style={styles.pageTitle}>
+        Editar Perfil
+      </Text>
     </SafeAreaView>
   );
 };
@@ -112,7 +68,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
-    alignSelf: "flex-start",
+    alignSelf: "center",
+    marginTop: 16,
   },
   tabsContainer: {
     flexDirection: "row",

@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import HeaderButton from "./HeaderButtons";
 import Logo from "@/assets/logoValidator.svg";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions, Modal, TouchableOpacity, View, Text } from "react-native";
 
 export default function Header() {
+  const navigation = useNavigation();
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = Dimensions.get("window").width < 768;
 
@@ -44,7 +46,7 @@ export default function Header() {
 
                 {/* Meu Perfil */}
                 <Text style={styles.sectionTitle}>Meu Perfil</Text>
-                <HeaderButton icon="user" label="Sobre Mim" onPress={() => { }} />
+                <HeaderButton icon="user" label="Sobre Mim" onPress={() => {navigation.navigate("edit-profile" as never); }} />
                 <HeaderButton icon="id-card" label="Minha Carteirinha" onPress={() => { }} />
                 <HeaderButton icon="ticket" label="Meus Ingressos" onPress={() => { }} />
 
