@@ -18,7 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
-const showError = (msg : any) => {
+const showError = (msg: any) => {
   if (Platform.OS === "android") {
     ToastAndroid.show(msg, ToastAndroid.LONG); // LONG ≈ 3,5s
   } else {
@@ -49,9 +49,8 @@ const LoginScreen = () => {
         }),
       });
 
-      // Aqui pegamos o texto em vez de JSON
       const result = await response.text();
-  
+
       if (!response.ok) {
         Toast.show({
           type: "error",
@@ -61,9 +60,13 @@ const LoginScreen = () => {
         });
         return;
       }
-  
+
       if (result === "Usuário logado!") {
+        
         await AsyncStorage.setItem("authToken", "true");
+
+        // Salva também o login do usuário
+        await AsyncStorage.setItem("userLogin", login);
 
         navigation.navigate("home" as never);
       } else {
@@ -73,7 +76,7 @@ const LoginScreen = () => {
       Alert.alert("Erro", error.message || "Não foi possível realizar o login.");
     }
   };
-  
+
 
   return (
     <SafeAreaView style={styles.safeArea}>
