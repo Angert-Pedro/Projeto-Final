@@ -4,12 +4,46 @@ import HeaderButton from "./HeaderButtons";
 import Logo from "@/assets/logoValidator.svg";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Dimensions, Modal, TouchableOpacity, View, Text } from "react-native";
 
 export default function Header() {
   const navigation = useNavigation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isMobile = Dimensions.get("window").width < 768;
+  const isMobile = Dimensions.get("window").width < 888;
+
+  async function handleLogout() {
+    const savedLogin = await AsyncStorage.getItem("userLogin");
+    console.log(savedLogin);
+
+    try {
+      const response = await fetch("https://localhost:7221/Usuario/executarLogout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(savedLogin),
+      });
+
+      const result = await response.text();
+      console.log(result);
+
+      if (response.ok) {
+        // Limpa storage também
+        setMenuOpen(false);
+        await AsyncStorage.removeItem("authToken");
+        await AsyncStorage.removeItem("userLogin");
+
+        navigation.navigate("index" as never);
+      } else {
+        console.error("Erro do servidor:", result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
 
   return (
     <View style={styles.headerContainerWeb}>
@@ -46,7 +80,7 @@ export default function Header() {
 
                 {/* Meu Perfil */}
                 <Text style={styles.sectionTitle}>Meu Perfil</Text>
-                <HeaderButton icon="user" label="Sobre Mim" onPress={() => {navigation.navigate("edit-profile" as never); }} />
+                <HeaderButton icon="user" label="Sobre Mim" onPress={() => { navigation.navigate("edit-profile" as never); }} />
                 <HeaderButton icon="id-card" label="Minha Carteirinha" onPress={() => { }} />
                 <HeaderButton icon="ticket" label="Meus Ingressos" onPress={() => { }} />
 
@@ -60,6 +94,9 @@ export default function Header() {
                 <Text style={styles.sectionTitle}>Sobre</Text>
                 <HeaderButton icon="file-text" label="Termos e Condição" onPress={() => { }} />
                 <HeaderButton icon="file-text" label="Políticas e Privacidade" onPress={() => { }} />
+
+                <Text style={styles.sectionTitle}>Sair</Text>
+                <HeaderButton icon="home" label="Sair" onPress={() => handleLogout()} />
               </View>
             </TouchableOpacity>
           </Modal>
@@ -69,7 +106,7 @@ export default function Header() {
           {/* Botões Desktop */}
           <View style={styles.buttonsBox}>
             <HeaderButton icon="home" label="Home" onPress={() => { }} />
-            <HeaderButton icon="ticket" label="Meus ingressos" onPress={() => { }} />
+            <HeaderButton icon="ticket" label="Meus ingressos" />
             <HeaderButton
               icon="id-card"
               label="Minha carteirinha"
