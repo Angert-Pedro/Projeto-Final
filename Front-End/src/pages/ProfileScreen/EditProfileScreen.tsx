@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import UserIcon from "@/assets/user-icon.svg"
 import {
   SafeAreaView,
@@ -12,15 +12,18 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import Header from "@/components/Header/Header";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
-import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 const ProfileScreen = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
-  const [showPassword, setShowPassword] = useState(false);
+  const [nome, setNome] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [sobrenome, setSobrenome] = useState("");
   const [form, setForm] = useState({
     login: "",
-    senha: "",
     pessoa_: {
       nome: "",
       cpf: "",
@@ -28,10 +31,44 @@ const ProfileScreen = () => {
       numero: "",
     },
   });
-  const [value, setValue] = useState("");
-  const [nome, setNome] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
-  const [loading, setLoading] = useState(true);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchUsuario = async () => {
+        try {
+          const userLogin = await AsyncStorage.getItem("userLogin");
+
+          if (!userLogin) {
+            console.warn("Nenhum usuário salvo no AsyncStorage.");
+            return;
+          }
+
+          const url = `https://localhost:7221/Usuario/consultarUsuario?usuario=${userLogin}`;
+
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          const nomeCompleto = data.pessoa_?.nome || "";
+
+          if (nomeCompleto) {
+            const partes = nomeCompleto.trim().split(" ");
+            setForm(data);
+            setNome(partes[0]);
+            setSobrenome(partes.slice(1).join(" "));
+          }
+
+        } catch (error) {
+          console.error("Erro ao consultar usuário:", error);
+        }
+      };
+
+      fetchUsuario();
+    }, [])
+  );
 
   useEffect(() => {
     setForm((prev) => ({
@@ -46,6 +83,29 @@ const ProfileScreen = () => {
   useEffect(() => {
     setLoading(false);
   }, [user]);
+
+  async function editarPerfil() {
+    try {
+      console.log(form);
+      await fetch("https://localhost:7221/Usuario/atualizarUsuario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      Toast.show({
+        type: "success",
+        text1: "Cadastro atualizado com sucesso!",
+        text2: "Suas informações foram salvas.",
+        visibilityTime: 4000,
+      });
+
+    } catch (error) {
+      console.error("Erro ao editar perfil:", error);
+    }
+  }
 
 
   if (loading) {
@@ -113,26 +173,6 @@ const ProfileScreen = () => {
         <Ionicons name="create-outline" size={20} color="#6b7280" />
       </View>
 
-      {/* Senha */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          secureTextEntry={!showPassword} // alterna
-          value={form.senha}
-          onChangeText={(text) =>
-            setForm((prev) => ({ ...prev, senha: text }))
-          }
-          placeholderTextColor="#6b7280"
-        />
-        <Ionicons
-          name={showPassword ? "eye-off-outline" : "eye-outline"}
-          size={20}
-          color="#6b7280"
-          onPress={() => setShowPassword((prev) => !prev)}
-        />
-      </View>
-
       {/* Celular -> numero */}
       <View style={styles.inputContainer}>
         <TextInput
@@ -181,6 +221,7 @@ const ProfileScreen = () => {
             marginTop: 20,
             width: "50%"
           }}
+          onPress={editarPerfil}
         >
           <Text
             style={{
@@ -223,7 +264,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#4b5563",
-    marginBottom: 16,
+    marginVertical: 10,
     marginHorizontal: 44,
   },
   input: {
@@ -236,7 +277,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginTop: 24,
+    marginTop: 94,
     marginHorizontal: 44,
     gap: 12
   }

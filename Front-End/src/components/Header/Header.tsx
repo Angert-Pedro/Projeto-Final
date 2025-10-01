@@ -1,7 +1,8 @@
 import { styles } from "./styles";
+import { Image } from "react-native";
 import React, { useState } from "react";
 import HeaderButton from "./HeaderButtons";
-import Logo from "@/assets/logoValidator.svg";
+import Logo from "../../assets/logoValidator.svg";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -43,6 +44,11 @@ export default function Header() {
     }
   }
 
+  function goTo(page: string) {
+    navigation.navigate(page as never);
+    setMenuOpen(false);
+  }
+
 
 
   return (
@@ -80,7 +86,7 @@ export default function Header() {
 
                 {/* Meu Perfil */}
                 <Text style={styles.sectionTitle}>Meu Perfil</Text>
-                <HeaderButton icon="user" label="Sobre Mim" onPress={() => { navigation.navigate("edit-profile" as never); }} />
+                <HeaderButton icon="user" label="Perfil" onPress={() => { goTo("edit-profile"); }} />
                 <HeaderButton icon="id-card" label="Minha Carteirinha" onPress={() => { }} />
                 <HeaderButton icon="ticket" label="Meus Ingressos" onPress={() => { }} />
 
