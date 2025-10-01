@@ -18,21 +18,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
-const showError = (msg: any) => {
-  if (Platform.OS === "android") {
-    ToastAndroid.show(msg, ToastAndroid.LONG); // LONG ≈ 3,5s
-  } else {
-    Alert.alert("Erro", msg); // iOS não tem Toast nativo
-  }
-};
-
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const handleGoogleLogin = () => Alert.alert("Login com Google");
-  const handleSignUp = () => Alert.alert("Navegar para Cadastro");
+  const handleSignUp = () => navigation.navigate("create-profile" as never);
   const handleFacebookLogin = () => Alert.alert("Login com Facebook");
   const handleForgotPassword = () => Alert.alert("Navegar para Recuperar Senha");
 
@@ -49,6 +41,8 @@ const LoginScreen = () => {
         }),
       });
 
+      console.log(response);
+      
       const result = await response.text();
 
       if (!response.ok) {

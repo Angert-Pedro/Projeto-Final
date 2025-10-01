@@ -1,74 +1,134 @@
 import { StyleSheet } from "react-native";
-export const styles = StyleSheet.create({
+
+const styles = StyleSheet.create({
   safeArea: {
-    flex: 1,
-    backgroundColor: "#E5E5E5",
+    backgroundColor: "#F2F2F7",
+    marginTop: 50,
   },
   container: {
+    flex: 1,
+  },
+  scrollViewContent: {
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
   },
-  card: {
-    width: "100%",
-    backgroundColor: "#F7F7F7",
-    borderRadius: 24,
-    padding: 25,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
-  },
+  // Logo e Títulos
   logoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 20,
   },
   logoText: {
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: "bold",
   },
+  logoIcon: {
+    marginLeft: 8,
+  },
   title: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: "bold",
     marginBottom: 8,
     color: "#1C1C1E",
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#636366",
-    marginBottom: 25,
-    textAlign: "center",
+    marginBottom: 30,
   },
-  termsContainer: {
+  // Formulário
+  formContainer: {
+    width: "100%",
+  },
+  // Separador
+  separatorContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    marginTop: 10,
-    marginBottom: 20,
+    marginVertical: 30,
   },
-  termsText: {
-    marginLeft: 10,
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#D1D1D6",
+  },
+  separatorText: {
+    marginHorizontal: 10,
+    color: "#636366",
     fontSize: 14,
-    color: "#3C3C43",
   },
-  submitButton: {
+  // Login Social
+  socialLoginContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     width: "100%",
-    backgroundColor: "#4A4A4A",
-    paddingVertical: 15,
-    borderRadius: 10,
+    marginBottom: 30,
+  },
+  socialButton: {
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    borderRadius: 8,
+    flex: 1,
   },
-  submitButtonDisabled: {
-    backgroundColor: "#A9A9A9",
+  facebookButton: {
+    backgroundColor: "#1877F2",
+    marginRight: 10,
   },
-  submitButtonText: {
+  googleButton: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#EAEAEA",
+    marginLeft: 10,
+  },
+  socialButtonText: {
     color: "#FFF",
+    marginLeft: 10,
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
+  googleButtonText: {
+    color: "#000",
+  },
+  // Cadastro
+  signupContainer: {
+    marginTop: 20,
+  },
+  signupText: {
+    fontSize: 16,
+    color: "#636366",
+  },
+  signupLink: {
+    fontWeight: "bold",
+    color: "#007AFF", // Cor padrão de link iOS
+  },
+  checkboxContainer:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  text:{
+    marginLeft: 8,
+    color: '#636366',
+    fontSize: 16,
+  },
+  checkbox:{
+    width: 24,
+    height: 24,
+  },
+  buttonsContainer:{
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 20,
+  }
 });
 
+export default styles;
