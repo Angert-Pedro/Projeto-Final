@@ -59,10 +59,6 @@ namespace API.Services
                 _dalPessoa.alterar(usuario.Pessoa_);
             }
 
-            //Criptografar a senha informada, mesmo que não seja alterada
-            CriptografiaAES cripto = new CriptografiaAES();
-            usuario.Senha = cripto.CriptografarAES(usuario.Senha);
-
             //Atualizar os dados do usuário existente
             var usuarioExistente = _dal.listarPor(x => x.Login == usuario.Login);
 
