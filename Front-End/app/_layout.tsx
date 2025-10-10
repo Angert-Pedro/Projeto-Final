@@ -9,6 +9,7 @@ export default function Layout() {
       <Stack.Screen name="home" options={{ headerShown: false }} />
       <Stack.Screen name="edit-profile" options={{ headerShown: false }} />
       <Stack.Screen name="create-profile" options={{ headerShown: false }} />
+      <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
     </Stack><Toast /></>
   );
 } 
