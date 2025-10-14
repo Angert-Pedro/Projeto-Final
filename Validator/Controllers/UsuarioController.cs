@@ -144,5 +144,25 @@ namespace API.Validator.Controllers
                 return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
             }
         }
+
+        [HttpPost("esqueceuSenha")]
+        public IActionResult esqueceuSenha([FromBody] string email)
+        {
+            try
+            {
+                if (_baseService.listarPor(x => email == x.Pessoa_.Email) != null)
+                {
+                    Destinatario destinatario = new Destinatario("Mário", "netogurupi2@gmail.com");
+                    Notificacao notificacao = new Notificacao("Email", destinatario, "Oi, teste!");
+                    _baseService.enviarNotificacao(notificacao);
+                    return Ok();
+                }
+                else
+                    return NotFound("Usuário não existe!");
+            } catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

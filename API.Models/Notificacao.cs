@@ -8,7 +8,7 @@ namespace API.Models
 {
     public class Notificacao
     {
-        public Notificacao(string tipo, string destinatario, string mensagem)
+        public Notificacao(string tipo, Destinatario destinatario, string mensagem)
         {
             this.Tipo = tipo;
             this.Destinatario = destinatario;
@@ -16,7 +16,7 @@ namespace API.Models
         }
         public int Id { get; set; }
         public string Tipo { get; set; }
-        public string Destinatario { get; set; }
+        public Destinatario Destinatario { get; set; }
         public string Mensagem { get; set; }
         public DateTime DataEnvio { get; set; }
     }

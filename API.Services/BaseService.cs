@@ -51,6 +51,12 @@ namespace API.Services
             }
         }
 
+        public bool enviarNotificacao(Notificacao notificacao)
+        {
+            NotificacaoService.EnviarEmail(notificacao);
+            return true;
+        }
+
         public bool verificarExistencia(T? entidade)
         {
             return _dal.verificarExistencia(entidade) != null ? true : false;

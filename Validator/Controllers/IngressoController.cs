@@ -18,13 +18,13 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_service.Listar());
+            return Ok(_service.listar());
         }
 
         [HttpPost]
         public IActionResult Create([FromBody] Ingresso ingresso)
         {
-            _service.Inserir(ingresso);
+            _service.inserir(ingresso);
             return Ok(ingresso);
         }
     }
