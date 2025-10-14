@@ -2,14 +2,13 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1,
     backgroundColor: "#F2F2F7",
+    marginTop: 50,
   },
   container: {
     flex: 1,
   },
   scrollViewContent: {
-    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 30,
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 80,
+    marginBottom: 20,
   },
   logoText: {
     fontSize: 28,
@@ -30,19 +29,21 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
+    textAlign: "center",
     fontWeight: "bold",
     marginBottom: 8,
     color: "#1C1C1E",
   },
   subtitle: {
+    textAlign: "center",
     fontSize: 16,
     color: "#636366",
     marginBottom: 30,
-    textAlign: "center",
   },
   // Formulário
   formContainer: {
     width: "100%",
+    marginTop: 175,
   },
   // Separador
   separatorContainer: {
@@ -107,6 +108,28 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#007AFF", // Cor padrão de link iOS
   },
+  checkboxContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  text: {
+    marginLeft: 8,
+    color: '#636366',
+    fontSize: 16,
+  },
+  checkbox: {
+    width: 24,
+    height: 24,
+  },
+  buttonsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }
 });
 
 export default styles;
