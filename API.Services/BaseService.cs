@@ -53,8 +53,14 @@ namespace API.Services
 
         public bool enviarNotificacao(Notificacao notificacao)
         {
-            NotificacaoService.EnviarEmail(notificacao);
-            return true;
+            try
+            {
+                NotificacaoService.EnviarEmail(notificacao);            
+                return true;
+            } catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool verificarExistencia(T? entidade)

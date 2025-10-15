@@ -12,14 +12,48 @@ import {
 import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
 import { useNavigation } from "@react-navigation/native";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export default function ForgotPassword() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
 
-  function handleSendEmail() {
-    // Lógica para enviar o email com token
-    navigation.navigate("check-email" as never);
+  async function handleSendEmail() {
+    try {
+      const response = await fetch("https://localhost:7221/Usuario/recuperarSenha", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(email),
+      });
+
+      const result = await response.text();
+
+      if (!response.ok) {
+        Toast.show({
+          type: "error",
+          text1: "Erro ao enviar e-mail!",
+          text2: result,
+          visibilityTime: 4000,
+        });
+        return;
+      } else{
+        Toast.show({
+          type: "success",
+          text1: "E-mail de recuperação enviado com sucesso!\nVerifique sua caixa de entrada para mais detalhes.",
+        });
+        navigation.navigate("index" as never);
+      }
+
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Erro ao enviar e-mail!",
+        text2: error.message || "Não foi possível enviar o e-mail.",
+        visibilityTime: 4000,
+      });
+    }
   }
 
   return (

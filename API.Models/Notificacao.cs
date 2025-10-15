@@ -8,16 +8,19 @@ namespace API.Models
 {
     public class Notificacao
     {
-        public Notificacao(string tipo, Destinatario destinatario, string mensagem)
+        public Notificacao() { }
+        public Notificacao(string tipo, string destinatario, string mensagem, string token)
         {
             this.Tipo = tipo;
             this.Destinatario = destinatario;
             this.Mensagem = mensagem;
+            this.Token = token;
         }
         public int Id { get; set; }
         public string Tipo { get; set; }
-        public Destinatario Destinatario { get; set; }
+        public string Destinatario { get; set; }
         public string Mensagem { get; set; }
-        public DateTime DataEnvio { get; set; }
+        public DateTime Data_Envio { get; set; }
+        public string Token { get; set; }
     }
 }

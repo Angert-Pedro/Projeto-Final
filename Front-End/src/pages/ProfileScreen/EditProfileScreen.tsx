@@ -151,6 +151,7 @@ const ProfileScreen = () => {
           onChangeText={(text) =>
             setForm((prev) => ({ ...prev, login: text }))
           }
+          editable={false}
           placeholderTextColor="#6b7280"
         />
         <Ionicons name="create-outline" size={20} color="#6b7280" />

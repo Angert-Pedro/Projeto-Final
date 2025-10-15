@@ -26,7 +26,7 @@ const LoginScreen = () => {
   const handleGoogleLogin = () => Alert.alert("Login com Google");
   const handleSignUp = () => navigation.navigate("create-profile" as never);
   const handleFacebookLogin = () => Alert.alert("Login com Facebook");
-  const handleForgotPassword = () => Alert.alert("Navegar para Recuperar Senha");
+  const handleForgotPassword = () => navigation.navigate("forgot-password" as never);
 
   const handleLogin = async () => {
     try {

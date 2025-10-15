@@ -33,3 +33,4 @@ D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.dll
 D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\refint\API.Criptografia.dll
 D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\API.Criptografia.pdb
 D:\Nova pasta\API.Criptografia\obj\Debug\net8.0\ref\API.Criptografia.dll
+C:\Users\Mário\source\repos\Projeto-Final\API.Criptografia\obj\Debug\net8.0\API.Criptografia.csproj.AssemblyReference.cache
