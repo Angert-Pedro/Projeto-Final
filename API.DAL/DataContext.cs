@@ -18,7 +18,7 @@ namespace API.DAL
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Validacao> Validacao { get; set; }
         public DbSet<Notificacao> Notificacao { get; set; }
-        private string connectionString = "Data Source=(localdb)\\Local;Initial Catalog=Validator;Integrated Security=True;";
+        private string connectionString = "Data Source=(localdb)\\Local;Initial Catalog=Validator;Integrated Security=True;MultipleActiveResultSets=True;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();

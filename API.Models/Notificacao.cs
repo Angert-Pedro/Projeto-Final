@@ -9,12 +9,13 @@ namespace API.Models
     public class Notificacao
     {
         public Notificacao() { }
-        public Notificacao(string tipo, string destinatario, string mensagem, string token)
+        public Notificacao(string tipo, string destinatario, string mensagem, string token, Usuario usuario)
         {
             this.Tipo = tipo;
             this.Destinatario = destinatario;
             this.Mensagem = mensagem;
             this.Token = token;
+            this.Usuario_ = usuario;
         }
         public int Id { get; set; }
         public string Tipo { get; set; }
@@ -22,5 +23,6 @@ namespace API.Models
         public string Mensagem { get; set; }
         public DateTime Data_Envio { get; set; }
         public string Token { get; set; }
+        public virtual Usuario Usuario_ { get; set; }
     }
 }

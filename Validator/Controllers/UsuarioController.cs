@@ -156,12 +156,12 @@ namespace API.Validator.Controllers
         {
             try
             {
-                Pessoa pessoa = _baseServicePessoa.listarPor(x => x.Email == email);
-                if (pessoa != null)
+                Usuario usuario = _baseService.listarPor(x => x.Pessoa_.Email == email);
+                if (usuario != null)
                 {
-                    Destinatario destinatario = new Destinatario(pessoa.Nome, email);
+                    Destinatario destinatario = new Destinatario(usuario.Pessoa_.Nome, email);
                     string token = gerarToken(1440, destinatario.Email);
-                    Notificacao notificacao = new Notificacao("Recuperação de senha", destinatario.Email, montarMensagemRecuperacaoSenha(destinatario, token), token);
+                    Notificacao notificacao = new Notificacao("Recuperação de senha", destinatario.Email, montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/RecuperarSenha?token={token}&email={email}"), token, usuario);
 
                     notificacao.Data_Envio = DateTime.Now;
 
@@ -177,6 +177,13 @@ namespace API.Validator.Controllers
             }
         }
 
+        private string gerarToken(int tempoExpiracao, string email)
+        {
+            Token tk = new Token();
+            string token = tk.GenerateToken(email, tempoExpiracao);
+            return token;
+        }
+
         [HttpGet("validarToken")]
         public IActionResult ValidarToken([FromQuery] string email, string token)
         {
@@ -186,6 +193,11 @@ namespace API.Validator.Controllers
                     return BadRequest("Token não informado.");
 
                 Token tk = new Token();
+
+                var tokenBanco = _baseServiceNotificacao.listarPor(x => x.Token == token);
+
+                if (tokenBanco == null)
+                    return BadRequest("Token já foi utilizado!");
 
                 if (tk.ValidarToken(email, token))
                     return Ok("Token válido.");
@@ -198,12 +210,49 @@ namespace API.Validator.Controllers
             }
         }
 
-
-        private string gerarToken(int tempoExpiracao, string email)
+        [HttpPost("alterarSenha")]
+        public IActionResult AlterarSenha([FromBody] AlterarSenhaRequest request)
         {
-            Token token = new Token();
-            string linkRedefinicao = $"http://localhost:8081/RecuperarSenha?token={token.GenerateToken(email, tempoExpiracao)}&email={email}";
-            return linkRedefinicao;
+            try
+            {
+                var token = request.Token;
+                var email = request.Email;
+                var novaSenha = request.NovaSenha;
+
+                if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
+                    return BadRequest("Está faltando o token ou o e-mail.");
+
+                Token tk = new Token();
+
+                Notificacao notificacao = _baseServiceNotificacao.listarPor(x => x.Token == token);
+
+                if (tk.ValidarToken(email, token))
+                {
+                    Usuario usuario = _baseService.listarPor(y => y.Pessoa_.Email == email);
+                    if (usuario != null)
+                    {
+                        if (notificacao != null)
+                        {
+                            CriptografiaAES crip = new CriptografiaAES();
+                            usuario.Senha = crip.CriptografarAES(novaSenha);
+                            _baseService.atualizar(usuario);
+                            notificacao.Token = "";
+                            _baseServiceNotificacao.atualizar(notificacao);
+                            return Ok("Senha atualizada com sucesso!");
+                        }
+                        else
+                            return BadRequest("O token já foi utilizado!");
+                    }
+                    else
+                        return BadRequest("Usuário inválido!");
+                }
+                else
+                    return BadRequest("Token inválido!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         private string montarMensagemRecuperacaoSenha(Destinatario destinatario, string linkRedefinicao)

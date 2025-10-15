@@ -15,6 +15,7 @@ import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
 import { useNavigation } from "@react-navigation/native";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RecuperarSenha() {
   const navigation = useNavigation();
@@ -24,6 +25,9 @@ export default function RecuperarSenha() {
   const [tokenValid, setTokenValid] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
   useEffect(() => {
     async function extractTokenFromUrl() {
@@ -37,7 +41,8 @@ export default function RecuperarSenha() {
             setToken(tokenParam);
             setEmail(email);
           } else {
-            console.warn("URL inválida.");
+            setTokenValid(false);
+            setLoading(false);
           }
         }
       } catch (err) {
@@ -87,7 +92,6 @@ export default function RecuperarSenha() {
     validateToken();
   }, [token]);
 
-  // 🔐 Requisição de redefinição
   async function handleResetPassword() {
     if (!password || !confirmPassword) {
       Toast.show({
@@ -108,12 +112,13 @@ export default function RecuperarSenha() {
     }
 
     try {
-      const response = await fetch("https://localhost:7221/Usuario/RedefinirSenha", {
+      const response = await fetch("https://localhost:7221/Usuario/alterarSenha", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          token,
-          novaSenha: password,
+            email: email,
+            token: token,
+            novaSenha: password
         }),
       });
 
@@ -166,18 +171,57 @@ export default function RecuperarSenha() {
               <>
                 <Text style={styles.subtitle}>Digite sua nova senha abaixo.</Text>
 
-                <FormField
+                {/* Campo Nova Senha com olho */}
+                <View style={{ position: "relative" }}>
+                  <FormField
                     placeholder="Nova senha"
                     value={password}
                     onChangeText={setPassword}
-                    isSecure label={""}
-                />
-                <FormField
+                    isSecure={!showPassword}
+                    label={""}
+                  />
+                  <TouchableOpacity
+                    style={{
+                      position: "absolute",
+                      right: 10,
+                      top: 18,
+                      zIndex: 1,
+                    }}
+                    onPress={() => setShowPassword((prev) => !prev)}
+                  >
+                    <Ionicons
+                      name={showPassword ? "eye" : "eye-off"}
+                      size={22}
+                      color="#454B60"
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Campo Confirmar Senha com olho */}
+                <View style={{ position: "relative", marginTop: 10 }}>
+                  <FormField
                     placeholder="Confirme a nova senha"
                     value={confirmPassword}
                     onChangeText={setConfirmPassword}
-                    isSecure label={""}
-                />
+                    isSecure={!showConfirmPassword}
+                    label={""}
+                  />
+                  <TouchableOpacity
+                    style={{
+                      position: "absolute",
+                      right: 10,
+                      top: 18,
+                      zIndex: 1,
+                    }}
+                    onPress={() => setShowConfirmPassword((prev) => !prev)}
+                  >
+                    <Ionicons
+                      name={showConfirmPassword ? "eye" : "eye-off"}
+                      size={22}
+                      color="#454B60"
+                    />
+                  </TouchableOpacity>
+                </View>
 
                 <TouchableOpacity
                   onPress={handleResetPassword}
@@ -201,9 +245,24 @@ export default function RecuperarSenha() {
                 </TouchableOpacity>
               </>
             ) : (
-              <Text style={{ color: "red", marginTop: 20 }}>
-                Token inválido ou expirado. Solicite um novo link de recuperação.
-              </Text>
+              <><Text style={{ color: "red", marginTop: 20, textAlign: "center" }}>
+                                      Token inválido ou expirado.{'\n'}
+                                      Solicite um novo link de recuperação.
+                                  </Text><TouchableOpacity
+                                      onPress={() => navigation.navigate("index" as never)}
+                                      style={{
+                                          marginTop: 20,
+                                          backgroundColor: "#454B60",
+                                          paddingVertical: 12,
+                                          paddingHorizontal: 30,
+                                          borderRadius: 8,
+                                      }}
+                                  >
+                                          <Text style={{ color: "#FFF", fontSize: 16, fontWeight: "bold", textAlign: "center" }}>
+                                              Voltar para Home
+                                          </Text>
+                                      </TouchableOpacity></>
+              
             )}
           </View>
         </ScrollView>

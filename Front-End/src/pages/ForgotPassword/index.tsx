@@ -41,7 +41,7 @@ export default function ForgotPassword() {
       } else{
         Toast.show({
           type: "success",
-          text1: "E-mail de recuperação enviado com sucesso!\nVerifique sua caixa de entrada para mais detalhes.",
+          text1: "E-mail de recuperação enviado com sucesso!",
         });
         navigation.navigate("index" as never);
       }
