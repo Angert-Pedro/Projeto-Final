@@ -106,29 +106,88 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#007AFF", // Cor padrão de link iOS
   },
-  checkboxContainer:{
+  checkboxContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  text:{
+  text: {
     marginLeft: 8,
     color: '#636366',
     fontSize: 16,
   },
-  checkbox:{
+  checkbox: {
     width: 24,
     height: 24,
   },
-  buttonsContainer:{
+  buttonsContainer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 20,
-  }
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 20,
+    width: "80%",
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 12,
+    color: "#18181b",
+  },
+  modalImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 16,
+  },
+  modalButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  modalButton: {
+    flex: 1,
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    marginHorizontal: 5,
+  },
+  modalText: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#444",
+  },
+  scrollArea: {
+    marginBottom: 20,
+  },
+  cancelButton: {
+    backgroundColor: "#f4f4f5",
+  },
+  confirmButton: {
+    backgroundColor: "#18181b",
+  },
+  cancelText: {
+    color: "#18181b",
+    fontWeight: "500",
+  },
+  confirmText: {
+    color: "#fff",
+    fontWeight: "500",
+  },
 });
 
 export default styles;
