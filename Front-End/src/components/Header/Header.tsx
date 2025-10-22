@@ -98,8 +98,8 @@ export default function Header() {
 
                 {/* Sobre */}
                 <Text style={styles.sectionTitle}>Sobre</Text>
-                <HeaderButton icon="file-text" label="Termos e Condição" onPress={() => { }} />
-                <HeaderButton icon="file-text" label="Políticas e Privacidade" onPress={() => { }} />
+                <HeaderButton icon="file-text" label="Termos e Condições" onPress={() => {goTo("terms-and-conditions")}} />
+                <HeaderButton icon="file-text" label="Políticas e Privacidade" onPress={() => {goTo("policies-and-privacy")}} />
 
                 <Text style={styles.sectionTitle}>Sair</Text>
                 <HeaderButton icon="home" label="Sair" onPress={() => handleLogout()} />
