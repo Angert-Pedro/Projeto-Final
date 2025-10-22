@@ -97,8 +97,7 @@ const LoginScreen = () => {
               placeholder="Usuário"
               value={login}
               onChangeText={setLogin}
-              forgotText="Esqueceu seu usuário?"
-              onForgotPress={handleForgotPassword}
+              
             />
             <FormField
               label=""

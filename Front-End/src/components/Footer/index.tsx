@@ -20,7 +20,7 @@ const leftColumnLinks = [
 const rightColumnLinks = [
   { title: "Suporte", route: "Support" },
   { title: "Feedback", route: "Feedback" },
-  { title: "Termos e Condição", route: "Terms" },
+  { title: "Termos e Condições", route: "Terms" },
   { title: "Políticas e Privacidade", route: "PrivacyPolicy" },
 ];
 
