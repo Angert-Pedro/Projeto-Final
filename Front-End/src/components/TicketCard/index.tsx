@@ -32,8 +32,30 @@ function formatDateToPt(dateInput: string) {
   return `${day} de ${month}`;
 }
 
+// new: format time to "HH:MM"
+function formatTimeToHours(dateTime: string) {
+  if (!dateTime) return "";
+  // Try ISO parse
+  const d = new Date(dateTime);
+  if (!Number.isNaN(d.getTime())) {
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mm = String(d.getMinutes()).padStart(2, "0");
+    return `${hh}:${mm}`;
+  }
+  // Fallback: extract first HH:MM occurrence
+  const m = dateTime.match(/(\d{1,2}):(\d{2})/);
+  if (m) {
+    const hh = String(Number(m[1])).padStart(2, "0");
+    return `${hh}:${m[2]}`;
+  }
+  return dateTime;
+}
+
 export default function TicketCard(props: TicketCardProps) {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const start = formatTimeToHours(props.time_start);
+  const end = formatTimeToHours(props.time_end);
 
   return (
     <>
@@ -44,8 +66,8 @@ export default function TicketCard(props: TicketCardProps) {
             <Text style={styles.date}>{formatDateToPt(props.date)}</Text>
             <Text style={styles.title}>{props.title}</Text>
             <View style={styles.timeContainer}>
-              <Text style={styles.timeText}>{props.time_start}</Text>
-              <Text style={styles.timeText}>{props.time_end}</Text>
+              <Text style={styles.timeText}>{start}</Text>
+              <Text style={styles.timeText}>{end}</Text>
             </View>
           </View>
         </View>
@@ -82,7 +104,7 @@ export default function TicketCard(props: TicketCardProps) {
             </Text>
             <Text style={{ marginBottom: 4 }}>{formatDateToPt(props.date)}</Text>
             <Text>
-              {props.time_start} — {props.time_end}
+              {start} — {end}
             </Text>
 
             <TouchableOpacity
