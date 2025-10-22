@@ -10,6 +10,9 @@ export default function Layout() {
       <Stack.Screen name="edit-profile" options={{ headerShown: false }} />
       <Stack.Screen name="create-profile" options={{ headerShown: false }} />
       <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
+      <Stack.Screen name="faq" options={{ headerShown: false }} />
+      <Stack.Screen name="feedback" options={{ headerShown: false }} />
+      <Stack.Screen name="support" options={{ headerShown: false }} />
       <Stack.Screen name="RecuperarSenha" options={{ headerShown: false }} />
       <Stack.Screen name="register-student-card" options={{ headerShown: false }} />
       <Stack.Screen name="my-tickets" options={{ headerShown: false }} />
