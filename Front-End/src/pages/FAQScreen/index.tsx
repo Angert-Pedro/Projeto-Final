@@ -7,6 +7,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { styles } from "./styles";
+import Header from "@/components/Header/Header";
 
 const FAQ_DATA = [
   {
@@ -64,6 +65,7 @@ const FAQ_DATA = [
 export default function FAQScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
+      <Header />
       <SectionList
         sections={FAQ_DATA}
         keyExtractor={(item) => item.id}

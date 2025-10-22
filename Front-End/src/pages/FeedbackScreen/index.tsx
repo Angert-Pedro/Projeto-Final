@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import { styles } from "./styles";
+import Header from "@/components/Header/Header";
 
 export default function FeedbackScreen() {
   const [feedback, setFeedback] = useState("");
@@ -50,6 +51,7 @@ export default function FeedbackScreen() {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
+        <Header />
         <Text style={styles.title}>Enviar Feedback</Text>
         <Text style={styles.description}>
           Gostou do app? Tem alguma sugestão de melhoria ou encontrou um bug?

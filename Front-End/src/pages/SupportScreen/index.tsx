@@ -13,6 +13,7 @@ import {
 // (Opcional) Instale 'expo-dev-client' ou 'expo-application' para pegar a versão do app
 // import * as Application from 'expo-application';
 import { styles } from "./styles";
+import Header from "@/components/Header/Header";
 
 export default function SupportScreen() {
   const [subject, setSubject] = useState("");
@@ -57,6 +58,7 @@ export default function SupportScreen() {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
+        <Header />
         <Text style={styles.title}>Formulário de Suporte</Text>
         <Text style={styles.description}>
           Encontrou um problema ou tem uma dúvida que o FAQ não respondeu?
