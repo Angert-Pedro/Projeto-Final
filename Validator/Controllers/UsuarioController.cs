@@ -42,7 +42,9 @@ namespace API.Validator.Controllers
                 {
                     if(_baseServicePessoa.listarPor(x => x.Cpf == usuario.Pessoa_.Cpf) != null)
                         return BadRequest("CPF já cadastrado!");
+                    
                     _service.criarUsuario(usuario);
+                    enviarEmail(usuario, "AtivarConta");
                     return Ok("Usuário criado com sucesso!");
                 }
             } catch(Exception ex)
@@ -159,21 +161,14 @@ namespace API.Validator.Controllers
                 Usuario usuario = _baseService.listarPor(x => x.Pessoa_.Email == email);
                 if (usuario != null)
                 {
-                    Destinatario destinatario = new Destinatario(usuario.Pessoa_.Nome, email);
-                    string token = gerarToken(1440, destinatario.Email);
-                    Notificacao notificacao = new Notificacao("Recuperação de senha", destinatario.Email, montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/RecuperarSenha?token={token}&email={email}"), token, usuario);
-
-                    notificacao.Data_Envio = DateTime.Now;
-
-                    _baseServiceNotificacao.inserir(notificacao);
-                    _baseService.enviarNotificacao(notificacao);
+                    enviarEmail(usuario, "RecuperarSenha");
                     return Ok();
                 }
                 else
                     return NotFound("E-mail inexistente!");
             } catch(Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -253,6 +248,114 @@ namespace API.Validator.Controllers
             {
                 return BadRequest(ex);
             }
+        }
+
+        [NonAction]
+        public void enviarEmail(Usuario usuario, string link)
+        {
+            try
+            {
+                Destinatario destinatario = new Destinatario(usuario.Pessoa_.Nome, usuario.Pessoa_.Email);
+
+                string token = gerarToken(1440, destinatario.Email);
+            
+                Notificacao notificacao = new Notificacao("Recuperação de senha", destinatario.Email, montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}"), token, usuario);
+
+                notificacao.Data_Envio = DateTime.Now;
+
+                _baseServiceNotificacao.inserir(notificacao);
+                _baseService.enviarNotificacao(notificacao);
+
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private string montarMensagemAtivacaoConta(Destinatario destinatario, string linkAtivacao)
+        {
+            return $@"
+                <!doctype html>
+                <html lang=""pt-BR"">
+                <head>
+                  <meta charset=""utf-8"">
+                  <meta name=""viewport"" content=""width=device-width,initial-scale=1"">
+                  <title>Ativação de conta</title>
+                  <style>
+                    /* Reset simples */
+                    body,table,td{{margin:0;padding:0;border:0;font-family:Helvetica, Arial, sans-serif}}
+                    img{{border:0;display:block;outline:none;text-decoration:none}}
+                    a{{color:inherit;text-decoration:none}}
+                    /* Container */
+                    .email-wrap{{width:100%;background-color:#f4f6f8;padding:20px 0}}
+                    .email-content{{max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden}}
+                    .spacer{{height:24px}}
+                    /* Header */
+                    .header{{padding:24px;text-align:center;background:linear-gradient(90deg,#0ea5a0,#06b6d4);color:#ffffff}}
+                    .brand{{font-size:20px;font-weight:700}}
+                    .preheader{{display:none!important;visibility:hidden;mso-hide:all;opacity:0;color:transparent;height:0;width:0}}
+                    /* Body */
+                    .body{{padding:28px}}
+                    h1{{font-size:20px;margin:0 0 8px;color:#0f172a}}
+                    p{{font-size:15px;line-height:1.5;color:#475569;margin:0 0 12px}}
+                    .button-cell{{padding:22px 0;text-align:center}}
+                    .btn{{display:inline-block;padding:12px 22px;border-radius:8px;background:#0ea5a0;color:#fff;font-weight:600}}
+                    .muted{{font-size:13px;color:#94a3b8}}
+                    /* Footer */
+                    .footer{{padding:18px;text-align:center;font-size:13px;color:#94a3b8}}
+                    .small-link{{color:#64748b}}
+                    /* Responsivo */
+                    @media only screen and (max-width:480px){{
+                      .body{{padding:18px}}
+                      .header{{padding:18px}}
+                      .brand{{font-size:18px}}
+                      .btn{{width:100%;box-sizing:border-box}}
+                    }}
+                  </style>
+                </head>
+                <body>
+                  <!-- Preheader -->
+                  <div class=""preheader"">Ative sua conta e comece a usar nossos serviços.</div>
+
+                  <table class=""email-wrap"" width=""100%"" cellpadding=""0"" cellspacing=""0"" role=""presentation"">
+                    <tr>
+                      <td align=""center"">
+                        <table class=""email-content"" width=""100%"" cellpadding=""0"" cellspacing=""0"" role=""presentation"">
+
+                          <!-- Header -->
+                          <tr>
+                            <td class=""header"">
+                              <div class=""brand"">Validator</div>
+                            </td>
+                          </tr>
+
+                          <!-- Corpo -->
+                          <tr>
+                            <td class=""body"">
+                              <h1>Bem-vindo(a), {destinatario.Nome}!</h1>
+                              <p>Estamos muito felizes em tê-lo(a) conosco. Para começar a usar sua conta, é necessário ativá-la clicando no botão abaixo.</p>
+                              
+                              <table width=""100%"" role=""presentation"">
+                                <tr>
+                                  <td class=""button-cell"">
+                                    <a href=""{linkAtivacao}"" class=""btn"" target=""_blank"" rel=""noopener"">Ativar minha conta</a>
+                                  </td>
+                                </tr>
+                              </table>
+
+                              <div class=""spacer""></div>
+
+                              <p class=""muted"">Se você não criou esta conta, ignore este e-mail. Caso precise de ajuda, entre em contato com nosso suporte.</p>
+                            </td>
+                          </tr>
+
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </body>
+                </html>";
         }
 
         private string montarMensagemRecuperacaoSenha(Destinatario destinatario, string linkRedefinicao)

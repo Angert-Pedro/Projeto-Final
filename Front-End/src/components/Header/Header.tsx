@@ -87,14 +87,14 @@ export default function Header() {
                 {/* Meu Perfil */}
                 <Text style={styles.sectionTitle}>Meu Perfil</Text>
                 <HeaderButton icon="user" label="Perfil" onPress={() => { goTo("edit-profile"); }} />
-                <HeaderButton icon="id-card" label="Minha Carteirinha" onPress={() => { }} />
+                <HeaderButton icon="id-card" label="Minha Carteirinha" onPress={() => { goTo("register-student-card") }} />
                 <HeaderButton icon="ticket" label="Meus Ingressos" onPress={() => { }} />
 
                 {/* Ajuda */}
                 <Text style={styles.sectionTitle}>Ajuda</Text>
-                <HeaderButton icon="file-text" label="FAQ's" onPress={() => { }} />
-                <HeaderButton icon="headphones" label="Suporte" onPress={() => { }} />
-                <HeaderButton icon="comments" label="Feedback" onPress={() => { }} />
+                <HeaderButton icon="file-text" label="FAQ's" onPress={() => {goTo("faq")}} />
+                <HeaderButton icon="headphones" label="Suporte" onPress={() => {goTo("support")}} />
+                <HeaderButton icon="comments" label="Feedback" onPress={() => {goTo("feedback")}} />
 
                 {/* Sobre */}
                 <Text style={styles.sectionTitle}>Sobre</Text>

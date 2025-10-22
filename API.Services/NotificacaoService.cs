@@ -47,7 +47,7 @@ namespace API.Services
                 return true;
             } catch(Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 

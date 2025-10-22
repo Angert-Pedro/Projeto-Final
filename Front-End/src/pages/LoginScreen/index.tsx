@@ -41,8 +41,6 @@ const LoginScreen = () => {
         }),
       });
 
-      console.log(response);
-      
       const result = await response.text();
 
       if (!response.ok) {
@@ -56,13 +54,16 @@ const LoginScreen = () => {
       }
 
       if (result === "Usuário logado!") {
-        
         await AsyncStorage.setItem("authToken", "true");
-
-        // Salva também o login do usuário
         await AsyncStorage.setItem("userLogin", login);
 
         navigation.navigate("home" as never);
+
+        // Timer de 5 minutos
+        setTimeout(async () => {
+          await AsyncStorage.setItem("authToken", "false");
+          navigation.navigate("login" as never);
+        }, 5 * 60 * 1000);
       } else {
         throw new Error("Resposta inválida do servidor");
       }
