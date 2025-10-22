@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("API.Criptografia")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48edfb0ffd2ae87c88687aa3261021c8141da8af")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b90356eabbee46b30cebd0f6bc7756447b13934e")]
 [assembly: System.Reflection.AssemblyProductAttribute("API.Criptografia")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API.Criptografia")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollViewContent: {
-    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 30,
@@ -30,11 +29,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
+    textAlign: "center",
     fontWeight: "bold",
     marginBottom: 8,
     color: "#1C1C1E",
   },
   subtitle: {
+    textAlign: "center",
     fontSize: 16,
     color: "#636366",
     marginBottom: 30,
@@ -42,6 +43,17 @@ const styles = StyleSheet.create({
   // Formulário
   formContainer: {
     width: "100%",
+  },
+  maskedInput: {
+    height: 50,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "#d1d1d6",
+    color: "#8b8b8bff"
   },
   // Separador
   separatorContainer: {
@@ -107,6 +119,7 @@ const styles = StyleSheet.create({
     color: "#007AFF", // Cor padrão de link iOS
   },
   checkboxContainer: {
+    marginTop: 20,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -127,7 +140,37 @@ const styles = StyleSheet.create({
     gap: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 20,
+  },
+  fotoLabel: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#3f3f46",
+    marginBottom: 8,
+  },
+  uploadButton: {
+    backgroundColor: "#18181b",
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  uploadButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "500",
+  },
+  previewContainer: {
+    marginTop: 12,
+    alignItems: "center",
+  },
+  previewImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 8,
+  },
+  previewText: {
+    fontSize: 12,
+    color: "#71717a",
+    marginTop: 6,
   },
   modalOverlay: {
     flex: 1,
@@ -166,14 +209,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 5,
   },
-  modalText: {
-    fontSize: 14,
-    lineHeight: 20,
-    color: "#444",
-  },
-  scrollArea: {
-    marginBottom: 20,
-  },
   cancelButton: {
     backgroundColor: "#f4f4f5",
   },
@@ -187,6 +222,17 @@ const styles = StyleSheet.create({
   confirmText: {
     color: "#fff",
     fontWeight: "500",
+  },
+  uploadButtonDisabled: {
+    backgroundColor: "#a1a1aa",
+  },
+  scrollArea: {
+    marginBottom: 20,
+  },
+  modalText: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#444",
   },
 });
 
