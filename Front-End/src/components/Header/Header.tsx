@@ -92,9 +92,9 @@ export default function Header() {
 
                 {/* Ajuda */}
                 <Text style={styles.sectionTitle}>Ajuda</Text>
-                <HeaderButton icon="file-text" label="FAQ's" onPress={() => { }} />
-                <HeaderButton icon="headphones" label="Suporte" onPress={() => { }} />
-                <HeaderButton icon="comments" label="Feedback" onPress={() => { }} />
+                <HeaderButton icon="file-text" label="FAQ's" onPress={() => {goTo("faq")}} />
+                <HeaderButton icon="headphones" label="Suporte" onPress={() => {goTo("support")}} />
+                <HeaderButton icon="comments" label="Feedback" onPress={() => {goTo("feedback")}} />
 
                 {/* Sobre */}
                 <Text style={styles.sectionTitle}>Sobre</Text>
