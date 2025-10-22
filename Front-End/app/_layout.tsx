@@ -13,6 +13,7 @@ export default function Layout() {
       <Stack.Screen name="RecuperarSenha" options={{ headerShown: false }} />
       <Stack.Screen name="register-student-card" options={{ headerShown: false }} />
       <Stack.Screen name="my-tickets" options={{ headerShown: false }} />
+      <Stack.Screen name="account-activate" options={{ headerShown: false }} />
     </Stack><Toast /></>
   );
 } 
