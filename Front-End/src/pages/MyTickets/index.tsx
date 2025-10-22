@@ -9,13 +9,14 @@ export default function MyTickets() {
     title: "Show da Banda X",
     date: "2024-07-15",
     time_start: "20:00",
-    time_end: "23:00"
+    time_end: "23:00",
+    imgURL: "https://upload.wikimedia.org/wikipedia/en/2/2a/Linkin_Park_Hybrid_Theory_Album_Cover.jpg"
   }
 
   return (
     
     <View style={styles.container}>
-      <Header title="Meus ingressos" />
+      <Header />
       <TicketCard {...ticketProps} />
     </View>
   )

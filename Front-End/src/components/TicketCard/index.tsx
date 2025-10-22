@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styles from "./styles";
-import { View, Text, Modal, TouchableOpacity } from "react-native";
+import { View, Text, Modal, TouchableOpacity, Image } from "react-native";
 
 type TicketCardProps = {
   title: string;
   date: string;
   time_start: string;
   time_end: string;
+  imgURL: string;
 };
 
 function formatDateToPt(dateInput: string) {
@@ -37,12 +38,15 @@ export default function TicketCard(props: TicketCardProps) {
   return (
     <>
       <TouchableOpacity activeOpacity={0.9} onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
-          <Text style={styles.date}>{formatDateToPt(props.date)}</Text>
-          <Text style={styles.title}>{props.title}</Text>
-          <View style={styles.timeContainer}>
-            <Text style={styles.timeText}>{props.time_start}</Text>
-            <Text style={styles.timeText}>{props.time_end}</Text>
+        <View style={styles.outerContainer}>
+          <Image source={{ uri: props.imgURL }} style={styles.image} />
+          <View style={styles.container}>
+            <Text style={styles.date}>{formatDateToPt(props.date)}</Text>
+            <Text style={styles.title}>{props.title}</Text>
+            <View style={styles.timeContainer}>
+              <Text style={styles.timeText}>{props.time_start}</Text>
+              <Text style={styles.timeText}>{props.time_end}</Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
