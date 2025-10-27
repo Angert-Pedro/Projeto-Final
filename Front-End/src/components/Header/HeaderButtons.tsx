@@ -34,7 +34,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
       style={[styles.container, containerStyle]}
       onPress={onPress}
     >
-      <FontAwesome name={icon} size={iconSize} color={iconColor} />
+      <FontAwesome IconName={icon} size={iconSize} color={iconColor} />
       <Text style={[styles.text, textStyle]}>{label}</Text>
     </TouchableOpacity>
   );

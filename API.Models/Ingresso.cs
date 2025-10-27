@@ -9,12 +9,13 @@ namespace API.Models
     public class Ingresso
     {
         public int Id { get; set; }
-        public int Codigo { get; set; }
-        public string? Tipo { get; set; }
-        public virtual Evento Evento { get; set; }
-        public DateTime DataCompra { get; set; }
+        public string Codigo { get; set; }
+        public string Tipo { get; set; }
+        
+        public virtual Evento Evento_ { get; set; }
+        public DateTime Data_Compra { get; set; }
         public bool Valido { get; set; }
         public int Lote { get; set; }
-        public decimal PrecoBase { get; set; }
+        public decimal Preco_Base { get; set; }
     }
 }
