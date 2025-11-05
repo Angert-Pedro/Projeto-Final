@@ -78,11 +78,46 @@ export default function RegisterStudentCard() {
     setModalVisible(false);
   };
 
-  function handleRegistrateStudentCard() {
-    // Lógica de registro da carteirinha de estudante
-  }
+  async function handleRegistrateStudentCard() {
+  try {
+    const validacao = {
+      data_hora: new Date().toISOString(), // pega a data/hora atual no formato ISO
+      local_validacao: "Evento Cultural - São Paulo", // exemplo
+      status_validacao: "Em análise",
+      ingresso_id: 1, // substitua conforme seu caso
+      validador_id: 2, // substitua conforme seu caso
+      foi_bem_sucedida: true
+    };
 
-  return (
+    const response = await fetch("https://10.0.2.2:7221/Validacao/criarValidacao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(validacao),
+    });
+
+    const result = await response.text();
+
+    if (!response.ok) {
+      alert("Erro: " + result);
+      return;
+    }
+
+    alert("Validação criada com sucesso!");
+  } catch (error) {
+  if (error instanceof Error) {
+    console.error("Erro:", error.message);
+    alert("Erro ao enviar requisição: " + error.message);
+  } else {
+    console.error("Erro desconhecido:", error);
+    alert("Erro desconhecido");
+  }
+}
+}
+
+
+    return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}

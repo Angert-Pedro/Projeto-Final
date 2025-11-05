@@ -33,3 +33,15 @@ D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.dll
 D:\Nova pasta\API.Models\obj\Debug\net8.0\refint\API.Models.dll
 D:\Nova pasta\API.Models\obj\Debug\net8.0\API.Models.pdb
 D:\Nova pasta\API.Models\obj\Debug\net8.0\ref\API.Models.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\bin\Debug\net8.0\API.Models.deps.json
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\bin\Debug\net8.0\API.Models.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\bin\Debug\net8.0\API.Models.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.AssemblyInfoInputs.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.AssemblyInfo.cs
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.csproj.CoreCompileInputs.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.sourcelink.json
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\refint\API.Models.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\API.Models.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Models\obj\Debug\net8.0\ref\API.Models.dll

@@ -51,3 +51,21 @@ D:\Nova pasta\API.DAL\obj\Debug\net8.0\refint\API.DAL.dll
 D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.pdb
 D:\Nova pasta\API.DAL\obj\Debug\net8.0\API.DAL.genruntimeconfig.cache
 D:\Nova pasta\API.DAL\obj\Debug\net8.0\ref\API.DAL.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\bin\Debug\net8.0\API.DAL.deps.json
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\bin\Debug\net8.0\API.DAL.runtimeconfig.json
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\bin\Debug\net8.0\API.DAL.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\bin\Debug\net8.0\API.DAL.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\bin\Debug\net8.0\API.Models.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\bin\Debug\net8.0\API.Models.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.csproj.AssemblyReference.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.AssemblyInfoInputs.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.AssemblyInfo.cs
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.sourcelink.json
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.csproj.Up2Date
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\refint\API.DAL.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\API.DAL.genruntimeconfig.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.DAL\obj\Debug\net8.0\ref\API.DAL.dll
