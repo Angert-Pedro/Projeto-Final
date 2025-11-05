@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Validator"
   ],
-  "SelectedNode": "\\Validator.sln",
+  "SelectedNode": "\\Validator\\Validator.sln",
   "PreviewInSolutionExplorer": false
 }

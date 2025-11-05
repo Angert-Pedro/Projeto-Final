@@ -57,3 +57,23 @@ D:\Nova pasta\API.Services\obj\Debug\net8.0\API.Services.dll
 D:\Nova pasta\API.Services\obj\Debug\net8.0\refint\API.Services.dll
 D:\Nova pasta\API.Services\obj\Debug\net8.0\API.Services.pdb
 D:\Nova pasta\API.Services\obj\Debug\net8.0\ref\API.Services.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.Services.deps.json
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.Services.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.Services.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.Criptografia.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.DAL.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.Models.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.Criptografia.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.DAL.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\bin\Debug\net8.0\API.Models.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.csproj.AssemblyReference.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.AssemblyInfoInputs.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.AssemblyInfo.cs
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.csproj.CoreCompileInputs.cache
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.sourcelink.json
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Serv.A72B4071.Up2Date
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\refint\API.Services.dll
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\API.Services.pdb
+C:\Users\Pedro\OneDrive\Documents\GitHub\Projeto-Final\API.Services\obj\Debug\net8.0\ref\API.Services.dll
