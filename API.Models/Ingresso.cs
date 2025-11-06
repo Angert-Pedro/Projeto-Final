@@ -11,7 +11,6 @@ namespace API.Models
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Tipo { get; set; }
-        
         public virtual Evento Evento_ { get; set; }
         public DateTime Data_Compra { get; set; }
         public bool Valido { get; set; }

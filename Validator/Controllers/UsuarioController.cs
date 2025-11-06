@@ -5,6 +5,7 @@ using API.Validator.Request;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -242,7 +243,11 @@ namespace API.Validator.Controllers
                         return BadRequest("Usuário inválido!");
                 }
                 else
+                {
+                    notificacao.Token = "";
+                    _baseServiceNotificacao.atualizar(notificacao);
                     return BadRequest("Token inválido!");
+                }
             }
             catch (Exception ex)
             {
@@ -258,8 +263,21 @@ namespace API.Validator.Controllers
                 Destinatario destinatario = new Destinatario(usuario.Pessoa_.Nome, usuario.Pessoa_.Email);
 
                 string token = gerarToken(1440, destinatario.Email);
-            
-                Notificacao notificacao = new Notificacao("Recuperação de senha", destinatario.Email, montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}"), token, usuario);
+                string msg = "";
+                string assunto = "";
+
+                if (link.ToUpper() == "RECUPERARSENHA")
+                {
+                    msg = montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
+                    assunto = "Recuperação de senha";
+                }
+                else if (link.ToUpper() == "ATIVARCONTA")
+                {
+                    msg = montarMensagemAtivacaoConta(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
+                    assunto = "Ativação de conta";
+                }
+
+                Notificacao notificacao = new Notificacao(assunto, destinatario.Email, msg, token, usuario);
 
                 notificacao.Data_Envio = DateTime.Now;
 
