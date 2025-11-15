@@ -18,7 +18,7 @@ namespace API.DAL
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Validacao> Validacao { get; set; }
         public DbSet<Notificacao> Notificacao { get; set; }
-        private string connectionString = "Server=localhost;Database=Validator;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
+        private string connectionString = "Data Source=(localdb)\\Local;Initial Catalog=Validator;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
