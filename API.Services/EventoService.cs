@@ -42,19 +42,6 @@ namespace API.Services
             }
         }
 
-        // READ - buscar por condição
-        public Evento? BuscarPor(System.Func<Evento, bool> condicao)
-        {
-            try
-            {
-                return _dal.listarPor(condicao);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao buscar evento: " + ex.Message, ex);
-            }
-        }
-
         // UPDATE
         public void Atualizar(Evento entidade)
         {

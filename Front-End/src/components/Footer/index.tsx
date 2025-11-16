@@ -11,17 +11,17 @@ type FooterProps = {
 // --- Dados dos Links ---
 // Organizar os links em arrays facilita a manutenção.
 const leftColumnLinks = [
-  { title: "Home", route: "Home" },
-  { title: "Minha Carteirinha", route: "Wallet" },
-  { title: "Meus Ingressos", route: "Tickets" },
-  { title: "FAQ’s", route: "FAQ" },
+  { title: "Home", route: "home" },
+  { title: "Minha Carteirinha", route: "register-student-card" },
+  { title: "Meus Ingressos", route: "my-tickets" },
+  { title: "FAQ’s", route: "faq" },
 ];
 
 const rightColumnLinks = [
-  { title: "Suporte", route: "Support" },
-  { title: "Feedback", route: "Feedback" },
-  { title: "Termos e Condições", route: "Terms" },
-  { title: "Políticas e Privacidade", route: "PrivacyPolicy" },
+  { title: "Suporte", route: "support" },
+  { title: "Feedback", route: "feedback" },
+  { title: "Termos e Condições", route: "terms-and-conditions" },
+  { title: "Políticas e Privacidade", route: "policies-and-privacy" },
 ];
 
 const Footer: React.FC<FooterProps> = ({ navigation }) => {

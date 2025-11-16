@@ -13,40 +13,5 @@ namespace API.Services
         {
             _dal = dal;
         }
-
-        // CREATE
-        public void Inserir(Validacao entidade)
-        {
-            _dal.inserir(entidade);
-        }
-
-        // READ - listar todos
-        public IEnumerable<Validacao> Listar()
-        {
-            return _dal.listar();
-        }
-
-        // READ - buscar por condição
-        public Validacao? BuscarPor(Func<Validacao, bool> condicao)
-        {
-            return _dal.listarPor(condicao);
-        }
-
-        // UPDATE
-        public void Atualizar(Validacao entidade)
-        {
-            _dal.alterar(entidade);
-        }
-
-        // DELETE
-        public bool Deletar(Validacao entidade)
-        {
-            if (_dal.verificarExistencia(entidade) != null)
-            {
-                _dal.excluir(entidade);
-                return true;
-            }
-            return false;
-        }
     }
 }

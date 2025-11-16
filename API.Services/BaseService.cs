@@ -4,6 +4,7 @@ using API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace API.Services
             return _dal.listar();
         }
 
-        public T? listarPor(Func<T, bool> func)
+        public T? listarPor(Expression<Func<T, bool>> func)
         {
             return _dal.listarPor(func);
         }

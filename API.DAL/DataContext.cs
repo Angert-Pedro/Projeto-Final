@@ -32,6 +32,7 @@ namespace API.DAL
             modelBuilder.Entity<Pessoa>()
                 .HasIndex(p => p.Cpf)
                 .IsUnique();
+
         }
 
         // Método de diagnóstico: tenta abrir a conexão e lança a exceção em caso de falha

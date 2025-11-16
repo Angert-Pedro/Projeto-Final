@@ -9,10 +9,12 @@ namespace API.Validator.Controllers
     public class ValidacaoController : ControllerBase
     {
         private readonly ValidacaoService _service;
+        private readonly BaseService<Validacao> _baseService;
 
-        public ValidacaoController(ValidacaoService service)
+        public ValidacaoController(ValidacaoService service, BaseService<Validacao> baseService)
         {
             _service = service;
+            _baseService = baseService;
         }
 
         [HttpPost("criarValidacao")]
@@ -20,7 +22,7 @@ namespace API.Validator.Controllers
         {
             try
             {
-                _service.Inserir(validacao);
+                _baseService.inserir(validacao);
                 return Ok("Validação criada com sucesso!");
             }
             catch (Exception ex)
@@ -37,7 +39,7 @@ namespace API.Validator.Controllers
                 if (!int.TryParse(id, out int validacaoId))
                     return BadRequest("Id inválido!");
 
-                var resultado = _service.BuscarPor(x => x.Id == validacaoId);
+                var resultado = _baseService.listarPor(x => x.Id == validacaoId);
                 if (resultado != null)
                     return Ok(resultado);
                 else
@@ -54,7 +56,7 @@ namespace API.Validator.Controllers
         {
             try
             {
-                var lista = _service.Listar();
+                var lista = _baseService.listar();
                 return Ok(lista);
             }
             catch (Exception ex)
@@ -68,7 +70,7 @@ namespace API.Validator.Controllers
         {
             try
             {
-                _service.Atualizar(validacao);
+                _baseService.atualizar(validacao);
                 return Ok("Validação atualizada com sucesso!");
             }
             catch (Exception ex)
@@ -85,11 +87,11 @@ namespace API.Validator.Controllers
                 if (!int.TryParse(id, out int validacaoId))
                     return BadRequest("Id inválido!");
 
-                var validacao = _service.BuscarPor(x => x.Id == validacaoId);
+                var validacao = _baseService.listarPor(x => x.Id == validacaoId);
                 if (validacao == null)
                     return NotFound("Validação não encontrada!");
 
-                if (_service.Deletar(validacao))
+                if (_baseService.deletar(validacao))
                     return Ok("Validação excluída com sucesso!");
                 else
                     return BadRequest("Erro ao excluir validação!");

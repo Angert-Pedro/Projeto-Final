@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace API.DAL
 {
@@ -14,7 +15,7 @@ namespace API.DAL
 
         #region Consultas genéricas
 
-        public T? listarPor(Func<T,bool> condicao)
+        public T? listarPor(Expression<Func<T,bool>> condicao)
         {
             return context.Set<T>().FirstOrDefault(condicao);
         }
