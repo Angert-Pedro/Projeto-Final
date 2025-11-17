@@ -29,7 +29,8 @@ export default function Index() {
           id: item.id,
           title: item.nome,
           image: { uri: item.urlBanner }, // ← usa a url que vem do banco
-          screen: "details-event",       // você pode definir uma tela padrão
+          screen: `details-event`,
+          params: { id: item.id }       // você pode definir uma tela padrão
         }));
 
         setData(mappedData);
