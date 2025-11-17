@@ -14,7 +14,8 @@ import Checkbox from "expo-checkbox";
 import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
 import { useNavigation } from "@react-navigation/native";
-import { Toast } from "react-native-toast-message/lib/src/Toast"; 
+import { Toast } from "react-native-toast-message/lib/src/Toast";
+import validateRegister from "@/utils/validateRegister";
 
 export default function RegistrationScreen() {
   const navigation = useNavigation();
@@ -48,19 +49,23 @@ export default function RegistrationScreen() {
   };
 
   async function handleRegister() {
-    // Validações básicas
-    if (!nome.trim() || !username.trim() || !email.trim() || !celular.trim() || !senha || !confirmarSenha) {
-      Toast.show({ type: "error", text1: "Preencha todos os campos.", visibilityTime: 4000 });
-      return;
-    }
+    const errorMessage = validateRegister({
+      nome,
+      username,
+      email,
+      celular,
+      cpf,
+      senha,
+      confirmarSenha,
+      isChecked,
+    });
 
-    if (senha !== confirmarSenha) {
-      Toast.show({ type: "error", text1: "As senhas não coincidem.", visibilityTime: 4000 });
-      return;
-    }
-
-    if (!isChecked) {
-      Toast.show({ type: "error", text1: "Você precisa aceitar os termos e condições.", visibilityTime: 4000 });
+    if (errorMessage) {
+      Toast.show({
+        type: "error",
+        text1: errorMessage,
+        visibilityTime: 4000,
+      });
       return;
     }
 
@@ -71,13 +76,13 @@ export default function RegistrationScreen() {
         body: JSON.stringify({
           Login: username,
           Senha: senha,
-          Pessoa_:{
+          Pessoa_: {
             Nome: nome,
             Email: email,
             Celular: celular,
             Cpf: cpf,
-            DataNascimento: dataNascimento
-          }
+            DataNascimento: dataNascimento,
+          },
         }),
       });
 
