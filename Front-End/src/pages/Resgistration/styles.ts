@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   logoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginTop: -20,
+    marginBottom: 0,
   },
   logoText: {
     fontSize: 28,

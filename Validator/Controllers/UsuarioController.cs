@@ -43,7 +43,10 @@ namespace API.Validator.Controllers
                 {
                     if(_baseServicePessoa.listarPor(x => x.Cpf == usuario.Pessoa_.Cpf) != null)
                         return BadRequest("CPF já cadastrado!");
-                    
+
+                    if (_baseServicePessoa.listarPor(x => x.Email == usuario.Pessoa_.Email) != null)
+                        return BadRequest("E-mail já cadastrado!");
+
                     _service.criarUsuario(usuario);
                     enviarEmail(usuario, "AtivarConta");
                     return Ok("Usuário criado com sucesso!");
@@ -267,15 +270,12 @@ namespace API.Validator.Controllers
                 string assunto = "";
 
                 if (link.ToUpper() == "RECUPERARSENHA")
-                {
-                    msg = montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
                     assunto = "Recuperação de senha";
-                }
+
                 else if (link.ToUpper() == "ATIVARCONTA")
-                {
-                    msg = montarMensagemAtivacaoConta(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
                     assunto = "Ativação de conta";
-                }
+                
+                msg = montarMensagemAtivacaoConta(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
 
                 Notificacao notificacao = new Notificacao(assunto, destinatario.Email, msg, token, usuario);
 

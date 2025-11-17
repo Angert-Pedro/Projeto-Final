@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingTop: 72, // reserva espaço para o Header fixo
   },
   container: {
     flex: 1,

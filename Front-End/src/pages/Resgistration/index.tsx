@@ -14,11 +14,14 @@ import Checkbox from "expo-checkbox";
 import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
 import { useNavigation } from "@react-navigation/native";
+import { Toast } from "react-native-toast-message/lib/src/Toast"; 
 
 export default function RegistrationScreen() {
   const navigation = useNavigation();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
   const [senha, setSenha] = useState("");
   const [celular, setCelular] = useState("");
   const [username, setUsername] = useState("");
@@ -44,7 +47,68 @@ export default function RegistrationScreen() {
     setModalVisible(false);
   };
 
-  function handleRegister() { }
+  async function handleRegister() {
+    // Validações básicas
+    if (!nome.trim() || !username.trim() || !email.trim() || !celular.trim() || !senha || !confirmarSenha) {
+      Toast.show({ type: "error", text1: "Preencha todos os campos.", visibilityTime: 4000 });
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      Toast.show({ type: "error", text1: "As senhas não coincidem.", visibilityTime: 4000 });
+      return;
+    }
+
+    if (!isChecked) {
+      Toast.show({ type: "error", text1: "Você precisa aceitar os termos e condições.", visibilityTime: 4000 });
+      return;
+    }
+
+    try {
+      const response = await fetch("https://localhost:7221/Usuario/criarUsuario", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          Login: username,
+          Senha: senha,
+          Pessoa_:{
+            Nome: nome,
+            Email: email,
+            Celular: celular,
+            Cpf: cpf,
+            DataNascimento: dataNascimento
+          }
+        }),
+      });
+
+      const result = await response.text();
+
+      if (!response.ok) {
+        Toast.show({
+          type: "error",
+          text1: "Erro ao cadastrar usuário",
+          text2: result,
+          visibilityTime: 4000,
+        });
+        return;
+      }
+
+      Toast.show({
+        type: "success",
+        text1: "Cadastro realizado com sucesso!",
+        visibilityTime: 4000,
+      });
+
+      navigation.navigate("index" as never);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Erro ao cadastrar usuário",
+        text2: error.message || "Não foi possível cadastrar.",
+        visibilityTime: 4000,
+      });
+    }
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -59,9 +123,6 @@ export default function RegistrationScreen() {
           </View>
 
           <Text style={styles.title}>Cadastro</Text>
-          <Text style={styles.subtitle}>
-            Insira seus dados para se registrar
-          </Text>
 
           <View style={styles.formContainer}>
             <FormField
@@ -69,6 +130,18 @@ export default function RegistrationScreen() {
               placeholder="Nome Completo"
               value={nome}
               onChangeText={setNome}
+            />
+            <FormField
+              label=""
+              placeholder="CPF"
+              value={cpf}
+              onChangeText={setCpf}
+            />
+            <FormField
+              label=""
+              placeholder="Data de Nascimento"
+              value={dataNascimento}
+              onChangeText={setDataNascimento}
             />
             <FormField
               label=""
