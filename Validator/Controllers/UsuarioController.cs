@@ -120,7 +120,9 @@ namespace API.Validator.Controllers
                 {
                     if (usuarioLogin.Usuario_logado == OperacaoLogin.Login)
                         return BadRequest("Usuário já está logado!");
-                    if(_service.executarLogin(usuarioLogin, usuario.Senha))
+                    else if (!usuarioLogin.Ativo)
+                        return Unauthorized("Usuário não foi ativado ainda! Verifique seu e-mail.");
+                    if (_service.executarLogin(usuarioLogin, usuario.Senha))
                         return Ok("Usuário logado!");
                     else
                         return BadRequest("Usuário ou senha incorretos!");
@@ -256,6 +258,13 @@ namespace API.Validator.Controllers
             {
                 return BadRequest(ex);
             }
+        }
+
+        [HttpPost("ativarUsuario")]
+        public IActionResult ativarUsuario([FromBody] Usuario usuario)
+        {
+            _baseService.atualizar(usuario);
+            return Ok("Usuário ativado com sucesso!");
         }
 
         [NonAction]
