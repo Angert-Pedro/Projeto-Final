@@ -16,7 +16,7 @@ export default function Layout() {
       <Stack.Screen name="RecuperarSenha" options={{ headerShown: false }} />
       <Stack.Screen name="register-student-card" options={{ headerShown: false }} />
       <Stack.Screen name="my-tickets" options={{ headerShown: false }} />
-      <Stack.Screen name="account-activate" options={{ headerShown: false }} />
+      <Stack.Screen name="AtivarConta" options={{ headerShown: false }} />
       <Stack.Screen name="terms-and-conditions" options={{ headerShown: false }} />
       <Stack.Screen name="policies-and-privacy" options={{ headerShown: false }} />
       <Stack.Screen name="details-event" options={{ headerShown: false }} />

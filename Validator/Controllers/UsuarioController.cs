@@ -261,10 +261,50 @@ namespace API.Validator.Controllers
         }
 
         [HttpPost("ativarUsuario")]
-        public IActionResult ativarUsuario([FromBody] Usuario usuario)
+        public IActionResult ativarUsuario([FromBody] AtivarContaRequest request)
         {
-            _baseService.atualizar(usuario);
-            return Ok("Usuário ativado com sucesso!");
+            try
+            {
+                var token = request.Token;
+                var email = request.Email;
+
+                if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
+                    return BadRequest("Está faltando o token ou o e-mail.");
+
+                Token tk = new Token();
+
+                Notificacao notificacao = _baseServiceNotificacao.listarPor(x => x.Token == token);
+
+                if (tk.ValidarToken(email, token))
+                {
+                    Usuario usuario = _baseService.listarPor(y => y.Pessoa_.Email == email);
+                    if (usuario != null)
+                    {
+                        if (notificacao != null)
+                        {
+                            usuario.Ativo = true;
+                            _baseService.atualizar(usuario);
+                            notificacao.Token = "";
+                            _baseServiceNotificacao.atualizar(notificacao);
+                            return Ok("Usuário ativado com sucesso!");
+                        }
+                        else
+                            return BadRequest("O token já foi utilizado!");
+                    }
+                    else
+                        return BadRequest("Usuário inválido!");
+                }
+                else
+                {
+                    notificacao.Token = "";
+                    _baseServiceNotificacao.atualizar(notificacao);
+                    return BadRequest("Token inválido!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [NonAction]

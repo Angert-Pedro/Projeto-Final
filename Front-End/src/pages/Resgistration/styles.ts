@@ -189,6 +189,54 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "500",
   },
+  datePickerWeb: {
+  width: "100%",
+  position: "relative",
+  marginVertical: 8,
+  },
+  dateInputWeb: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    width: "10%",
+    height: 1,
+    opacity: 0,
+    zIndex: 10,
+    borderWidth: 0,
+  } as any,
+
+  fakeDateInput: {
+    width: "98%",
+    height: 48,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    backgroundColor: "#fff",
+    fontSize: 16,
+    color: "#222",
+    cursor: "pointer",
+    alignSelf: "stretch",
+  },
+
+  fakeDateInputPlaceholder: {
+    color: "#A9A9A9",
+  },
+
+  datePickerButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    backgroundColor: "#fff",
+  },
+
+  datePickerText: {
+    color: "#454B60",
+    fontSize: 16,
+  },
 });
 
 export default styles;
