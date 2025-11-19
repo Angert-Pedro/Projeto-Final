@@ -1,93 +1,163 @@
-  import React, { useState } from "react";
-  import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
-  import styles from "./styles";
+import React, { useState, useEffect } from "react";
+import { Modal, View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import styles from "./styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-  type TicketModalProps = {
-    visible: boolean;
-    onClose: () => void;
-    evento: any; // or the real type of Evento
-    onCreate: (ingresso: any) => void;
-  };
+type TicketModalProps = {
+  visible: boolean;
+  onClose: () => void;
+  evento: any;
+  onCreate: (ingresso: any) => void;
+  precoBase: number;
+};
 
+export default function TicketModal({
+  visible,
+  onClose,
+  evento,
+  onCreate,
+  precoBase,
+}: TicketModalProps) {
+  const [tipo, setTipo] = useState<"MEIA_ESTUDANTE" | "INTEIRA">("INTEIRA");
+  const [lote, setLote] = useState<1 | 2>(1);
 
-  export default function TicketModal({ visible, onClose, evento, onCreate }: TicketModalProps) {
-    const [tipo, setTipo] = useState<"MEIA_ESTUDANTE" | "INTEIRA">("INTEIRA");
-    const [lote, setLote] = useState<1 | 2>(1);
+  const [userId, setUserId] = useState<number | null>(null);
+  const [loadingUser, setLoadingUser] = useState(false);
 
-    function generateRandomCodigo() {
-      return Math.floor(Math.random() * 900000 + 100000).toString(); // 6 digits
+  // 🔄 Carrega o usuário quando o modal abrir
+  useEffect(() => {
+    if (visible) loadUserData();
+  }, [visible]);
+
+  // 🟦 Lógica igual ao EditProfileScreen (buscar userLogin → consultar API → pegar userId)
+  async function loadUserData() {
+    try {
+      setLoadingUser(true);
+
+      const userLogin = await AsyncStorage.getItem("userLogin");
+
+      if (!userLogin) {
+        console.warn("Nenhum userLogin salvo no AsyncStorage.");
+        setLoadingUser(false);
+        return;
+      }
+
+      console.log("User login recuperado:", userLogin);
+
+      const response = await fetch(`https://localhost:7221/Usuario/consultarUsuario?usuario=${userLogin}`);
+
+      if (!response.ok) {
+        console.warn("Erro ao buscar usuário pela API.");
+        setLoadingUser(false);
+        return;
+      }
+
+      const usuario = await response.json();
+      console.log("Usuário carregado pela API:", usuario);
+
+      if (usuario?.id) {
+        setUserId(usuario.id);
+      } else {
+        console.warn("API não retornou ID do usuário.");
+      }
+    } catch (e) {
+      console.warn("Erro ao carregar usuário:", e);
+    } finally {
+      setLoadingUser(false);
+    }
+  }
+
+  function generateRandomCodigo() {
+    return Math.floor(Math.random() * 900000 + 100000).toString();
+  }
+
+  function calculatePrecoFinal() {
+    let preco = precoBase;
+    if (tipo === "MEIA_ESTUDANTE") preco = preco / 2;
+    return preco;
+  }
+
+  function handleCreate() {
+    if (!userId) {
+      console.warn("User ID ainda não carregado.");
+      return;
     }
 
-    function handleCreate() {
-      const ingresso = {
-        codigo: generateRandomCodigo(),
-        tipo: tipo,
-        eventoId: evento.id,
-        data_Compra: new Date(),
-        valido: true,
-        lote: lote,
-        preco_Base: lote === 1 ? 200 : 250,
-      };
-      console.log("JSON enviado:", JSON.stringify(ingresso));
-      onCreate(ingresso);
-      onClose();
-    }
+    const ingresso = {
+      codigo: generateRandomCodigo(),
+      tipo,
+      evento_id: evento.id,
+      data_Compra: new Date(),
+      valido: true,
+      lote,
+      usuario_id: userId, // ← agora carregado corretamente
+      preco_final: calculatePrecoFinal(),
+    };
 
-    return (
-      <Modal visible={visible} transparent animationType="fade">
-        <View style={styles.backdrop}>
-          <View style={styles.box}>
-            <Text style={styles.title}>Criar Ingresso</Text>
+    console.log("JSON enviado:", JSON.stringify(ingresso));
 
-            {/* Tipo */}
-            <Text style={styles.label}>Tipo</Text>
-            <View style={styles.row}>
-              <TouchableOpacity
-                style={[styles.btn, tipo === "INTEIRA" && styles.selected]}
-                onPress={() => setTipo("INTEIRA")}
-              >
-                <Text>INTEIRA</Text>
-              </TouchableOpacity>
+    onCreate(ingresso);
+    onClose();
+  }
 
-              <TouchableOpacity
-                style={[styles.btn, tipo === "MEIA_ESTUDANTE" && styles.selected]}
-                onPress={() => setTipo("MEIA_ESTUDANTE")}
-              >
-                <Text>MEIA ESTUDANTE</Text>
-              </TouchableOpacity>
+  return (
+    <Modal visible={visible} transparent animationType="fade">
+      <View style={styles.backdrop}>
+        <View style={styles.box}>
+          <Text style={styles.title}>Criar Ingresso</Text>
+
+          {loadingUser && (
+            <View style={{ alignItems: "center", marginBottom: 10 }}>
+              <ActivityIndicator size="large" />
+              <Text>Carregando usuário...</Text>
             </View>
+          )}
 
-            {/* Lote */}
-            <Text style={styles.label}>Lote</Text>
-            <View style={styles.row}>
-              <TouchableOpacity
-                style={[styles.btn, lote === 1 && styles.selected]}
-                onPress={() => setLote(1)}
-              >
-                <Text>Lote 1 (R$ 200)</Text>
-              </TouchableOpacity>
+          {/* Tipo */}
+          <Text style={styles.label}>Tipo</Text>
+          <View style={styles.row}>
+            <TouchableOpacity
+              style={[styles.btn, tipo === "INTEIRA" && styles.selected]}
+              onPress={() => setTipo("INTEIRA")}
+            >
+              <Text>INTEIRA</Text>
+            </TouchableOpacity>
 
-              <TouchableOpacity
-                style={[styles.btn, lote === 2 && styles.selected]}
-                onPress={() => setLote(2)}
-              >
-                <Text>Lote 2 (R$ 250)</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              style={[styles.btn, tipo === "MEIA_ESTUDANTE" && styles.selected]}
+              onPress={() => setTipo("MEIA_ESTUDANTE")}
+            >
+              <Text>MEIA ESTUDANTE</Text>
+            </TouchableOpacity>
+          </View>
 
-            {/* Buttons */}
-            <View style={styles.actions}>
-              <TouchableOpacity onPress={onClose} style={styles.cancel}>
-                <Text>Cancelar</Text>
-              </TouchableOpacity>
+          {/* Lote */}
+          <Text style={styles.label}>Lote</Text>
+          <View style={styles.row}>
+            <TouchableOpacity
+              style={[styles.btn, lote === 1 && styles.selected]}
+              onPress={() => setLote(1)}
+            >
+              <Text>Lote 1 (R$ {calculatePrecoFinal()})</Text>
+            </TouchableOpacity>
+          </View>
 
-              <TouchableOpacity onPress={handleCreate} style={styles.confirm}>
-                <Text style={{ color: "#fff" }}>Criar</Text>
-              </TouchableOpacity>
-            </View>
+          {/* Botões */}
+          <View style={styles.actions}>
+            <TouchableOpacity onPress={onClose} style={styles.cancel}>
+              <Text>Cancelar</Text>
+            </TouchableOpacity>
 
+            <TouchableOpacity
+              onPress={handleCreate}
+              style={[styles.confirm, (!userId || loadingUser) && { opacity: 0.5 }]}
+              disabled={!userId || loadingUser}
+            >
+              <Text style={{ color: "#fff" }}>Comprar</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </Modal>
-    );
-  }
+      </View>
+    </Modal>
+  );
+}

@@ -8,8 +8,8 @@ import { Feather } from "@expo/vector-icons";
 import TicketModal from "@/components/TicketModal";
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-
-
+import Toast from "react-native-toast-message"
+import { useLocalSearchParams } from "expo-router"
 
 type Localizacao = {
   nome: string;
@@ -26,19 +26,21 @@ type EventProps = {
   capacidade_Max: number;
   horario_Inicio: string;
   horario_Final: string;
+  preco_base: number;
 }
-
-
 
 export default function DetailsEvent() {
   const [data, setData] = useState<EventProps | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter();
+  const { id } = useLocalSearchParams()
+
+  console.log("ID do evento:", id);
 
   useEffect(() => {
     const fetchEventos = async () => {
       try {
-        const response = await fetch(`https://localhost:7221/Evento/ObterEventoPorID?id=${12}`);
+        const response = await fetch(`https://localhost:7221/Evento/ObterEventoPorID?id=${id}`);
         const eventos = await response.json();
         setData(eventos);
         console.log(eventos)
@@ -52,7 +54,7 @@ export default function DetailsEvent() {
 
   async function sendIngresso(ingresso: any) {
     try {
-      const response = await fetch("https://localhost:7221/Ingresso", {
+      const response = await fetch("https://localhost:7221/Ingresso/Create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -175,7 +177,7 @@ export default function DetailsEvent() {
           }}
         >
           <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-            Gerar Ingresso
+            Comprar Ingresso
           </Text>
         </TouchableOpacity>
 
@@ -185,15 +187,22 @@ export default function DetailsEvent() {
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         evento={data}
+        precoBase={data ? data.preco_base : 0}
         onCreate={async (ingresso) => {
           try {
             await sendIngresso(ingresso);
-            alert("Ingresso criado com sucesso!");
+            Toast.show({
+              type: 'success',
+              text1: 'Ingresso criado com sucesso!'
+            });
 
-            router.push("/my-tickets");   // 👈 navigate here
+            router.push("/my-tickets"); 
 
           } catch (err) {
-            alert("Erro ao criar ingresso.");
+            Toast.show({
+              type: 'error',
+              text1: 'Erro ao criar ingresso. Tente novamente.'
+            });
           }
         }}
       />

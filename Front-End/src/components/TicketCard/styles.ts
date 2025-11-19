@@ -50,5 +50,10 @@ export default StyleSheet.create<Styles>({
   },
   outerContainer: {
     flexDirection: "row",
-  }
+  }, priceText: {
+    marginHorizontal: 10,
+    marginBottom: 10,
+    padding: 0,
+    fontWeight: "bold",
+  },
 });

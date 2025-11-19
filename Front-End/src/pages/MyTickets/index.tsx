@@ -11,6 +11,7 @@ type Ticket = {
   time_end: string;
   imgURL: string;
   codigo?: string | number;
+  preco_final: number;     // ✅ ADD THIS
 };
 
 type ApiTicket = {
@@ -32,7 +33,7 @@ type ApiTicket = {
   data_compra: string;
   valido: boolean;
   lote: number;
-  preco_base: number;
+  preco_final: number;
 };
 
 export default function MyTickets() {
@@ -72,6 +73,7 @@ export default function MyTickets() {
             time_start: ev.horario_Inicio ?? "",
             time_end: ev.horario_Final ?? "",
             imgURL: ev.urlBanner ?? "",
+            preco_final: item.preco_final,   // ✅ SEND TO FRONTEND
           };
         });
 
@@ -112,7 +114,7 @@ export default function MyTickets() {
         </View>
       )}
       {tickets.map((t, i) => (
-        <TicketCard key={t.codigo ?? i} {...t} />
+        <TicketCard key={t.codigo ?? i} {...t} preco_final={t.preco_final}/>
       ))}
     </View>
   );
