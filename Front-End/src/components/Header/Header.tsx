@@ -59,6 +59,17 @@ export default function Header() {
       {isMobile ? (
         <>
           {/* Botão de menu sanduíche */}
+          {(() => {
+            const state = (navigation as any).getState?.();
+            const currentRouteName = state?.routes?.[state.index]?.name;
+            if (currentRouteName === "home") return null;
+            return (
+              <TouchableOpacity onPress={() => navigation.navigate("home" as never)}>
+                <FontAwesome name="home" size={32} color="#000" />
+              </TouchableOpacity>
+            );
+          })()}
+
           <TouchableOpacity onPress={() => setMenuOpen(true)}>
             <FontAwesome name="bars" size={32} color="#000" />
           </TouchableOpacity>
@@ -92,14 +103,14 @@ export default function Header() {
 
                 {/* Ajuda */}
                 <Text style={styles.sectionTitle}>Ajuda</Text>
-                <HeaderButton icon="file-text" label="FAQ's" onPress={() => {goTo("faq")}} />
-                <HeaderButton icon="headphones" label="Suporte" onPress={() => {goTo("support")}} />
-                <HeaderButton icon="comments" label="Feedback" onPress={() => {goTo("feedback")}} />
+                <HeaderButton icon="file-text" label="FAQ's" onPress={() => { goTo("faq") }} />
+                <HeaderButton icon="headphones" label="Suporte" onPress={() => { goTo("support") }} />
+                <HeaderButton icon="comments" label="Feedback" onPress={() => { goTo("feedback") }} />
 
                 {/* Sobre */}
                 <Text style={styles.sectionTitle}>Sobre</Text>
-                <HeaderButton icon="file-text" label="Termos e Condições" onPress={() => {goTo("terms-and-conditions")}} />
-                <HeaderButton icon="file-text" label="Políticas e Privacidade" onPress={() => {goTo("policies-and-privacy")}} />
+                <HeaderButton icon="file-text" label="Termos e Condições" onPress={() => { goTo("terms-and-conditions") }} />
+                <HeaderButton icon="file-text" label="Políticas e Privacidade" onPress={() => { goTo("policies-and-privacy") }} />
 
                 <Text style={styles.sectionTitle}>Sair</Text>
                 <HeaderButton icon="home" label="Sair" onPress={() => handleLogout()} />

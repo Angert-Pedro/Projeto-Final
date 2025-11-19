@@ -319,12 +319,16 @@ namespace API.Validator.Controllers
                 string assunto = "";
 
                 if (link.ToUpper() == "RECUPERARSENHA")
+                {
                     assunto = "Recuperação de senha";
+                    msg = montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
+                }
 
                 else if (link.ToUpper() == "ATIVARCONTA")
+                {
                     assunto = "Ativação de conta";
-                
-                msg = montarMensagemAtivacaoConta(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
+                    msg = montarMensagemAtivacaoConta(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
+                }
 
                 Notificacao notificacao = new Notificacao(assunto, destinatario.Email, msg, token, usuario);
 

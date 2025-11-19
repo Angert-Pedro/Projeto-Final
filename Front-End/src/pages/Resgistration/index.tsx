@@ -10,10 +10,12 @@ import {
   Platform,
   ScrollView,
   Modal,
+  TextInput,
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
+import { styles as fieldStyles } from "@/components/FormField/styles";
 import { useNavigation } from "@react-navigation/native";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import validateRegister from "@/utils/validateRegister";
@@ -32,6 +34,11 @@ export default function RegistrationScreen() {
   const [isChecked, setIsChecked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [showPasswords, setShowPasswords] = useState(false);
+
+  // data máxima permitida para nascimento: hoje menos 18 anos
+  const today = new Date();
+  const maxBirthDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
   const handleCheckboxChange = () => {
     if (!isChecked) {
@@ -110,8 +117,8 @@ export default function RegistrationScreen() {
           Pessoa_: {
             Nome: nome,
             Email: email,
-            Numero: celular,
-            Cpf: cpf,
+              Numero: celular,
+              Cpf: cpf.replace(/\D/g, ""),
             Data_Nasc: dataNascParaBackend,
           },
         }),
@@ -146,6 +153,15 @@ export default function RegistrationScreen() {
     }
   }
 
+  function formatCpfInput(text: string) {
+    const digits = text.replace(/\D/g, "").slice(0, 11);
+    if (!digits) return "";
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `${digits.slice(0, 3)}.${digits.slice(3)}`;
+    if (digits.length <= 9) return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6)}`;
+    return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6, 9)}-${digits.slice(9)}`;
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
@@ -165,13 +181,18 @@ export default function RegistrationScreen() {
               label=""
               placeholder="Nome Completo"
               value={nome}
-              onChangeText={setNome}
+              onChangeText={(text) => {
+                const clean = text.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ\s~\^´]/g, "");
+                setNome(clean);
+              }}
             />
             <FormField
               label=""
               placeholder="CPF"
               value={cpf}
-              onChangeText={setCpf}
+              onChangeText={(text) => setCpf(formatCpfInput(text))}
+              keyboardType={Platform.OS === 'web' ? 'default' : 'numeric'}
+              maxLength={14}
             />
 
             {Platform.OS === "web" ? (
@@ -191,6 +212,7 @@ export default function RegistrationScreen() {
                 <input
                   id="realDateInput"
                   type="date"
+                  max={formatDateForInput(maxBirthDate)}
                   value={birthDate ? formatDateForInput(birthDate) : ""}
                   onChange={(e: any) => {
                     const val = e.target.value;
@@ -221,10 +243,10 @@ export default function RegistrationScreen() {
                 </TouchableOpacity>
                 {showDatePicker && (
                   <DateTimePicker
-                    value={birthDate || new Date(2000, 0, 1)}
+                    value={birthDate || maxBirthDate}
                     mode="date"
                     display={Platform.OS === "ios" ? "spinner" : "default"}
-                    maximumDate={new Date()}
+                    maximumDate={maxBirthDate}
                     onChange={(event: any, selectedDate?: Date) => {
                       setShowDatePicker(false);
                       if (selectedDate) {
@@ -240,13 +262,18 @@ export default function RegistrationScreen() {
               label=""
               placeholder="Usuário"
               value={username}
-              onChangeText={setUsername}
+              onChangeText={(text) => {
+                const clean = text.replace(/[^a-zA-Z0-9]/g, "");
+                setUsername(clean);
+              }}
             />
             <FormField
               label=""
               placeholder="E-mail"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(text) => setEmail(text.slice(0, 90))}
+              keyboardType={Platform.OS === 'web' ? 'default' : 'email-address'}
+              maxLength={90}
             />
             <FormField
               label=""
@@ -258,16 +285,30 @@ export default function RegistrationScreen() {
               label=""
               placeholder="Senha"
               value={senha}
-              isSecure={true}
+              isSecure={!showPasswords}
               onChangeText={setSenha}
             />
-            <FormField
-              label=""
-              placeholder="Confirmar Senha"
-              value={confirmarSenha}
-              isSecure={true}
-              onChangeText={setConfirmarSenha}
-            />
+
+            <View style={{ width: '100%', marginBottom: 20 }}>
+              <TextInput
+                placeholder="Confirmar Senha"
+                placeholderTextColor="#8A8A8E"
+                value={confirmarSenha}
+                onChangeText={setConfirmarSenha}
+                secureTextEntry={!showPasswords}
+                autoCapitalize="none"
+                style={[fieldStyles.input, { width: '100%' }]}
+              />
+
+              <TouchableOpacity
+                onPress={() => setShowPasswords((s) => !s)}
+                style={{ marginTop: 8, alignSelf: 'flex-start' }}
+              >
+                <Text style={{ color: "#454B60", fontWeight: "600" }}>
+                  {showPasswords ? "Ocultar senha" : "Mostrar senha"}
+                </Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.checkboxContainer}>
               <Checkbox
                 value={isChecked}

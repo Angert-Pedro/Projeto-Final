@@ -27,7 +27,6 @@ export default function RegisterStudentCard() {
   const [instituicao, setInstituicao] = useState("");
   const [foto, setFoto] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [dataNascimento, setDataNascimento] = useState("");
   const [fotoTemp, setFotoTemp] = useState<string | null>(null);
 
   const handleCheckboxChange = () => {
@@ -151,14 +150,6 @@ export default function RegisterStudentCard() {
               placeholder="Curso"
               value={curso}
               onChangeText={setCurso}
-            />
-            <MaskedTextInput
-              mask="99/99/9999"
-              placeholder="Data de Nascimento"
-              keyboardType="numeric"
-              value={dataNascimento}
-              onChangeText={(text) => setDataNascimento(text)}
-              style={styles.maskedInput}
             />
             <FormField
               label=""
