@@ -24,6 +24,7 @@ namespace API.Models
         public OperacaoLogin Usuario_logado { get; set; } = OperacaoLogin.Logout;
         public virtual Pessoa? Pessoa_ { get; set; }
         public bool Ativo { get; set; }
+        //public int Carteirinha_id { get; set; }
     }
     public enum OperacaoLogin
     {
