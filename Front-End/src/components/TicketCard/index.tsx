@@ -8,6 +8,7 @@ type TicketCardProps = {
   time_start: string;
   time_end: string;
   imgURL: string;
+  preco_final: number;
 };
 
 function formatDateToPt(dateInput: string) {
@@ -68,6 +69,7 @@ export default function TicketCard(props: TicketCardProps) {
             <View style={styles.timeContainer}>
               <Text style={styles.timeText}>{start}</Text>
               <Text style={styles.timeText}>{end}</Text>
+              <Text >R$ {props.preco_final.toFixed(2)}</Text>
             </View>
           </View>
         </View>

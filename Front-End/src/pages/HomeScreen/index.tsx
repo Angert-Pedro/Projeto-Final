@@ -11,8 +11,9 @@ import {
 } from "react-native";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/";
-import { useNavigation } from "@react-navigation/native";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { router } from "expo-router";
+import { useNavigation } from "expo-router";
 
 export default function Index() {
   const [data, setData] = useState<any[]>([]);
@@ -21,16 +22,13 @@ export default function Index() {
   useEffect(() => {
     const fetchEventos = async () => {
       try {
-        const response = await fetch("https://localhost:7221/Evento/obterEventos"); // ajuste a URL
+        const response = await fetch("https://localhost:7221/Evento/obterEventos");
         const eventos = await response.json();
 
-        // adapta os dados do backend para o formato usado no carrossel
         const mappedData = eventos.map((item: any) => ({
           id: item.id,
           title: item.nome,
-          image: { uri: item.urlBanner }, // ← usa a url que vem do banco
-          screen: `details-event`,
-          params: { id: item.id }       // você pode definir uma tela padrão
+          image: { uri: item.urlBanner },
         }));
 
         setData(mappedData);
@@ -41,6 +39,28 @@ export default function Index() {
 
     fetchEventos();
   }, []);
+
+  const renderEvent = ({ item }: any) => (
+    <TouchableOpacity
+      onPress={() => router.push(`/details-event?id=${item.id}`)}
+      style={{ alignItems: "center" }}
+    >
+      <Image
+        source={item.image}
+        style={{ width: 120, height: 180, borderRadius: 8 }}
+      />
+      <Text
+        style={{
+          marginTop: 5,
+          fontSize: 16,
+          fontWeight: "600",
+          textAlign: "center",
+        }}
+      >
+        {item.title}
+      </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <AuthProvider>
@@ -53,68 +73,24 @@ export default function Index() {
             <FlatList
               data={data}
               horizontal
-              pagingEnabled={false}
-              showsHorizontalScrollIndicator={false}
               keyExtractor={(item) => item.id.toString()}
+              renderItem={renderEvent}
               contentContainerStyle={{ paddingHorizontal: 10 }}
               ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate(item.screen as never)}
-                  style={{ alignItems: "center" }}
-                >
-                  <Image
-                    source={item.image}
-                    style={{ width: 120, height: 180, borderRadius: 8 }}
-                  />
-                  <Text
-                    style={{
-                      marginTop: 5,
-                      fontSize: 16,
-                      fontWeight: "600",
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-              )}
             />
 
             <Text style={styles.title}>Eventos próximos</Text>
             <FlatList
               data={data}
               horizontal
-              pagingEnabled={false}
-              showsHorizontalScrollIndicator={false}
               keyExtractor={(item) => item.id.toString()}
+              renderItem={renderEvent}
               contentContainerStyle={{ paddingHorizontal: 10 }}
               ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate(item.screen as never)}
-                  style={{ alignItems: "center" }}
-                >
-                  <Image
-                    source={item.image}
-                    style={{ width: 120, height: 180, borderRadius: 8 }}
-                  />
-                  <Text
-                    style={{
-                      marginTop: 5,
-                      fontSize: 16,
-                      fontWeight: "600",
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-              )}
             />
           </View>
 
-          <Footer navigation={navigation} />
+          <Footer navigation={navigation}/>
         </ScrollView>
       </SafeAreaView>
     </AuthProvider>
@@ -136,25 +112,5 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     margin: 20,
     color: "#333",
-  },
-  listPadding: {
-    paddingHorizontal: 10,
-  },
-  cardContainer: {
-    alignItems: "center",
-    width: 170,
-  },
-  cardImage: {
-    width: "100%",
-    height: 250,
-    borderRadius: 8,
-  },
-  cardTitle: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: "500",
-    letterSpacing: 0.5,
-    textAlign: "center",
-    color: "#1C1C1E",
   },
 });
