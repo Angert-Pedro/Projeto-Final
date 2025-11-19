@@ -49,5 +49,22 @@ namespace API.Validator.Controllers
                 return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
             }
         }
+
+        [HttpGet("ObterEventoPorID")]
+        public IActionResult obterEventoPorID(int id)
+        {
+            try
+            {
+                Evento evento = _service.listarPor(x => x.Id == id);
+                if (evento != null)
+                    return Ok(evento);
+                else
+                    return NotFound("Evento não encontrado!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
+            }
+        }
     }
 }
