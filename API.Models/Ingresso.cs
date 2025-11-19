@@ -14,12 +14,12 @@ namespace API.Models
         public string Tipo { get; set; }
 
         [Column("evento_id")]
-        public int EventoId { get; set; }
+        public int Evento_id { get; set; }
         public virtual Evento? Evento_ { get; set; }
-
         public DateTime Data_Compra { get; set; }
         public bool Valido { get; set; }
         public int Lote { get; set; }
-        public decimal Preco_Base { get; set; }
+        public int usuario_id { get; set; }
+        public decimal preco_final { get; set; }
     }
 }

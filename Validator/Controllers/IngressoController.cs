@@ -21,7 +21,7 @@ namespace API.Controllers
             return Ok(_service.listar());
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public IActionResult Create([FromBody] Ingresso ingresso)
         {
             _service.inserir(ingresso);
