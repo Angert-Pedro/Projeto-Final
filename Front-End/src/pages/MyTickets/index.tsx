@@ -103,8 +103,12 @@ export default function MyTickets() {
         </View>
       )}
       {!loading && tickets.length === 0 && !error && (
-        <View>
-          <Text>Nenhum ingresso encontrado</Text>
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyEmoji}>🎟️</Text>
+          <Text style={styles.emptyTitle}>Você ainda não possui ingressos</Text>
+          <Text style={styles.emptySubtitle}>
+            Quando você comprar um ingresso, ele aparecerá aqui 😉
+          </Text>
         </View>
       )}
       {tickets.map((t, i) => (

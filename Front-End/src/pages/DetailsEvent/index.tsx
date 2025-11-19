@@ -4,7 +4,11 @@ import { useEffect, useState } from "react"
 import { Image } from "react-native"
 import styles from "./styles"
 import Header from "@/components/Header/Header"
-import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import TicketModal from "@/components/TicketModal";
+import { TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
+
 
 
 type Localizacao = {
@@ -24,8 +28,12 @@ type EventProps = {
   horario_Final: string;
 }
 
+
+
 export default function DetailsEvent() {
   const [data, setData] = useState<EventProps | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchEventos = async () => {
@@ -41,6 +49,32 @@ export default function DetailsEvent() {
 
     fetchEventos();
   }, []);
+
+  async function sendIngresso(ingresso: any) {
+    try {
+      const response = await fetch("https://localhost:7221/Ingresso", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(ingresso),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro ao criar ingresso: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Ingresso salvo com sucesso:", data);
+
+      return data;
+
+    } catch (error) {
+      console.error("Erro no POST:", error);
+      throw error;
+    }
+  }
+
 
   return (
     <View>
@@ -129,7 +163,40 @@ export default function DetailsEvent() {
             Endereço: {data?.localizacao_?.endereco}
           </Text>
         </View>
+
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          style={{
+            backgroundColor: "#007bff",
+            padding: 14,
+            borderRadius: 10,
+            marginTop: 20,
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            Gerar Ingresso
+          </Text>
+        </TouchableOpacity>
+
       </View>
+
+      <TicketModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        evento={data}
+        onCreate={async (ingresso) => {
+          try {
+            await sendIngresso(ingresso);
+            alert("Ingresso criado com sucesso!");
+
+            router.push("/my-tickets");   // 👈 navigate here
+
+          } catch (err) {
+            alert("Erro ao criar ingresso.");
+          }
+        }}
+      />
     </View>
   )
 }
