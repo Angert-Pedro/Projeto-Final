@@ -19,7 +19,8 @@ namespace API.Services
         protected bool UsuarioLogado { get; set; }
         public bool executarLogin(Usuario usuario, string senha)
         {
-            if (_dal.listarPor(x => x.Login == usuario.Login && DescriptografarAES(x.Senha) == senha) != null)
+            var senhaDescriptografada = DescriptografarAES(usuario.Senha);
+            if (_dal.listarPor(x => x.Login == usuario.Login && senhaDescriptografada == senha) != null)
             {
                 this.HorarioEntrou = DateTime.Now;
                 this.UsuarioLogado = true;

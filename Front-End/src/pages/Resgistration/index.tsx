@@ -1,5 +1,6 @@
 import styles from "./styles";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import {
   SafeAreaView,
   View,
@@ -14,11 +15,17 @@ import Checkbox from "expo-checkbox";
 import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
 import { useNavigation } from "@react-navigation/native";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
+import validateRegister from "@/utils/validateRegister";
 
 export default function RegistrationScreen() {
   const navigation = useNavigation();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const [senha, setSenha] = useState("");
   const [celular, setCelular] = useState("");
   const [username, setUsername] = useState("");
@@ -44,7 +51,100 @@ export default function RegistrationScreen() {
     setModalVisible(false);
   };
 
-  function handleRegister() { }
+  function formatDateDisplay(d: Date | null) {
+    if (!d) return "";
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    return `${dd}/${mm}/${yyyy}`;
+  }
+
+  function formatDateForInput(d: Date) {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`; // value for <input type="date" />
+  }
+
+  async function handleRegister() {
+    const errorMessage = validateRegister({
+      nome,
+      username,
+      email,
+      celular,
+      cpf,
+      senha,
+      confirmarSenha,
+      isChecked,
+    });
+
+    if (errorMessage) {
+      Toast.show({
+        type: "error",
+        text1: errorMessage,
+        visibilityTime: 4000,
+      });
+      return;
+    }
+
+    let dataNascParaBackend: string | null = null;
+    if (birthDate) {
+      dataNascParaBackend = formatDateForInput(birthDate);
+    } else if (dataNascimento) {
+      const m = dataNascimento.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      if (m) dataNascParaBackend = `${m[3]}-${m[2]}-${m[1]}`;
+    }
+
+    if (!dataNascParaBackend) {
+      Toast.show({ type: "error", text1: "Data de nascimento inválida.", visibilityTime: 4000 });
+      return;
+    }
+
+    try {
+      const response = await fetch("https://localhost:7221/Usuario/criarUsuario", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          Login: username,
+          Senha: senha,
+          Pessoa_: {
+            Nome: nome,
+            Email: email,
+            Numero: celular,
+            Cpf: cpf,
+            Data_Nasc: dataNascParaBackend,
+          },
+        }),
+      });
+
+      const result = await response.text();
+
+      if (!response.ok) {
+        Toast.show({
+          type: "error",
+          text1: "Erro ao cadastrar usuário",
+          text2: result,
+          visibilityTime: 4000,
+        });
+        return;
+      }
+
+      Toast.show({
+        type: "success",
+        text1: "Cadastro realizado com sucesso!",
+        visibilityTime: 4000,
+      });
+
+      navigation.navigate("index" as never);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Erro ao cadastrar usuário",
+        text2: error.message || "Não foi possível cadastrar.",
+        visibilityTime: 4000,
+      });
+    }
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -59,9 +159,6 @@ export default function RegistrationScreen() {
           </View>
 
           <Text style={styles.title}>Cadastro</Text>
-          <Text style={styles.subtitle}>
-            Insira seus dados para se registrar
-          </Text>
 
           <View style={styles.formContainer}>
             <FormField
@@ -70,6 +167,75 @@ export default function RegistrationScreen() {
               value={nome}
               onChangeText={setNome}
             />
+            <FormField
+              label=""
+              placeholder="CPF"
+              value={cpf}
+              onChangeText={setCpf}
+            />
+
+            {Platform.OS === "web" ? (
+              <View style={styles.datePickerWeb}>
+    
+                {/* Input fake com placeholder */}
+                <input
+                  type="text"
+                  placeholder="   Data de Nascimento"
+                  value={birthDate ? "   " + formatDateDisplay(birthDate) : ""}
+                  onClick={() => (document.getElementById("realDateInput") as any)?.showPicker?.()}
+                  readOnly
+                  style={styles.fakeDateInput}
+                />
+    
+                {/* Input real escondido */}
+                <input
+                  id="realDateInput"
+                  type="date"
+                  value={birthDate ? formatDateForInput(birthDate) : ""}
+                  onChange={(e: any) => {
+                    const val = e.target.value;
+                    if (val) {
+                      const [y, m, d] = val.split("-");
+                      const dt = new Date(Number(y), Number(m) - 1, Number(d));
+                      setBirthDate(dt);
+                      setDataNascimento(`${d}/${m}/${y}`);
+                    }
+                  }}
+                  style={{
+                    ...styles.dateInputWeb,
+                    position: "absolute",
+                    opacity: 0,
+                    pointerEvents: "none",
+                  }}
+                />
+              </View>
+            ) : (
+              <View>
+                <TouchableOpacity
+                  onPress={() => setShowDatePicker(true)}
+                  style={styles.datePickerButton}
+                >
+                  <Text style={styles.datePickerText}>
+                    {birthDate ? formatDateDisplay(birthDate) : "Data de Nascimento"}
+                  </Text>
+                </TouchableOpacity>
+                {showDatePicker && (
+                  <DateTimePicker
+                    value={birthDate || new Date(2000, 0, 1)}
+                    mode="date"
+                    display={Platform.OS === "ios" ? "spinner" : "default"}
+                    maximumDate={new Date()}
+                    onChange={(event: any, selectedDate?: Date) => {
+                      setShowDatePicker(false);
+                      if (selectedDate) {
+                        setBirthDate(selectedDate);
+                        setDataNascimento(formatDateDisplay(selectedDate));
+                      }
+                    }}
+                  />
+                )}
+              </View>
+            )}
             <FormField
               label=""
               placeholder="Usuário"

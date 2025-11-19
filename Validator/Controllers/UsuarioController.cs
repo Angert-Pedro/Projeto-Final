@@ -43,7 +43,10 @@ namespace API.Validator.Controllers
                 {
                     if(_baseServicePessoa.listarPor(x => x.Cpf == usuario.Pessoa_.Cpf) != null)
                         return BadRequest("CPF já cadastrado!");
-                    
+
+                    if (_baseServicePessoa.listarPor(x => x.Email == usuario.Pessoa_.Email) != null)
+                        return BadRequest("E-mail já cadastrado!");
+
                     _service.criarUsuario(usuario);
                     enviarEmail(usuario, "AtivarConta");
                     return Ok("Usuário criado com sucesso!");
@@ -117,7 +120,9 @@ namespace API.Validator.Controllers
                 {
                     if (usuarioLogin.Usuario_logado == OperacaoLogin.Login)
                         return BadRequest("Usuário já está logado!");
-                    if(_service.executarLogin(usuarioLogin, usuario.Senha))
+                    else if (!usuarioLogin.Ativo)
+                        return Unauthorized("Usuário não foi ativado ainda! Verifique seu e-mail.");
+                    if (_service.executarLogin(usuarioLogin, usuario.Senha))
                         return Ok("Usuário logado!");
                     else
                         return BadRequest("Usuário ou senha incorretos!");
@@ -255,6 +260,53 @@ namespace API.Validator.Controllers
             }
         }
 
+        [HttpPost("ativarUsuario")]
+        public IActionResult ativarUsuario([FromBody] AtivarContaRequest request)
+        {
+            try
+            {
+                var token = request.Token;
+                var email = request.Email;
+
+                if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
+                    return BadRequest("Está faltando o token ou o e-mail.");
+
+                Token tk = new Token();
+
+                Notificacao notificacao = _baseServiceNotificacao.listarPor(x => x.Token == token);
+
+                if (tk.ValidarToken(email, token))
+                {
+                    Usuario usuario = _baseService.listarPor(y => y.Pessoa_.Email == email);
+                    if (usuario != null)
+                    {
+                        if (notificacao != null)
+                        {
+                            usuario.Ativo = true;
+                            _baseService.atualizar(usuario);
+                            notificacao.Token = "";
+                            _baseServiceNotificacao.atualizar(notificacao);
+                            return Ok("Usuário ativado com sucesso!");
+                        }
+                        else
+                            return BadRequest("O token já foi utilizado!");
+                    }
+                    else
+                        return BadRequest("Usuário inválido!");
+                }
+                else
+                {
+                    notificacao.Token = "";
+                    _baseServiceNotificacao.atualizar(notificacao);
+                    return BadRequest("Token inválido!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [NonAction]
         public void enviarEmail(Usuario usuario, string link)
         {
@@ -267,15 +319,12 @@ namespace API.Validator.Controllers
                 string assunto = "";
 
                 if (link.ToUpper() == "RECUPERARSENHA")
-                {
-                    msg = montarMensagemRecuperacaoSenha(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
                     assunto = "Recuperação de senha";
-                }
+
                 else if (link.ToUpper() == "ATIVARCONTA")
-                {
-                    msg = montarMensagemAtivacaoConta(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
                     assunto = "Ativação de conta";
-                }
+                
+                msg = montarMensagemAtivacaoConta(destinatario, $"http://localhost:8081/{link}?token={token}&email={usuario.Pessoa_.Email}");
 
                 Notificacao notificacao = new Notificacao(assunto, destinatario.Email, msg, token, usuario);
 
