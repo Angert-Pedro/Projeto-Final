@@ -11,7 +11,7 @@ type Ticket = {
   time_end: string;
   imgURL: string;
   codigo?: string | number;
-  preco_final: number;     // ✅ ADD THIS
+  preco_final: number; // ✅ ADD THIS
 };
 
 type ApiTicket = {
@@ -20,11 +20,7 @@ type ApiTicket = {
   evento_: {
     nome: string;
     data_Evento: string;
-    localizacao_: {
-      nome: string;
-      endereco: string;
-      capacidade: number;
-    }
+    localizacao_: { nome: string; endereco: string; capacidade: number };
     urlBanner: string;
     capacidade_max: number;
     horario_Inicio: string;
@@ -49,16 +45,23 @@ export default function MyTickets() {
 
   useEffect(() => {
     let mounted = true;
+
     async function loadTickets() {
       setLoading(true);
       setError(null);
+
       try {
         const res = await fetch("https://localhost:7221/Ingresso", {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
+
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
         console.log("fetch response:", res);
+
         const data: ApiTicket[] = await res.json();
 
         if (!mounted) return;
@@ -73,7 +76,7 @@ export default function MyTickets() {
             time_start: ev.horario_Inicio ?? "",
             time_end: ev.horario_Final ?? "",
             imgURL: ev.urlBanner ?? "",
-            preco_final: item.preco_final,   // ✅ SEND TO FRONTEND
+            preco_final: item.preco_final, // ✅ SEND TO FRONTEND
           };
         });
 
@@ -85,7 +88,9 @@ export default function MyTickets() {
         if (mounted) setLoading(false);
       }
     }
+
     loadTickets();
+
     return () => {
       mounted = false;
     };
@@ -94,16 +99,19 @@ export default function MyTickets() {
   return (
     <View style={styles.container}>
       <Header />
+
       {loading && (
         <View>
           <Text>Carregando...</Text>
         </View>
       )}
+
       {error && (
         <View>
           <Text>{error}</Text>
         </View>
       )}
+
       {!loading && tickets.length === 0 && !error && (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyEmoji}>🎟️</Text>
@@ -113,8 +121,9 @@ export default function MyTickets() {
           </Text>
         </View>
       )}
+
       {tickets.map((t, i) => (
-        <TicketCard key={t.codigo ?? i} {...t} preco_final={t.preco_final}/>
+        <TicketCard key={t.codigo ?? i} {...t} preco_final={t.preco_final} />
       ))}
     </View>
   );
