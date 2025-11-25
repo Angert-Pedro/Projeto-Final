@@ -33,6 +33,9 @@ namespace API.DAL
                 .HasIndex(p => p.Cpf)
                 .IsUnique();
 
+            modelBuilder.Entity<Ingresso>()
+                .Navigation(i => i.Evento_)
+                .AutoInclude();
         }
 
         // Método de diagnóstico: tenta abrir a conexão e lança a exceção em caso de falha

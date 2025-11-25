@@ -1,15 +1,16 @@
 import styles from "./styles";
 import React, { useEffect, useState } from "react";
 import TicketCard from "@/components/TicketCard";
-import { View, Platform, Text } from "react-native";
+import { View, Platform, Text, ScrollView } from "react-native";
 import Header from "@/components/Header/Header";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Ticket = {
-  title: string;
-  date: string;
-  time_start: string;
-  time_end: string;
-  imgURL: string;
+  nome: string;
+  data_evento: string;
+  horario_inicio: string;
+  horario_final: string;
+  urlBanner: string;
   codigo?: string | number;
   preco_final: number; // ✅ ADD THIS
 };
@@ -17,7 +18,10 @@ type Ticket = {
 type ApiTicket = {
   id: number;
   codigo: string | number;
+  tipo: string;
+  evento_id: number;
   evento_: {
+    id: number;
     nome: string;
     data_Evento: string;
     localizacao_: { nome: string; endereco: string; capacidade: number };
@@ -25,10 +29,12 @@ type ApiTicket = {
     capacidade_max: number;
     horario_Inicio: string;
     horario_Final: string;
+    preco_base: number;
   };
   data_compra: string;
   valido: boolean;
   lote: number;
+  usuario_id: number;
   preco_final: number;
 };
 
@@ -40,8 +46,8 @@ export default function MyTickets() {
   // platform-aware host for dev:
   const host =
     Platform.OS === "android"
-      ? "http://10.0.2.2:7221" // Android emulator
-      : "http://localhost:7221"; // iOS simulator or web
+      ? "https://10.0.2.2:7221" // Android emulator
+      : "https://localhost:7221"; // iOS simulator or web
 
   useEffect(() => {
     let mounted = true;
@@ -51,7 +57,9 @@ export default function MyTickets() {
       setError(null);
 
       try {
-        const res = await fetch("https://localhost:7221/Ingresso", {
+        const userLogin = await AsyncStorage.getItem("userLogin");
+
+        const res = await fetch(`https://localhost:7221/Ingresso/ListarPorUsuario?usuario=${userLogin}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -60,23 +68,22 @@ export default function MyTickets() {
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        console.log("fetch response:", res);
-
         const data: ApiTicket[] = await res.json();
 
         if (!mounted) return;
 
-        // transform API shape to TicketCard props
-        const transformed: Ticket[] = (data || []).map((item) => {
+        const ticketArray = Array.isArray(data) ? data : [data];
+
+        const transformed: Ticket[] = ticketArray.map((item) => {
           const ev = item.evento_ || ({} as ApiTicket["evento_"]);
           return {
             codigo: item.codigo,
-            title: ev.nome ?? "Evento",
-            date: ev.data_Evento ?? "",
-            time_start: ev.horario_Inicio ?? "",
-            time_end: ev.horario_Final ?? "",
-            imgURL: ev.urlBanner ?? "",
-            preco_final: item.preco_final, // ✅ SEND TO FRONTEND
+            nome: ev.nome ?? "Evento",
+            data_evento: ev.data_Evento ?? "",
+            horario_inicio: ev.horario_Inicio ?? "",
+            horario_final: ev.horario_Final ?? "",
+            urlBanner: ev.urlBanner ?? "",
+            preco_final: item.preco_final,
           };
         });
 
@@ -97,7 +104,7 @@ export default function MyTickets() {
   }, [host]);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Header />
 
       {loading && (
@@ -123,8 +130,10 @@ export default function MyTickets() {
       )}
 
       {tickets.map((t, i) => (
-        <TicketCard key={t.codigo ?? i} {...t} preco_final={t.preco_final} />
+        <View key={t.codigo ?? i} style={{ marginBottom: 10 }}>
+          <TicketCard {...t} preco_final={t.preco_final} />
+        </View>
       ))}
-    </View>
+    </ScrollView>
   );
 }

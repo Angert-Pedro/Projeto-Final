@@ -14,38 +14,41 @@ import {
 // import * as Application from 'expo-application';
 import { styles } from "./styles";
 import Header from "@/components/Header/Header";
+import Toast from "react-native-toast-message";
+import { Redirect, useNavigation } from "expo-router";
 
 export default function SupportScreen() {
+  const navigation = useNavigation();
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = () => {
     if (!subject || !message) {
-      Alert.alert(
-        "Campos incompletos",
-        "Por favor, preencha o assunto e a mensagem."
-      );
+      Toast.show({
+        type: "error",
+        text1: "Campos incompletos!",
+        text2: "Por favor, preencha o assunto e a mensagem.",
+        visibilityTime: 4000,
+      });
       return;
     }
 
     setIsSubmitting(true);
 
-    // --- LÓGICA DE ENVIO ---
-    // Aqui você faria a chamada para sua API de suporte (ex: Zendesk, Freshdesk, ou um endpoint seu)
-    // Ex: api.post('/support-ticket', { subject, message, appVersion: Application.nativeApplicationVersion })
-
     console.log("Enviando chamado:", { subject, message });
 
-    // Simula uma chamada de API
     setTimeout(() => {
       setIsSubmitting(false);
-      Alert.alert(
-        "Chamado Enviado!",
-        "Sua solicitação foi recebida. Nossa equipe responderá no seu e-mail de cadastro em breve."
-      );
+      Toast.show({
+        type: "success",
+        text1: "Sua solicitação foi recebida. ",
+        text2: "Nossa equipe responderá no seu e-mail de cadastro em breve.",
+        visibilityTime: 4000,
+      });
       setSubject("");
       setMessage("");
+      navigation.navigate("home" as never);
     }, 1500);
   };
 

@@ -12,33 +12,39 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import Header from "@/components/Header/Header";
+import Toast from "react-native-toast-message";
+import { useNavigation } from "expo-router";
 
 export default function FeedbackScreen() {
+  const navigation = useNavigation();
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = () => {
     if (feedback.length < 10) {
-      Alert.alert(
-        "Pouco detalhe",
-        "Por favor, escreva um pouco mais no seu feedback."
-      );
+      Toast.show({
+        type: "error",
+        text1: "Poucos detalhes!",
+        text2: "Por favor, escreva um pouco mais no seu feedback.",
+        visibilityTime: 4000,
+      });
       return;
     }
 
     setIsSubmitting(true);
 
-    // --- LÓGICA DE ENVIO ---
-    // Chamada para sua API de feedback
     console.log("Enviando feedback:", { feedback });
 
     setTimeout(() => {
       setIsSubmitting(false);
-      Alert.alert(
-        "Obrigado pelo Feedback!",
-        "Sua mensagem foi enviada e ajuda muito a melhorar o Validator."
-      );
+      Toast.show({
+        type: "success",
+        text1: "Obrigado pelo Feedback!",
+        text2: "Sua mensagem foi enviada e ajuda muito a melhorar o Validator.",
+        visibilityTime: 4000,
+      });
       setFeedback("");
+      navigation.navigate("home" as never);
     }, 1000);
   };
 

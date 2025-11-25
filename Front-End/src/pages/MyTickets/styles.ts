@@ -2,16 +2,17 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  emptyContainer: {
     flex: 1,
+    flexDirection: "column",
+    paddingTop: 10,
+  },
+
+  emptyContainer: {
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 30,
     marginTop: 50,
+    marginBottom: 100,
   },
 
   emptyEmoji: {
@@ -35,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles
+export default styles;

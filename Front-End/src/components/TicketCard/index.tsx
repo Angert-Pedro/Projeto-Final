@@ -3,11 +3,11 @@ import styles from "./styles";
 import { View, Text, Modal, TouchableOpacity, Image } from "react-native";
 
 type TicketCardProps = {
-  title: string;
-  date: string;
-  time_start: string;
-  time_end: string;
-  imgURL: string;
+  nome: string;
+  data_evento: string;
+  horario_inicio: string;
+  horario_final: string;
+  urlBanner: string;
   preco_final: number;
 };
 
@@ -55,17 +55,17 @@ function formatTimeToHours(dateTime: string) {
 export default function TicketCard(props: TicketCardProps) {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const start = formatTimeToHours(props.time_start);
-  const end = formatTimeToHours(props.time_end);
+  const start = formatTimeToHours(props.horario_inicio);
+  const end = formatTimeToHours(props.horario_final);
 
   return (
     <>
       <TouchableOpacity activeOpacity={0.9} onPress={() => setModalVisible(true)}>
         <View style={styles.outerContainer}>
-          <Image source={{ uri: props.imgURL }} style={styles.image} />
+          <Image source={{ uri: props.urlBanner }} style={styles.image} />
           <View style={styles.container}>
-            <Text style={styles.date}>{formatDateToPt(props.date)}</Text>
-            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.date}>{formatDateToPt(props.data_evento)}</Text>
+            <Text style={styles.title}>{props.nome}</Text>
             <View style={styles.timeContainer}>
               <Text style={styles.timeText}>{start}</Text>
               <Text style={styles.timeText}>{end}</Text>
@@ -102,9 +102,9 @@ export default function TicketCard(props: TicketCardProps) {
             }}
           >
             <Text style={{ fontSize: 18, fontWeight: "700", marginBottom: 8 }}>
-              {props.title}
+              {props.nome}
             </Text>
-            <Text style={{ marginBottom: 4 }}>{formatDateToPt(props.date)}</Text>
+            <Text style={{ marginBottom: 4 }}>{formatDateToPt(props.data_evento)}</Text>
             <Text>
               {start} — {end}
             </Text>

@@ -305,7 +305,7 @@ export default function RegistrationScreen() {
                 style={{ marginTop: 8, alignSelf: 'flex-start' }}
               >
                 <Text style={{ color: "#454B60", fontWeight: "600" }}>
-                  {showPasswords ? "Ocultar senha" : "Mostrar senha"}
+                  {showPasswords ? "Ocultar senha" : "Mostrar senhas"}
                 </Text>
               </TouchableOpacity>
             </View>
