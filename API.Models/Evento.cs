@@ -22,5 +22,6 @@ namespace API.Models
         public DateTime Horario_Inicio { get; set; }
         public DateTime Horario_Final { get; set; }
         public decimal Preco_base { get; set; }
+        public string tipo { get; set; }
     }
 }
