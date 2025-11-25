@@ -34,6 +34,11 @@ namespace API.Services
             return _dal.listarPor(func);
         }
 
+        public IEnumerable<T?> listarVariosPor(Expression<Func<T,bool>> func)
+        {
+            return _dal.listarVariosPor(func);
+        }
+
         public void atualizar(T entidade)
         {
             _dal.alterar(entidade);

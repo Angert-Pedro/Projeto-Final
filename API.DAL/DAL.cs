@@ -20,6 +20,11 @@ namespace API.DAL
             return context.Set<T>().FirstOrDefault(condicao);
         }
 
+        public IEnumerable<T?> listarVariosPor(Expression<Func<T, bool>> condicao)
+        {
+            return context.Set<T>().Where(condicao).ToList();
+        }
+
         public T? verificarExistencia(T? entidade)
         {
             return context.Set<T>().FirstOrDefault(x=>x.Equals(entidade));

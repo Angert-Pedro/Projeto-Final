@@ -1,5 +1,6 @@
 using API.Models;
 using API.Services;
+using API.Validator.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -9,10 +10,12 @@ namespace API.Controllers
     public class IngressoController : ControllerBase
     {
         private readonly BaseService<Ingresso> _service;
+        private readonly BaseService<Usuario> _serviceUsuario;
 
-        public IngressoController(BaseService<Ingresso> service)
+        public IngressoController(BaseService<Ingresso> service, BaseService<Usuario> serviceUsuario)
         {
             _service = service;
+            _serviceUsuario = serviceUsuario;
         }
 
         [HttpGet]
@@ -28,23 +31,21 @@ namespace API.Controllers
             return Ok(ingresso);
         }
 
-        [HttpGet("PorUsuario")]
-        public IActionResult ListarIngressoPorUserId(int userId)
+        [HttpGet("ListarPorUsuario")]
+        public IActionResult ListarPorUsuario([FromQuery] string usuario)
         {
             try
             {
-                var ingressos = _service.listarPor(x => x.usuario_id == userId);
-
-                if (ingressos != null)
-                    return Ok(ingressos);
+                Usuario user = _serviceUsuario.listarPor(x => x.Login == usuario);
+                if (user != null)
+                    return Ok(_service.listarVariosPor(x => x.usuario_id == user.Id && x.Evento_.Data_Evento > DateTime.Now));
                 else
-                    return NotFound("Nenhum ingresso encontrado!");
+                    return BadRequest("Usuário inválido!");
             }
             catch (Exception ex)
             {
-                return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
+                return BadRequest(ex);
             }
         }
-
     }
 }   
