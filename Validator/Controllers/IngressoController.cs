@@ -27,5 +27,24 @@ namespace API.Controllers
             _service.inserir(ingresso);
             return Ok(ingresso);
         }
+
+        [HttpGet("PorUsuario")]
+        public IActionResult ListarIngressoPorUserId(int userId)
+        {
+            try
+            {
+                var ingressos = _service.listarPor(x => x.usuario_id == userId);
+
+                if (ingressos != null)
+                    return Ok(ingressos);
+                else
+                    return NotFound("Nenhum ingresso encontrado!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
+            }
+        }
+
     }
 }   
