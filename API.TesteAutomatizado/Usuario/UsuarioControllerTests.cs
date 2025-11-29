@@ -38,20 +38,14 @@ public class UsuarioControllerTests
     [Fact]
     public void When_CriarUsuarioValido_Then_RetornaOk()
     {
+        // Triple A - AAA - Arrange / Assert / Act
         var usuario = new Usuario
         {
             Login = "teste",
             Pessoa_ = new Pessoa { Cpf = "111", Email = "a@a.com" }
         };
 
-        // listarPor
-        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
-                        .Returns((Usuario)null);
-
-        _basePessoaMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Pessoa, bool>>>()))
-                       .Returns((Pessoa)null);
-
-        // verificarExistencia (IMPORTANTE)
+        // verificarExistencia 
         _baseUsuarioMock.Setup(x => x.verificarExistencia(It.IsAny<Usuario>()))
                         .Returns(false);
 
@@ -73,7 +67,7 @@ public class UsuarioControllerTests
         // Act
         var result = _controller.criarUsuario(usuario);
 
-        // Xunit
+        // Assert
         Xunit.Assert.IsType<OkObjectResult>(result);
     }
 
