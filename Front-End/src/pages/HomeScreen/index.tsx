@@ -15,9 +15,19 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { router } from "expo-router";
 import { useNavigation } from "expo-router";
 
+type Evento = {
+  id: number;
+  title: string;
+  image: { uri: string };
+  tipo: string;
+};
+
 export default function Index() {
   const [data, setData] = useState<any[]>([]);
   const navigation = useNavigation();
+  const [filmes, setFilmes] = useState<Evento[]>([]);
+  const [eventos, setEventos] = useState<Evento[]>([]);
+
 
   useEffect(() => {
     const fetchEventos = async () => {
@@ -29,9 +39,16 @@ export default function Index() {
           id: item.id,
           title: item.nome,
           image: { uri: item.urlBanner },
+          tipo: item.tipo, // 👈 include tipo
         }));
 
-        setData(mappedData);
+        // 👇 separate by tipo
+        const filmes = mappedData.filter((x: Evento) => x.tipo === "FILME");
+        const eventosProximos = mappedData.filter((x: Evento) => x.tipo === "EVENTO");
+
+        setFilmes(filmes);
+        setEventos(eventosProximos);
+
       } catch (error) {
         console.error("Erro ao carregar eventos:", error);
       }
@@ -71,7 +88,7 @@ export default function Index() {
           <View style={styles.contentWrapper}>
             <Text style={styles.title}>Filmes em cartaz</Text>
             <FlatList
-              data={data}
+              data={filmes}
               horizontal
               keyExtractor={(item) => item.id.toString()}
               renderItem={renderEvent}
@@ -81,7 +98,7 @@ export default function Index() {
 
             <Text style={styles.title}>Eventos próximos</Text>
             <FlatList
-              data={data}
+              data={eventos}
               horizontal
               keyExtractor={(item) => item.id.toString()}
               renderItem={renderEvent}
@@ -90,7 +107,7 @@ export default function Index() {
             />
           </View>
 
-          <Footer navigation={navigation}/>
+          <Footer navigation={navigation} />
         </ScrollView>
       </SafeAreaView>
     </AuthProvider>
