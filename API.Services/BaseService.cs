@@ -1,6 +1,7 @@
 ﻿using API.Criptografia;
 using API.DAL;
 using API.Models;
+using API.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace API.Services
 {
-    public class BaseService<T> : DescriptografiaAES where T : class
+    public class BaseService<T> : DescriptografiaAES, IBaseService<T> where T : class
     {
         protected readonly DAL<T> _dal;
 

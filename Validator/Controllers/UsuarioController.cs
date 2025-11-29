@@ -1,6 +1,7 @@
 using API.Criptografia;
 using API.Models;
 using API.Services;
+using API.Services.Interfaces;
 using API.Validator.Request;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +18,12 @@ namespace API.Validator.Controllers
     [Route("[controller]")]
     public class UsuarioController : ControllerBase
     {
-        private readonly UsuarioService _service;
-        private readonly BaseService<Usuario> _baseService;
-        private readonly BaseService<Pessoa> _baseServicePessoa;
-        private readonly BaseService<Notificacao> _baseServiceNotificacao;
+        private readonly IUsuarioService _service;
+        private readonly IBaseService<Usuario> _baseService;
+        private readonly IBaseService<Pessoa> _baseServicePessoa;
+        private readonly IBaseService<Notificacao> _baseServiceNotificacao;
      
-        public UsuarioController(UsuarioService service, BaseService<Usuario> baseService, BaseService<Pessoa> baseServicePessoa, BaseService<Notificacao> baseServiceNotificacao)
+        public UsuarioController(IUsuarioService service, IBaseService<Usuario> baseService, IBaseService<Pessoa> baseServicePessoa, IBaseService<Notificacao> baseServiceNotificacao)
         {
             _service = service;
             _baseService = baseService;
