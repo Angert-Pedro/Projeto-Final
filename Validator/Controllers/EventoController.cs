@@ -33,6 +33,20 @@ namespace API.Validator.Controllers
             }
         }
 
+        [HttpPost("atualizarEvento")]
+        public IActionResult atualizarEvento([FromBody] Evento evento)
+        {
+            try
+            {
+                _service.atualizar(evento);
+                return Ok("Evento atualizado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ocorreu um erro em sua requisição! Log:" + ex);
+            }
+        }
+
         [HttpGet("ObterEventos")]
         public IActionResult obterEventos()
         {
