@@ -1089,10 +1089,7 @@
       },
       "API.Models/1.0.0": {
         "runtime": {
-          "API.Models.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "API.Models.dll": {}
         }
       }
     }

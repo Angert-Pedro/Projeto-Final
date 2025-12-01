@@ -1312,10 +1312,7 @@
           "System.IdentityModel.Tokens.Jwt": "8.14.0"
         },
         "runtime": {
-          "API.Criptografia.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "API.Criptografia.dll": {}
         }
       },
       "API.DAL/1.0.0": {
@@ -1325,18 +1322,12 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.8"
         },
         "runtime": {
-          "API.DAL.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "API.DAL.dll": {}
         }
       },
       "API.Models/1.0.0": {
         "runtime": {
-          "API.Models.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "API.Models.dll": {}
         }
       },
       "API.Services/1.0.0": {
@@ -1346,10 +1337,7 @@
           "API.Models": "1.0.0"
         },
         "runtime": {
-          "API.Services.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "API.Services.dll": {}
         }
       },
       "API.Validator/1.0.0": {
@@ -1360,10 +1348,7 @@
           "Swashbuckle.AspNetCore": "6.6.2"
         },
         "runtime": {
-          "API.Validator.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "API.Validator.dll": {}
         }
       },
       "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions/14.0.0.0": {
