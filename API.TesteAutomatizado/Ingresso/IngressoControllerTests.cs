@@ -1,6 +1,7 @@
 using API.Controllers;
 using API.Models;
 using API.Services;
+using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -10,14 +11,14 @@ using Xunit;
 
 public class IngressoControllerTests
 {
-    private readonly Mock<BaseService<Ingresso>> _ingressoServiceMock;
-    private readonly Mock<BaseService<Usuario>> _usuarioServiceMock;
+    private readonly Mock<IBaseService<Ingresso>> _ingressoServiceMock;
+    private readonly Mock<IBaseService<Usuario>> _usuarioServiceMock;
     private readonly IngressoController _controller;
 
     public IngressoControllerTests()
     {
-        _ingressoServiceMock = new Mock<BaseService<Ingresso>>();
-        _usuarioServiceMock = new Mock<BaseService<Usuario>>();
+        _ingressoServiceMock = new Mock<IBaseService<Ingresso>>();
+        _usuarioServiceMock = new Mock<IBaseService<Usuario>>();
 
         _controller = new IngressoController(
             _ingressoServiceMock.Object,

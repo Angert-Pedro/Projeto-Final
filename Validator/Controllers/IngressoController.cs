@@ -1,5 +1,6 @@
 using API.Models;
 using API.Services;
+using API.Services.Interfaces;
 using API.Validator.Request;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,10 @@ namespace API.Controllers
     [Route("[controller]")]
     public class IngressoController : ControllerBase
     {
-        private readonly BaseService<Ingresso> _service;
-        private readonly BaseService<Usuario> _serviceUsuario;
+        private readonly IBaseService<Ingresso> _service;
+        private readonly IBaseService<Usuario> _serviceUsuario;
 
-        public IngressoController(BaseService<Ingresso> service, BaseService<Usuario> serviceUsuario)
+        public IngressoController(IBaseService<Ingresso> service, IBaseService<Usuario> serviceUsuario)
         {
             _service = service;
             _serviceUsuario = serviceUsuario;

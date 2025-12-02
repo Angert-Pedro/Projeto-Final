@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj": {}
+    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj": {
+    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj",
+        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
         "projectName": "API.Models",
-        "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj",
-        "packagesPath": "C:\\Users\\hugo.oliveira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\obj\\",
+        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
+        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hugo.oliveira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,9 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.amhp.com.br/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -41,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -62,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
