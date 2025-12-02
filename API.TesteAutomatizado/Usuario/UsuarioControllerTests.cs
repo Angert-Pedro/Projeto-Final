@@ -192,4 +192,225 @@ public class UsuarioControllerTests
 
         Xunit.Assert.IsType<NotFoundObjectResult>(result);
     }
+
+    // =====================================================================
+    // TESTE 9 — Criar Usuário com CPF já cadastrado
+    // =====================================================================
+    [Fact]
+    public void When_CriarUsuarioCpfJaCadastrado_Then_RetornaBadRequest()
+    {
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns((Usuario)null);
+
+        _basePessoaMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Pessoa, bool>>>()))
+                       .Returns(new Pessoa());
+
+        var usuario = new Usuario
+        {
+            Login = "WogZada",
+            Pessoa_ = new Pessoa { Cpf = "08299469180", Email = "thiago2b9s@gmail.com" }
+        };
+
+        var result = _controller.criarUsuario(usuario);
+
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 10 — Criar Usuário com E-mail já cadastrado
+    // =====================================================================
+    [Fact]
+    public void When_CriarUsuarioEmailJaCadastrado_Then_RetornaBadRequest()
+    {
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns((Usuario)null);
+
+        // CPF não cadastrado, E-mail cadastrado
+        _basePessoaMock.SetupSequence(x => x.listarPor(It.IsAny<Expression<Func<Pessoa, bool>>>()))
+                       .Returns((Pessoa)null)
+                       .Returns(new Pessoa());
+
+        var usuario = new Usuario
+        {
+            Login = "WogZada",
+            Pessoa_ = new Pessoa { Cpf = "08299469180", Email = "thiago2b9s@gmail.com" }
+        };
+
+        var result = _controller.criarUsuario(usuario);
+
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 11 — Excluir Usuário não existe
+    // =====================================================================
+    [Fact]
+    public void When_ExcluirUsuarioNaoExiste_Then_RetornaBadRequest()
+    {
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns((Usuario)null);
+
+        var result = _controller.excluirUsuario("nonExistant");
+
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 12 — Excluir Usuário não encontrado após deletar
+    // =====================================================================
+    [Fact]
+    public void When_ExcluirUsuarioNaoEncontrado_Then_RetornaNotFound()
+    {
+        var usuario = new Usuario { Pessoa_ = new Pessoa() };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        _baseUsuarioMock.Setup(x => x.deletar(It.IsAny<Usuario>())).Returns(false);
+        _basePessoaMock.Setup(x => x.deletar(It.IsAny<Pessoa>())).Returns(false);
+
+        var result = _controller.excluirUsuario("login");
+
+        Xunit.Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 13 — Login Usuário já está logado
+    // =====================================================================
+    [Fact]
+    public void When_ExecutarLoginUsuarioJaLogado_Then_RetornaBadRequest()
+    {
+        var usuario = new Usuario { Usuario_logado = OperacaoLogin.Login, Ativo = true };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        var request = new LoginRequest { Login = "WogZada", Senha = "$Th8736%%#" };
+
+        var result = _controller.executarLogin(request);
+
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 14 — Login Usuário não ativado
+    // =====================================================================
+    [Fact]
+    public void When_ExecutarLoginUsuarioNaoAtivado_Then_RetornaUnauthorized()
+    {
+        var usuario = new Usuario { Usuario_logado = OperacaoLogin.Logout, Ativo = false };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        var request = new LoginRequest { Login = "x", Senha = "123" };
+
+        var result = _controller.executarLogin(request);
+
+        Xunit.Assert.IsType<UnauthorizedObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 15 — Login Usuário logado com sucesso
+    // =====================================================================
+    [Fact]
+    public void When_ExecutarLoginUsuarioLogado_Then_RetornaOk()
+    {
+        var usuario = new Usuario { Usuario_logado = OperacaoLogin.Logout, Ativo = true };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        _serviceMock.Setup(x => x.executarLogin(usuario, "123")).Returns(true);
+
+        var request = new LoginRequest { Login = "x", Senha = "123" };
+
+        var result = _controller.executarLogin(request);
+
+        Xunit.Assert.IsType<OkObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 16 — Login Usuário ou senha incorretos
+    // =====================================================================
+    [Fact]
+    public void When_ExecutarLoginUsuarioOuSenhaIncorretos_Then_RetornaBadRequest()
+    {
+        var usuario = new Usuario { Usuario_logado = OperacaoLogin.Logout, Ativo = true };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        _serviceMock.Setup(x => x.executarLogin(usuario, "123")).Returns(false);
+
+        var request = new LoginRequest { Login = "x", Senha = "123" };
+
+        var result = _controller.executarLogin(request);
+
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 17 — Logout Usuário não está logado
+    // =====================================================================
+    [Fact]
+    public void When_ExecutarLogoutUsuarioNaoLogado_Then_RetornaBadRequest()
+    {
+        var usuario = new Usuario { Usuario_logado = OperacaoLogin.Logout };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        var result = _controller.executarLogout("login");
+
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 18 — Logout Usuário deslogado com sucesso
+    // =====================================================================
+    [Fact]
+    public void When_ExecutarLogoutUsuarioDeslogado_Then_RetornaOk()
+    {
+        var usuario = new Usuario { Usuario_logado = OperacaoLogin.Login };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        _serviceMock.Setup(x => x.executarLogout(usuario));
+
+        var result = _controller.executarLogout("login");
+
+        Xunit.Assert.IsType<OkObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 19 — Recuperar Senha E-mail inexistente
+    // =====================================================================
+    [Fact]
+    public void When_RecuperarSenhaEmailInexistente_Then_RetornaNotFound()
+    {
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns((Usuario)null);
+
+        var result = _controller.recuperarSenha("email@email.com");
+
+        Xunit.Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTE 20 — Recuperar Senha sucesso
+    // =====================================================================
+    [Fact]
+    public void When_RecuperarSenhaSucesso_Then_RetornaOk()
+    {
+        var usuario = new Usuario { Pessoa_ = new Pessoa { Email = "email@email.com" } };
+
+        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
+                        .Returns(usuario);
+
+        var result = _controller.recuperarSenha("email@email.com");
+
+        Xunit.Assert.IsType<OkResult>(result);
+    }
 }

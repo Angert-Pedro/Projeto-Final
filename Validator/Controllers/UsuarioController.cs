@@ -119,9 +119,7 @@ namespace API.Validator.Controllers
                 usuarioLogin = _baseService.listarPor(x => x.Login == usuario.Login);
                 if (usuarioLogin != null)
                 {
-                    if (usuarioLogin.Usuario_logado == OperacaoLogin.Login)
-                        return BadRequest("Usuário já está logado!");
-                    else if (!usuarioLogin.Ativo)
+                    if (!usuarioLogin.Ativo)
                         return Unauthorized("Usuário não foi ativado ainda! Verifique seu e-mail.");
                     if (_service.executarLogin(usuarioLogin, usuario.Senha))
                         return Ok("Usuário logado!");

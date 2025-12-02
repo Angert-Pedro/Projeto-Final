@@ -14,12 +14,9 @@ namespace API.Models
         }
         [JsonIgnore]
         public int Id { get; set; }
-        public DateTime data_hora { get; set; }
-        public string local_validacao { get; set; }
-        public string status_validacao { get; set; }
-        public int ingresso_id { get; set; }
-        public int validador_id { get; set; }
-        public bool foi_bem_sucedida { get; set; }
-
+        public DateTime Data_hora { get; set; }
+        public string Local_validacao { get; set; }
+        public string Status_validacao { get; set; }
+        public string Tipo_validacao { get; set; }
     }
 }
