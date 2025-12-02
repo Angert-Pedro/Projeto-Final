@@ -4,6 +4,7 @@ import TicketCard from "@/components/TicketCard";
 import { View, Platform, Text, ScrollView } from "react-native";
 import Header from "@/components/Header/Header";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LoadingScreen from "@/components/LoadingScreen";
 
 type Ticket = {
   nome: string;
@@ -108,16 +109,36 @@ export default function MyTickets() {
       <Header />
 
       {loading && (
-        <View>
-          <Text>Carregando...</Text>
-        </View>
+        <LoadingScreen />
       )}
 
       {error && (
-        <View>
-          <Text>{error}</Text>
+        <View style={styles.errorCard}>
+          <Text style={styles.errorEmoji}>😿</Text>
+          <Text style={styles.errorTitle}>Ops! Algo deu errado</Text>
+          <Text style={styles.errorMessage}>
+            Não consegui carregar seus ingressos agora.
+          </Text>
+          <Text style={styles.errorDetails}>{error}</Text>
+
+          <Text style={styles.errorHint}>
+            Verifique sua conexão ou tente novamente.
+          </Text>
+
+          <Text
+            style={styles.tryAgainButton}
+            onPress={() => {
+              setError(null);
+              setLoading(true);
+              // força o reload do useEffect
+              setTickets([]);
+            }}
+          >
+            🔄 Tentar novamente
+          </Text>
         </View>
       )}
+
 
       {!loading && tickets.length === 0 && !error && (
         <View style={styles.emptyContainer}>
