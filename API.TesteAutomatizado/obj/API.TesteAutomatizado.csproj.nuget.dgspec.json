@@ -1,30 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj": {}
+    "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/API.TesteAutomatizado.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj": {
+    "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj",
+        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj",
         "projectName": "API.Criptografia",
-        "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj",
-        "packagesPath": "C:\\Users\\hugo.oliveira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\obj\\",
+        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj",
+        "packagesPath": "/Users/Angert/.nuget/packages/",
+        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hugo.oliveira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/Angert/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.amhp.com.br/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -68,38 +64,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.DAL\\API.DAL.csproj": {
+    "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.DAL\\API.DAL.csproj",
+        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj",
         "projectName": "API.DAL",
-        "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.DAL\\API.DAL.csproj",
-        "packagesPath": "C:\\Users\\hugo.oliveira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.DAL\\obj\\",
+        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj",
+        "packagesPath": "/Users/Angert/.nuget/packages/",
+        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.DAL/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hugo.oliveira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/Angert/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.amhp.com.br/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj"
               }
             }
           }
@@ -156,31 +148,27 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj": {
+    "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj",
+        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj",
         "projectName": "API.Models",
-        "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj",
-        "packagesPath": "C:\\Users\\hugo.oliveira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\obj\\",
+        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj",
+        "packagesPath": "/Users/Angert/.nuget/packages/",
+        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hugo.oliveira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/Angert/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.amhp.com.br/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -218,44 +206,40 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Services\\API.Services.csproj": {
+    "/Users/Angert/Faculdade/Projeto-Final/API.Services/API.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Services\\API.Services.csproj",
+        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.Services/API.Services.csproj",
         "projectName": "API.Services",
-        "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Services\\API.Services.csproj",
-        "packagesPath": "C:\\Users\\hugo.oliveira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Services\\obj\\",
+        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Services/API.Services.csproj",
+        "packagesPath": "/Users/Angert/.nuget/packages/",
+        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.Services/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hugo.oliveira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/Angert/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.amhp.com.br/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj"
               },
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.DAL\\API.DAL.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.DAL\\API.DAL.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj"
               },
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj"
               }
             }
           }
@@ -290,38 +274,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj": {
+    "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/API.TesteAutomatizado.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
+        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/API.TesteAutomatizado.csproj",
         "projectName": "API.TesteAutomatizado",
-        "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
-        "packagesPath": "C:\\Users\\hugo.oliveira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.TesteAutomatizado\\obj\\",
+        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/API.TesteAutomatizado.csproj",
+        "packagesPath": "/Users/Angert/.nuget/packages/",
+        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hugo.oliveira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/Angert/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.amhp.com.br/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\Validator\\API.Validator.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\Validator\\API.Validator.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/Validator/API.Validator.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/Validator/API.Validator.csproj"
               }
             }
           }
@@ -380,44 +360,40 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\Validator\\API.Validator.csproj": {
+    "/Users/Angert/Faculdade/Projeto-Final/Validator/API.Validator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\Validator\\API.Validator.csproj",
+        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/Validator/API.Validator.csproj",
         "projectName": "API.Validator",
-        "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\Validator\\API.Validator.csproj",
-        "packagesPath": "C:\\Users\\hugo.oliveira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\Validator\\obj\\",
+        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/Validator/API.Validator.csproj",
+        "packagesPath": "/Users/Angert/.nuget/packages/",
+        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/Validator/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hugo.oliveira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/Angert/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.amhp.com.br/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj"
               },
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Models\\API.Models.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj"
               },
-              "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Services\\API.Services.csproj": {
-                "projectPath": "C:\\Users\\hugo.oliveira\\Documents\\projetos\\Projeto-Final\\API.Services\\API.Services.csproj"
+              "/Users/Angert/Faculdade/Projeto-Final/API.Services/API.Services.csproj": {
+                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Services/API.Services.csproj"
               }
             }
           }
@@ -461,7 +437,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
