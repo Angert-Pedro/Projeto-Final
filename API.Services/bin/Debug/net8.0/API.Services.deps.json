@@ -648,7 +648,10 @@
           "System.IdentityModel.Tokens.Jwt": "8.14.0"
         },
         "runtime": {
-          "API.Criptografia.dll": {}
+          "API.Criptografia.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "API.DAL/1.0.0": {
@@ -658,12 +661,18 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.8"
         },
         "runtime": {
-          "API.DAL.dll": {}
+          "API.DAL.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "API.Models/1.0.0": {
         "runtime": {
-          "API.Models.dll": {}
+          "API.Models.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

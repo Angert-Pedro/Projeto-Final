@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("API.TesteAutomatizado")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+756d9b42edeaa9cd3b23376c3170303df05978bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9db7089192989f540a64c839e38587ec1dd64338")]
 [assembly: System.Reflection.AssemblyProductAttribute("API.TesteAutomatizado")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API.TesteAutomatizado")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

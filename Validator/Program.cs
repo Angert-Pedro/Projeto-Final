@@ -1,6 +1,7 @@
 using API.DAL;
 using API.Models;
 using API.Services;
+using API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,9 +26,9 @@ builder.Services.AddSwaggerGen();
 //Injeção de dependências
 builder.Services.AddScoped<DataContext>();
 builder.Services.AddScoped(typeof(DAL<>));
-builder.Services.AddScoped(typeof(BaseService<>));
-builder.Services.AddScoped<UsuarioService>();
-builder.Services.AddScoped<ValidacaoService>(); // <-- adicione esta linha
+builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ValidacaoService>();
 
 var app = builder.Build();
 
