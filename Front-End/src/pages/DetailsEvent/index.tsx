@@ -33,6 +33,7 @@ export default function DetailsEvent() {
   const [data, setData] = useState<EventProps | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter();
+  const userIsAdmin = true;
   const { id } = useLocalSearchParams()
 
   console.log("ID do evento:", id);
@@ -180,6 +181,23 @@ export default function DetailsEvent() {
             Comprar Ingresso
           </Text>
         </TouchableOpacity>
+
+        {userIsAdmin && (
+        <TouchableOpacity
+  onPress={() => router.push(`/edit-event?id=${id}`)}
+  style={{
+    backgroundColor: "orange",
+    padding: 14,
+    borderRadius: 10,
+    marginTop: 10,
+    alignItems: "center",
+  }}
+>
+  <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+    Editar Evento
+  </Text>
+</TouchableOpacity>
+)}
 
       </View>
 

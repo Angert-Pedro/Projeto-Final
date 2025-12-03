@@ -22,6 +22,8 @@ export default function Layout() {
         <Stack.Screen name="terms-and-conditions" options={{ headerShown: false }} />
         <Stack.Screen name="policies-and-privacy" options={{ headerShown: false }} />
         <Stack.Screen name="details-event" options={{ headerShown: false }} />
+        <Stack.Screen name="edit-event" options={{ headerShown: false }} />
+        <Stack.Screen name="create-event" options={{ headerShown: false }} />
       </Stack><Toast /></>
     </AuthProvider>
   );

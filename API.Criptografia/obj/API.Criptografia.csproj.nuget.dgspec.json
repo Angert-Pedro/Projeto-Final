@@ -1,6 +1,19 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj",
+        "projectName": "API.Criptografia",
+        "projectPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Criptografia\\API.Criptografia.csproj",
+        "packagesPath": "C:\\Users\\Pedro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Criptografia\\obj\\",
+=======
     "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj": {}
   },
   "projects": {
@@ -12,9 +25,16 @@
         "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/API.Criptografia.csproj",
         "packagesPath": "/Users/Angert/.nuget/packages/",
         "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.Criptografia/obj/",
+>>>>>>> main
         "projectStyle": "PackageReference",
         "configFilePaths": [
+<<<<<<< HEAD
+          "C:\\Users\\Pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
           "/Users/Angert/.nuget/NuGet/NuGet.Config"
+>>>>>>> main
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -64,7 +84,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+=======
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
+>>>>>>> main
         }
       }
     }

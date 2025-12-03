@@ -5105,19 +5105,38 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
+    "C:\\Users\\Pedro\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+=======
     "/Users/Angert/.nuget/packages/": {}
+>>>>>>> main
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
+      "projectName": "API.TesteAutomatizado",
+      "projectPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.TesteAutomatizado\\API.TesteAutomatizado.csproj",
+      "packagesPath": "C:\\Users\\Pedro\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.TesteAutomatizado\\obj\\",
+=======
       "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/API.TesteAutomatizado.csproj",
       "projectName": "API.TesteAutomatizado",
       "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/API.TesteAutomatizado.csproj",
       "packagesPath": "/Users/Angert/.nuget/packages/",
       "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.TesteAutomatizado/obj/",
+>>>>>>> main
       "projectStyle": "PackageReference",
       "configFilePaths": [
+<<<<<<< HEAD
+        "C:\\Users\\Pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
         "/Users/Angert/.nuget/NuGet/NuGet.Config"
+>>>>>>> main
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -5129,8 +5148,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
+            "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\Validator\\API.Validator.csproj": {
+              "projectPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\Validator\\API.Validator.csproj"
+=======
             "/Users/Angert/Faculdade/Projeto-Final/Validator/API.Validator.csproj": {
               "projectPath": "/Users/Angert/Faculdade/Projeto-Final/Validator/API.Validator.csproj"
+>>>>>>> main
             }
           }
         }
@@ -5189,7 +5213,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+=======
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
+>>>>>>> main
       }
     }
   },
