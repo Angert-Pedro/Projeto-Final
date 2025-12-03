@@ -66,7 +66,6 @@ const LoginScreen = () => {
 
         navigation.navigate("home" as never);
 
-        // Timer de 5 minutos
         setTimeout(async () => {
           await AsyncStorage.setItem("authToken", "false");
           navigation.navigate("login" as never);
@@ -91,7 +90,6 @@ const LoginScreen = () => {
         style={styles.container}
       >
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          {/* 1. Logo e Títulos */}
           <View style={styles.logoContainer}>
             <Logo />
           </View>
@@ -101,7 +99,6 @@ const LoginScreen = () => {
             Digite seu nome de usuário e senha para fazer login
           </Text>
 
-          {/* 2. Campos de Formulário */}
           <View style={styles.formContainer}>
             <FormField
               label=""
@@ -147,7 +144,6 @@ const LoginScreen = () => {
             <View style={styles.line} />
           </View>
 
-          {/* 4. Botões de Login Social */}
           <View style={styles.socialLoginContainer}>
             <TouchableOpacity
               style={[styles.socialButton, styles.facebookButton]}

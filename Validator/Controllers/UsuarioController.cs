@@ -48,6 +48,9 @@ namespace API.Validator.Controllers
                     if (_baseServicePessoa.listarPor(x => x.Email == usuario.Pessoa_.Email) != null)
                         return BadRequest("E-mail já cadastrado!");
 
+                    if (_baseServicePessoa.listarPor(x => x.Numero == usuario.Pessoa_.Numero) != null)
+                        return BadRequest("Número já cadastrado!");
+
                     _service.criarUsuario(usuario);
                     enviarEmail(usuario, "AtivarConta");
                     return Ok("Usuário criado com sucesso!");

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet  } from "react-native";
 import { useRouter } from "expo-router";
 import Toast from "react-native-toast-message";
+import Header from "@/components/Header/Header";
 
 export default function CreateEvent() {
   const router = useRouter();
@@ -61,7 +62,7 @@ export default function CreateEvent() {
 
   return (
     <ScrollView style={{ padding: 20 }}>
-      
+      <Header></Header>
       <Text style={{ fontSize: 26, fontWeight: "bold", marginBottom: 20 }}>
         Criar Novo Evento
       </Text>

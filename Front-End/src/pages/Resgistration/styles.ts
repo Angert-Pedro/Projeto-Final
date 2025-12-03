@@ -190,53 +190,66 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   datePickerWeb: {
-  width: "100%",
-  position: "relative",
-  marginVertical: 8,
-  },
-  dateInputWeb: {
+    width: "100%",
+    height: 52,
+    marginBottom: 16,
+    position: "relative",
+  } as any,
+
+  realDateInput: {
+    width: "100%",
+    height: "100%",
+    paddingLeft: 18,
+    paddingRight: 14,
+    paddingTop: 12,
+    paddingBottom: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#D0D0D0",
+    backgroundColor: "#FFF",
+    fontSize: 16,
+    color: "#454B60",
+    boxSizing: "border-box",
+    // remove aparências nativas que atrapalham o visual
+    appearance: "none",
+    WebkitAppearance: "none",
+    MozAppearance: "textfield",
+  } as any,
+
+  dateButtonOverlay: {
     position: "absolute",
     left: 0,
     top: 0,
-    width: "10%",
-    height: 1,
-    opacity: 0,
-    zIndex: 10,
-    borderWidth: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: 3,
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    padding: 0,
+    margin: 0,
+    opacity: 0,         // invisível mas clicável
+    pointerEvents: "auto",
   } as any,
 
-  fakeDateInput: {
-    width: "98%",
-    height: 48,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+  dateInputWeb: {
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    backgroundColor: "#fff",
+    borderWidth: 0,
+    backgroundColor: "transparent",
+  } as any,
+
+  fakeDateWrapper: {
+    position: "relative",
+    width: "100%",
+  },
+  fakePlaceholder: {
+    position: "absolute",
+    left: 12,
+    top: 14,
+    color: "#8A8A8E",
+    pointerEvents: "none",
     fontSize: 16,
-    color: "#222",
-    cursor: "pointer",
-    alignSelf: "stretch",
-  },
-
-  fakeDateInputPlaceholder: {
-    color: "#A9A9A9",
-  },
-
-  datePickerButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    backgroundColor: "#fff",
-  },
-
-  datePickerText: {
-    color: "#454B60",
-    fontSize: 16,
-  },
+  }
 });
 
 export default styles;

@@ -14,6 +14,7 @@ import Footer from "@/components/Footer/";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { router } from "expo-router";
 import { useNavigation } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Evento = {
   id: number;
@@ -27,11 +28,17 @@ export default function Index() {
   const navigation = useNavigation();
   const [filmes, setFilmes] = useState<Evento[]>([]);
   const [eventos, setEventos] = useState<Evento[]>([]);
-
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchEventos = async () => {
       try {
+        async function loadUser() {
+          const user = await AsyncStorage.getItem("userLogin");
+          if (!user) return;
+          setUserIsAdmin(user == "root");
+        }
+
         const response = await fetch("https://localhost:7221/Evento/obterEventos");
         const eventos = await response.json();
 
@@ -39,16 +46,15 @@ export default function Index() {
           id: item.id,
           title: item.nome,
           image: { uri: item.urlBanner },
-          tipo: item.tipo, // 👈 include tipo
+          tipo: item.tipo,
         }));
 
-        // 👇 separate by tipo
         const filmes = mappedData.filter((x: Evento) => x.tipo === "FILME");
         const eventosProximos = mappedData.filter((x: Evento) => x.tipo === "EVENTO");
 
         setFilmes(filmes);
         setEventos(eventosProximos);
-
+        loadUser();
       } catch (error) {
         console.error("Erro ao carregar eventos:", error);
       }
@@ -83,7 +89,22 @@ export default function Index() {
     <AuthProvider>
       <SafeAreaView style={styles.safeArea}>
         <Header />
-
+        {userIsAdmin && (
+          <TouchableOpacity
+            onPress={() => router.push(`/create-event`)}
+            style={{
+              backgroundColor: "green",
+              padding: 14,
+              borderRadius: 10,
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              Criar Evento
+            </Text>
+          </TouchableOpacity>
+        )}
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.contentWrapper}>
             <Text style={styles.title}>Filmes em cartaz</Text>

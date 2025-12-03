@@ -197,21 +197,10 @@ export default function RegistrationScreen() {
 
             {Platform.OS === "web" ? (
               <View style={styles.datePickerWeb}>
-    
-                {/* Input fake com placeholder */}
-                <input
-                  type="text"
-                  placeholder="   Data de Nascimento"
-                  value={birthDate ? "   " + formatDateDisplay(birthDate) : ""}
-                  onClick={() => (document.getElementById("realDateInput") as any)?.showPicker?.()}
-                  readOnly
-                  style={styles.fakeDateInput}
-                />
-    
-                {/* Input real escondido */}
                 <input
                   id="realDateInput"
                   type="date"
+                  placeholder="   Data de Nascimento"
                   max={formatDateForInput(maxBirthDate)}
                   value={birthDate ? formatDateForInput(birthDate) : ""}
                   onChange={(e: any) => {
@@ -221,23 +210,27 @@ export default function RegistrationScreen() {
                       const dt = new Date(Number(y), Number(m) - 1, Number(d));
                       setBirthDate(dt);
                       setDataNascimento(`${d}/${m}/${y}`);
+                    } else {
+                      setBirthDate(null);
+                      setDataNascimento("");
                     }
                   }}
-                  style={{
-                    ...styles.dateInputWeb,
-                    position: "absolute",
-                    opacity: 0,
-                    pointerEvents: "none",
-                  }}
+                  style={styles.realDateInput as any}
                 />
               </View>
             ) : (
               <View>
                 <TouchableOpacity
                   onPress={() => setShowDatePicker(true)}
-                  style={styles.datePickerButton}
+                  style={{
+                    paddingVertical: 12,
+                    paddingHorizontal: 16,
+                    borderRadius: 8,
+                    backgroundColor: "#f2f2f2",
+                    width: "100%",
+                  }}
                 >
-                  <Text style={styles.datePickerText}>
+                  <Text style={styles.datePickerWeb}>
                     {birthDate ? formatDateDisplay(birthDate) : "Data de Nascimento"}
                   </Text>
                 </TouchableOpacity>

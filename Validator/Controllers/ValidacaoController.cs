@@ -131,6 +131,7 @@ namespace API.Validator.Controllers
         {
             public string cpf { get; set; }
             public string matricula { get; set; }
+            public string usuario { get; set; }
         }
 
         [HttpPost("CriarCarteirinha")]
@@ -138,10 +139,14 @@ namespace API.Validator.Controllers
         {
             try
             {
-                // Verifica se já existe uma carteirinha para o CPF informado
                 var pessoa = _baseServicePessoa.listarPor(x => x.Cpf == validacao.cpf);
                 if (pessoa == null)
                     return BadRequest("O CPF não existe no nosso registro de dados!");
+
+                var usuario = _baseServiceUsuario.listarPor(x => x.Login == validacao.usuario);
+
+                if (usuario.Pessoa_.Cpf != validacao.cpf)
+                    return BadRequest("O CPF informado não é correspondente ao usuário logado!");
 
                 var carteirinhaExistente = _baseServiceCarteirinha.listarPor(x => x.Pessoa_id == pessoa.Id);
                 if (carteirinhaExistente != null)

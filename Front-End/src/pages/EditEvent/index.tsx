@@ -3,6 +3,7 @@ import { View, Text, TextInput, ScrollView, TouchableOpacity } from "react-nativ
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import Toast from "react-native-toast-message";
+import Header from "@/components/Header/Header";
 
 export default function EditEvent() {
   const { id } = useLocalSearchParams();
@@ -99,6 +100,7 @@ export default function EditEvent() {
 
   return (
     <ScrollView style={{ padding: 20 }}>
+      <Header></Header>
       <Text style={styles.title}>Editar Evento</Text>
 
       <Text>Nome do Evento</Text>

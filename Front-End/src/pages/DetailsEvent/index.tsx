@@ -10,6 +10,7 @@ import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import Toast from "react-native-toast-message"
 import { useLocalSearchParams } from "expo-router"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 type Localizacao = {
   nome: string;
@@ -32,13 +33,17 @@ type EventProps = {
 export default function DetailsEvent() {
   const [data, setData] = useState<EventProps | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
   const router = useRouter();
-  const userIsAdmin = true;
   const { id } = useLocalSearchParams()
 
-  console.log("ID do evento:", id);
 
   useEffect(() => {
+    async function loadUser() {
+      const user = await AsyncStorage.getItem("userLogin");
+      if (!user) return;
+      setUserIsAdmin(user == "root");
+    }
     const fetchEventos = async () => {
       try {
         const response = await fetch(`https://localhost:7221/Evento/ObterEventoPorID?id=${id}`);
@@ -50,6 +55,7 @@ export default function DetailsEvent() {
       }
     };
 
+    loadUser();
     fetchEventos();
   }, []);
 
@@ -183,21 +189,21 @@ export default function DetailsEvent() {
         </TouchableOpacity>
 
         {userIsAdmin && (
-        <TouchableOpacity
-  onPress={() => router.push(`/edit-event?id=${id}`)}
-  style={{
-    backgroundColor: "orange",
-    padding: 14,
-    borderRadius: 10,
-    marginTop: 10,
-    alignItems: "center",
-  }}
->
-  <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-    Editar Evento
-  </Text>
-</TouchableOpacity>
-)}
+          <TouchableOpacity
+            onPress={() => router.push(`/edit-event?id=${id}`)}
+            style={{
+              backgroundColor: "orange",
+              padding: 14,
+              borderRadius: 10,
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              Editar Evento
+            </Text>
+          </TouchableOpacity>
+        )}
 
       </View>
 
@@ -214,7 +220,7 @@ export default function DetailsEvent() {
               text1: 'Ingresso criado com sucesso!'
             });
 
-            router.push("/my-tickets"); 
+            router.push("/my-tickets");
 
           } catch (err) {
             Toast.show({
