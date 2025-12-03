@@ -179,13 +179,17 @@ const ProfileScreen = () => {
           style={styles.input}
           placeholder="Celular"
           value={form.pessoa_.numero}
-          onChangeText={(text) =>
-            setForm((prev) => ({
-              ...prev,
-              pessoa_: { ...prev.pessoa_, numero: text },
-            }))
+          onChangeText={(text) => {
+            const onlyNumbers = text.replace(/\D/g, "");
+            if (onlyNumbers.length <= 16) {
+              setForm((prev) => ({
+                ...prev,
+                pessoa_: { ...prev.pessoa_, numero: onlyNumbers },
+              }))
+            }
           }
-          placeholderTextColor="#6b7280"
+        }
+        placeholderTextColor="#6b7280"
         />
         <Ionicons name="create-outline" size={20} color="#6b7280" />
       </View>
