@@ -4,8 +4,6 @@ import {
   Text,
   TextInput,
   Button,
-  StyleSheet,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -32,8 +30,6 @@ export default function FeedbackScreen() {
     }
 
     setIsSubmitting(true);
-
-    console.log("Enviando feedback:", { feedback });
 
     setTimeout(() => {
       setIsSubmitting(false);

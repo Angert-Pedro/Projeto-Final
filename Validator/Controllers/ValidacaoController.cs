@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using API.Services;
 using API.Services.Interfaces;
+using API.Validator.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 

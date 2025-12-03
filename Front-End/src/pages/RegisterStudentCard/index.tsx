@@ -1,5 +1,5 @@
 import styles from "./styles";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   View,
@@ -8,26 +8,85 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Image,
   Modal
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
-import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import { MaskedTextInput } from "react-native-mask-text";
+import Toast from "react-native-toast-message";
+import StudentCard from "@/components/StudentCard";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Header from "@/components/Header/Header";
+
+type Carteirinha = {
+  id: number;
+  pessoa_id: number;
+  instituicao: string;
+  curso: string;
+  matricula: string;
+  foto: string;
+  dataNascimento: string;
+  tipoCurso: string;
+  entidadeEmissora: string;
+  nome: string;
+  qrCode: string;
+  turno: string;
+  codigoUso: string;
+  validade: string;
+};
 
 export default function RegisterStudentCard() {
   const navigation = useNavigation();
-  const [nome, setNome] = useState("");
-  const [curso, setCurso] = useState("");
+  const [cpf, setCpf] = useState("");
   const [matricula, setMatricula] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [instituicao, setInstituicao] = useState("");
-  const [foto, setFoto] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [fotoTemp, setFotoTemp] = useState<string | null>(null);
+  const [hasCarteirinha, setHasCarteirinha] = useState(true);
+  const [carteirinha, setCarteirinha] = useState<Carteirinha | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCarteirinha = async () => {
+      const userLogin = await AsyncStorage.getItem("userLogin");
+
+      if (!userLogin) {
+        console.warn("Nenhum userLogin salvo no AsyncStorage.");
+        setLoading(false);
+        return;
+      }
+      
+      if (!userLogin) {
+        console.log("No user login found, skipping fetch");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        console.log("Fetching carteirinha for user:", userLogin);
+        const response = await fetch(
+          `https://localhost:7221/Validacao/listarValidacaoPorUsuario?usuario=${encodeURIComponent(userLogin)}`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Carteirinha found:", data);
+          setCarteirinha(data);
+          setHasCarteirinha(true);
+        } else {
+          console.log("No carteirinha found, status:", response.status);
+          setHasCarteirinha(false);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar carteirinha:", error);
+        setHasCarteirinha(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCarteirinha();
+  }, []);
 
   const handleCheckboxChange = () => {
     if (!isChecked) {
@@ -47,255 +106,188 @@ export default function RegisterStudentCard() {
     setModalVisible(false);
   };
 
-  const handleFotoChange = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      alert("Permissão para acessar a galeria é necessária!");
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setFotoTemp(result.assets[0].uri);
-      setModalVisible(true);
-    }
-  };
-
-  const confirmarFoto = () => {
-    setFoto(fotoTemp);
-    setFotoTemp(null);
-    setModalVisible(false);
-  };
-
-  const cancelarFoto = () => {
-    setFotoTemp(null);
-    setModalVisible(false);
-  };
-
   async function handleRegistrateStudentCard() {
-  try {
-    const validacao = {
-      data_hora: new Date().toISOString(), // pega a data/hora atual no formato ISO
-      local_validacao: "Evento Cultural - São Paulo", // exemplo
-      status_validacao: "Em análise",
-      ingresso_id: 1, // substitua conforme seu caso
-      validador_id: 2, // substitua conforme seu caso
-      foi_bem_sucedida: true
-    };
+    try {
+      const validacao = {
+        cpf: cpf,
+        matricula: matricula
+      };
 
-    const response = await fetch("https://10.0.2.2:7221/Validacao/criarValidacao", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(validacao),
-    });
+      const response = await fetch("https://localhost:7221/Validacao/CriarCarteirinha", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validacao),
+      });
 
-    const result = await response.text();
+      const result = await response.text();
 
-    if (!response.ok) {
-      alert("Erro: " + result);
-      return;
+      if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: "Atenção!",
+          text2: result
+        });
+        return;
+      }
+
+      Toast.show({
+        type: 'success',
+        text1: "Sucesso",
+        text2: "Validação criada com sucesso!"
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Erro:", error.message);
+        Toast.show({
+          type: 'error',
+          text1: "Atenção!",
+          text2: "Erro ao enviar requisição: " + error.message
+        });
+      }
     }
-
-    alert("Validação criada com sucesso!");
-  } catch (error) {
-  if (error instanceof Error) {
-    console.error("Erro:", error.message);
-    alert("Erro ao enviar requisição: " + error.message);
-  } else {
-    console.error("Erro desconhecido:", error);
-    alert("Erro desconhecido");
   }
-}
-}
 
-
-    return (
-    <SafeAreaView style={styles.safeArea}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
-      >
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          <View style={styles.logoContainer}>
-            <Logo />
+  return (
+    <SafeAreaView style={[styles.safeArea, { flex: 1 }]}>
+      <Header />
+      <View style={{ flex: 1 }}>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <Text>Carregando...</Text>
           </View>
+        ) : hasCarteirinha && carteirinha ? (
+          <StudentCard route={{ params: { carteirinha } }} />
+        ) : (
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.container}
+          >
+            <ScrollView contentContainerStyle={styles.scrollViewContent}>
+            <View style={styles.logoContainer}>
+              <Logo />
+            </View>
 
+            <View style={styles.formContainer}>
+              <Text style={styles.title}>Registrar carteirinha</Text>
+              <Text style={styles.subtitle}>
+                Insira os dados da sua carteirinha
+              </Text>
+              <FormField
+                label=""
+                placeholder="CPF"
+                value={cpf}
+                keyboardType="numeric"
+                onChangeText={(text) => {
+                  const onlyNumbers = text.replace(/\D/g, "");
 
-          <View style={styles.formContainer}>
-            <Text style={styles.title}>Registrar carteirinha</Text>
-            <Text style={styles.subtitle}>
-              Insira os dados da sua carteirinha
-            </Text>
-            <FormField
-              label=""
-              placeholder="Nome Completo"
-              value={nome}
-              onChangeText={setNome}
-            />
-            <FormField
-              label=""
-              placeholder="Instituição de Ensino"
-              value={instituicao}
-              onChangeText={setInstituicao}
-            />
-            <FormField
-              label=""
-              placeholder="Curso"
-              value={curso}
-              onChangeText={setCurso}
-            />
-            <FormField
-              label=""
-              placeholder="Número da Matrícula"
-              value={matricula}
-              onChangeText={setMatricula}
-            />
-            <View>
-              <Text style={styles.fotoLabel}>Foto do Estudante</Text>
-              <TouchableOpacity
-                style={[
-                  styles.uploadButton,
-                  foto && styles.uploadButtonDisabled,
-                ]}
-                onPress={handleFotoChange}
-                disabled={!!foto}
-              >
-                <Text style={styles.uploadButtonText}>
-                  {foto ? "Foto Selecionada" : "Selecionar Foto"}
-                </Text>
-              </TouchableOpacity>
-
-              {/* Modal de pré-visualização */}
-              <Modal
-                animationType="fade"
-                transparent
-                visible={modalVisible}
-                onRequestClose={cancelarFoto}
-              >
+                  if (onlyNumbers.length <= 11) {
+                    setCpf(onlyNumbers);
+                  }
+                }}
+              />
+              <FormField
+                label=""
+                placeholder="Matrícula"
+                value={matricula}
+                onChangeText={setMatricula}
+              />
+              <View style={styles.checkboxContainer}>
+                <Checkbox
+                  value={isChecked}
+                  onValueChange={handleCheckboxChange}
+                  color={isChecked ? "#34C759" : undefined}
+                  style={styles.checkbox}
+                />
+                <Text style={styles.text}>Concordo com os termos e condições</Text>
+              </View>
+              {/* Modal de Termos e Condições */}
+              <Modal animationType="fade" transparent visible={modalVisible}>
                 <View style={styles.modalOverlay}>
                   <View style={styles.modalContent}>
-                    <Text style={styles.modalTitle}>Confirmar foto?</Text>
-                    {fotoTemp && (
-                      <Image source={{ uri: fotoTemp }} style={styles.modalImage} />
-                    )}
+                    <Text style={styles.modalTitle}>Termos e Condições</Text>
+
+                    <ScrollView style={styles.scrollArea}>
+                      <Text style={styles.modalText}>
+                        Ao registrar sua carteirinha, você concorda em fornecer
+                        informações verdadeiras e atualizadas. O uso deste aplicativo é
+                        destinado exclusivamente à validação de carteirinhas estudantis
+                        para fins de meia-entrada em eventos culturais e educacionais.
+                        Seus dados serão utilizados apenas para validação junto à
+                        instituição de ensino e organizadores de eventos. É proibido o
+                        uso indevido ou a falsificação de informações. Ao prosseguir,
+                        você autoriza o tratamento dos seus dados conforme a Lei Geral
+                        de Proteção de Dados (LGPD).
+                      </Text>
+                    </ScrollView>
+
                     <View style={styles.modalButtons}>
                       <TouchableOpacity
                         style={[styles.modalButton, styles.cancelButton]}
-                        onPress={cancelarFoto}
+                        onPress={recusarTermos}
                       >
-                        <Text style={styles.cancelText}>Cancelar</Text>
+                        <Text style={styles.cancelText}>Recusar</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={[styles.modalButton, styles.confirmButton]}
-                        onPress={confirmarFoto}
+                        onPress={aceitarTermos}
                       >
-                        <Text style={styles.confirmText}>Confirmar</Text>
+                        <Text style={styles.confirmText}>Aceitar</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
                 </View>
               </Modal>
-            </View>
-            <View style={styles.checkboxContainer}>
-              <Checkbox
-                value={isChecked}
-                onValueChange={handleCheckboxChange}
-                color={isChecked ? "#34C759" : undefined}
-                style={styles.checkbox}
-              />
-              <Text style={styles.text}>Concordo com os termos e condições</Text>
-            </View>
-            {/* Modal de Termos e Condições */}
-            <Modal animationType="fade" transparent visible={modalVisible}>
-              <View style={styles.modalOverlay}>
-                <View style={styles.modalContent}>
-                  <Text style={styles.modalTitle}>Termos e Condições</Text>
-
-                  <ScrollView style={styles.scrollArea}>
-                    <Text style={styles.modalText}>
-                      Ao registrar sua carteirinha, você concorda em fornecer
-                      informações verdadeiras e atualizadas. O uso deste aplicativo é
-                      destinado exclusivamente à validação de carteirinhas estudantis
-                      para fins de meia-entrada em eventos culturais e educacionais.
-                      Seus dados serão utilizados apenas para validação junto à
-                      instituição de ensino e organizadores de eventos. É proibido o
-                      uso indevido ou a falsificação de informações. Ao prosseguir,
-                      você autoriza o tratamento dos seus dados conforme a Lei Geral
-                      de Proteção de Dados (LGPD).
-                    </Text>
-                  </ScrollView>
-
-                  <View style={styles.modalButtons}>
-                    <TouchableOpacity
-                      style={[styles.modalButton, styles.cancelButton]}
-                      onPress={recusarTermos}
-                    >
-                      <Text style={styles.cancelText}>Recusar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[styles.modalButton, styles.confirmButton]}
-                      onPress={aceitarTermos}
-                    >
-                      <Text style={styles.confirmText}>Aceitar</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
+              <View style={styles.buttonsContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("home" as never)}
+                  style={{
+                    backgroundColor: "#6b6b6b",
+                    paddingVertical: 15,
+                    borderRadius: 8,
+                    alignItems: "center",
+                    marginTop: 30,
+                    width: "50%"
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "#FFF",
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Voltar
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handleRegistrateStudentCard}
+                  style={{
+                    backgroundColor: "#454B60",
+                    paddingVertical: 15,
+                    borderRadius: 8,
+                    alignItems: "center",
+                    marginTop: 30,
+                    width: "50%"
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "#FFF",
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Validar
+                  </Text>
+                </TouchableOpacity>
               </View>
-            </Modal>
-            <View style={styles.buttonsContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("home" as never)}
-                style={{
-                  backgroundColor: "#6b6b6b",
-                  paddingVertical: 15,
-                  borderRadius: 8,
-                  alignItems: "center",
-                  marginTop: 30,
-                  width: "50%"
-                }}
-              >
-                <Text
-                  style={{
-                    color: "#FFF",
-                    fontSize: 16,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Voltar
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleRegistrateStudentCard}
-                style={{
-                  backgroundColor: "#454B60",
-                  paddingVertical: 15,
-                  borderRadius: 8,
-                  alignItems: "center",
-                  marginTop: 30,
-                  width: "50%"
-                }}
-              >
-                <Text
-                  style={{
-                    color: "#FFF",
-                    fontSize: 16,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Validar
-                </Text>
-              </TouchableOpacity>
             </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      )}
+      </View>
     </SafeAreaView>
   );
 }

@@ -3,10 +3,15 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: "#F2F2F7",
-    marginTop: 50,
+    flex: 1,
   },
   container: {
     flex: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   scrollViewContent: {
     justifyContent: "center",

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
+import Toast from "react-native-toast-message";
 
 export default function EditEvent() {
   const { id } = useLocalSearchParams();
@@ -47,8 +48,11 @@ export default function EditEvent() {
         setLoading(false);
 
       } catch (err) {
-        Alert.alert("Erro", "Não foi possível carregar o evento.");
-        console.log(err);
+        Toast.show({
+          type: 'error',
+          text1: "Atenção!",
+          text2: "Não foi possível carregar o evento."
+        });
       }
     };
 
@@ -74,12 +78,20 @@ export default function EditEvent() {
 
       if (!res.ok) throw new Error();
 
-      Alert.alert("Sucesso", "Evento atualizado!");
+      Toast.show({
+        type: 'success',
+        text1: "Sucesso",
+        text2: "Evento atualizado!"
+      });
+      
       router.push(`/details-event?id=${id}`);
 
     } catch (err) {
-      Alert.alert("Erro", "Falha ao atualizar evento");
-      console.log(err);
+      Toast.show({
+        type: 'error',
+        text1: "Atenção!",
+        text2: "Falha ao atualizar evento"
+      });
     }
   };
 

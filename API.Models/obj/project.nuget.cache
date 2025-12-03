@@ -1,21 +1,18 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "B2jrRbs7c7E=",
+  "dgSpecHash": "c4nVRg80ypA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Models\\API.Models.csproj",
-=======
-  "dgSpecHash": "Mj342y2cy9c=",
-  "success": true,
-  "projectFilePath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj",
->>>>>>> main
+  "projectFilePath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
   "expectedPackageFiles": [],
   "logs": [
     {
       "code": "Undefined",
       "level": "Warning",
+      "message": "Problem reading the cache file C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
+      "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
       "warningLevel": 1,
-      "message": "Problem reading the cache file /Users/Angert/Faculdade/Projeto-Final/API.Models/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "filePath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
+      "targetGraphs": []
     }
   ]
 }
