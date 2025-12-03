@@ -173,20 +173,23 @@ export default function DetailsEvent() {
           </Text>
         </View>
 
-        <TouchableOpacity
-          onPress={() => setModalVisible(true)}
-          style={{
-            backgroundColor: "#007bff",
-            padding: 14,
-            borderRadius: 10,
-            marginTop: 20,
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-            Comprar Ingresso
-          </Text>
-        </TouchableOpacity>
+        {!userIsAdmin && (
+          <TouchableOpacity
+            onPress={() => setModalVisible(true)}
+            style={{
+              backgroundColor: "#007bff",
+              padding: 14,
+              borderRadius: 10,
+              marginTop: 20,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              Comprar Ingresso
+            </Text>
+          </TouchableOpacity>
+        )}
+        
 
         {userIsAdmin && (
           <TouchableOpacity
