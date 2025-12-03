@@ -86,7 +86,6 @@ const ProfileScreen = () => {
 
   async function editarPerfil() {
     try {
-      console.log(form);
       await fetch("https://localhost:7221/Usuario/atualizarUsuario", {
         method: "POST",
         headers: {

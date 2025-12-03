@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
-  Alert,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select"; // Importando o dropdown
 import { Feather as Icon } from "@expo/vector-icons";
 import EditField from "@/components/EditField";
+import Toast from "react-native-toast-message";
 
 interface ValidationResult {
   id: string;
@@ -32,7 +32,12 @@ const CheckIdScreen = () => {
 
   const handleVerify = async () => {
     if (!entity || !validity || !cpf) {
-      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Por favor, preencha todos os campos.",
+        visibilityTime: 4000,
+      });
       return;
     }
 
@@ -58,7 +63,12 @@ const CheckIdScreen = () => {
 
       setResult(mockResult);
     } catch (error) {
-      Alert.alert("Erro", "Nenhuma carteirinha encontrada com esses dados.");
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Nenhuma carteirinha encontrada com esses dados.",
+        visibilityTime: 4000,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -67,9 +77,7 @@ const CheckIdScreen = () => {
   return (
     <View style={styles.card}>
       <View style={styles.contentRow}>
-        {/* Coluna da Esquerda (Formulário) */}
         <View style={styles.formColumn}>
-          {/* Dropdown de Entidade Emissora */}
           <Text style={styles.label}>Entidade emissora</Text>
           <View style={styles.dropdownContainer}>
             <RNPickerSelect

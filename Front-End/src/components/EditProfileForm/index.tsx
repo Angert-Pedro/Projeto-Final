@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
-  Image,
-  Alert,
   ActivityIndicator,
 } from "react-native";
 import EditField from "@/components/EditField";

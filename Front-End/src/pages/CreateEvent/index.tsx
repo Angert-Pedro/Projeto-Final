@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, StyleSheet  } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet  } from "react-native";
 import { useRouter } from "expo-router";
+import Toast from "react-native-toast-message";
 
 export default function CreateEvent() {
   const router = useRouter();
@@ -41,11 +42,19 @@ export default function CreateEvent() {
         throw new Error("Erro ao criar evento");
       }
 
-      Alert.alert("Sucesso", "Evento cadastrado com sucesso!");
+      Toast.show({
+        type: 'success',
+        text1: "Sucesso!",
+        text2: "Evento criado com sucesso."
+      });
       router.push("/"); 
 
     } catch (err) {
-      Alert.alert("Erro", "Não foi possível cadastrar o evento.");
+      Toast.show({
+        type: 'error',
+        text1: "Erro",
+        text2: "Não foi possível cadastrar o evento."
+      });
       console.error(err);
     }
   };

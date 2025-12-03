@@ -1,58 +1,39 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.DAL\\API.DAL.csproj": {}
+    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.DAL\\API.DAL.csproj": {
+    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.DAL\\API.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj",
         "projectName": "API.DAL",
-        "projectPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.DAL\\API.DAL.csproj",
-        "packagesPath": "C:\\Users\\Pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.DAL\\obj\\",
-=======
-    "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj": {}
-  },
-  "projects": {
-    "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj",
-        "projectName": "API.DAL",
-        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.DAL/API.DAL.csproj",
-        "packagesPath": "/Users/Angert/.nuget/packages/",
-        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.DAL/obj/",
->>>>>>> main
+        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\API.DAL.csproj",
+        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.DAL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\Pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-          "/Users/Angert/.nuget/NuGet/NuGet.Config"
->>>>>>> main
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-<<<<<<< HEAD
-              "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Models\\API.Models.csproj": {
-                "projectPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Models\\API.Models.csproj"
-=======
-              "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj": {
-                "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj"
->>>>>>> main
+              "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj": {
+                "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj"
               }
             }
           }
@@ -66,7 +47,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -109,47 +91,32 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Models\\API.Models.csproj": {
+    "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Models\\API.Models.csproj",
+        "projectUniqueName": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
         "projectName": "API.Models",
-        "projectPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Models\\API.Models.csproj",
-        "packagesPath": "C:\\Users\\Pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pedro\\OneDrive\\Documents\\GitHub\\Projeto-Final\\API.Models\\obj\\",
-=======
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj",
-        "projectName": "API.Models",
-        "projectPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/API.Models.csproj",
-        "packagesPath": "/Users/Angert/.nuget/packages/",
-        "outputPath": "/Users/Angert/Faculdade/Projeto-Final/API.Models/obj/",
->>>>>>> main
+        "projectPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\API.Models.csproj",
+        "packagesPath": "C:\\Users\\Mário\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mário\\source\\repos\\Projeto-Final\\API.Models\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\Pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mário\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-          "/Users/Angert/.nuget/NuGet/NuGet.Config"
->>>>>>> main
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -167,7 +134,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -188,11 +156,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
->>>>>>> main
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

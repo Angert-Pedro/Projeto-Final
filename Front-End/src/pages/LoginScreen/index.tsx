@@ -5,7 +5,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -23,9 +22,17 @@ const LoginScreen = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleGoogleLogin = () => Alert.alert("Login com Google");
+  const handleGoogleLogin = () => Toast.show({
+    type: 'info',
+    text1: "Login com Google",
+    text2: "Funcionalidade em desenvolvimento."
+  });
   const handleSignUp = () => navigation.navigate("create-profile" as never);
-  const handleFacebookLogin = () => Alert.alert("Login com Facebook");
+  const handleFacebookLogin = () => Toast.show({
+    type: 'info',
+    text1: "Login com Facebook",
+    text2: "Funcionalidade em desenvolvimento."
+  });
   const handleForgotPassword = () => navigation.navigate("forgot-password" as never);
 
   const handleLogin = async () => {
@@ -44,7 +51,6 @@ const LoginScreen = () => {
       const result = await response.text();
 
       if (!response.ok) {
-        console.log("❌ Erro do servidor:", response.status, result);
         Toast.show({
           type: "error",
           text1: "Erro na tentativa de login",
@@ -69,7 +75,11 @@ const LoginScreen = () => {
         throw new Error("Resposta inválida do servidor");
       }
     } catch (error: any) {
-      Alert.alert("Erro", error.message || "Não foi possível realizar o login.");
+      Toast.show({
+        type: 'error',
+        text1: "Erro",
+        text2: error.message || "Não foi possível realizar o login."
+      });
     }
   };
 

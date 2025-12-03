@@ -4,8 +4,6 @@ import {
   Text,
   TextInput,
   Button,
-  StyleSheet,
-  Alert,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -35,8 +33,6 @@ export default function SupportScreen() {
     }
 
     setIsSubmitting(true);
-
-    console.log("Enviando chamado:", { subject, message });
 
     setTimeout(() => {
       setIsSubmitting(false);
