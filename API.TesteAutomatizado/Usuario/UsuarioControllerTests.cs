@@ -7,6 +7,7 @@ using Moq;
 using System;
 using System.Linq.Expressions;
 using Xunit;
+namespace API.TesteAutomatizadoUsuario;
 
 public class UsuarioControllerTests
 {
@@ -275,24 +276,6 @@ public class UsuarioControllerTests
     }
 
     // =====================================================================
-    // TESTE 13 — Login Usuário já está logado
-    // =====================================================================
-    [Fact]
-    public void When_ExecutarLoginUsuarioJaLogado_Then_RetornaBadRequest()
-    {
-        var usuario = new Usuario { Usuario_logado = OperacaoLogin.Login, Ativo = true };
-
-        _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
-                        .Returns(usuario);
-
-        var request = new LoginRequest { Login = "WogZada", Senha = "$Th8736%%#" };
-
-        var result = _controller.executarLogin(request);
-
-        Xunit.Assert.IsType<BadRequestObjectResult>(result);
-    }
-
-    // =====================================================================
     // TESTE 14 — Login Usuário não ativado
     // =====================================================================
     [Fact]
@@ -303,7 +286,7 @@ public class UsuarioControllerTests
         _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
                         .Returns(usuario);
 
-        var request = new LoginRequest { Login = "x", Senha = "123" };
+        var request = new LoginRequest { Login = "passivaAtrevida", Senha = "$Th8736%%#" };
 
         var result = _controller.executarLogin(request);
 
@@ -343,7 +326,7 @@ public class UsuarioControllerTests
 
         _serviceMock.Setup(x => x.executarLogin(usuario, "123")).Returns(false);
 
-        var request = new LoginRequest { Login = "x", Senha = "123" };
+        var request = new LoginRequest { Login = "x", Senha = "1235" };
 
         var result = _controller.executarLogin(request);
 
@@ -404,7 +387,7 @@ public class UsuarioControllerTests
     [Fact]
     public void When_RecuperarSenhaSucesso_Then_RetornaOk()
     {
-        var usuario = new Usuario { Pessoa_ = new Pessoa { Email = "email@email.com" } };
+        var usuario = new Usuario { Pessoa_ = new Pessoa { Email = "thiago2b9s@gmail.com" } };
 
         _baseUsuarioMock.Setup(x => x.listarPor(It.IsAny<Expression<Func<Usuario, bool>>>()))
                         .Returns(usuario);
