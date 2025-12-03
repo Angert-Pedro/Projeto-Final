@@ -11,15 +11,13 @@ namespace API.TesteAutomatizadoEvento;
 
 public class EventoControllerTests
 {
-    private readonly Mock<IEventoService> _serviceMock;
-    private readonly EventoController _controller;
     private readonly Mock<IBaseService<Evento>> _baseEventoMock;
     private readonly Mock<IBaseService<Localizacao>> _baseLocalizacaoMock;
 
+    private readonly EventoController _controller;
+
     public EventoControllerTests()
     {
-        _serviceMock = new Mock<IEventoService>();
-
         _baseEventoMock = new Mock<IBaseService<Evento>>();
         _baseLocalizacaoMock = new Mock<IBaseService<Localizacao>>();
 
@@ -30,13 +28,57 @@ public class EventoControllerTests
     }
 
     // =====================================================================
-    // TESTE 1 — Listar eventos com sucesso (retorna eventos futuros)
+    // TESTES DE criarEvento
     // =====================================================================
+
+    [Fact]
+    public void When_CriarEventoComSucesso_Then_RetornaOk()
+    {
+        // Arrange
+        var evento = new Evento
+        {
+            Id = 1,
+            Nome = "Show",
+            Data_Evento = DateTime.Now.AddDays(5)
+        };
+
+        _baseEventoMock
+            .Setup(x => x.inserir(evento))
+            .Verifiable();
+
+        // Act
+        var result = _controller.criarEvento(evento);
+
+        // Assert
+        Xunit.Assert.IsType<OkObjectResult>(result);
+        _baseEventoMock.Verify(x => x.inserir(evento), Times.Once);
+    }
+
+    [Fact]
+    public void When_CriarEventoFalha_Then_RetornaBadRequest()
+    {
+        // Arrange
+        var evento = new Evento { Id = 1, Nome = "Erro" };
+
+        _baseEventoMock
+            .Setup(x => x.inserir(It.IsAny<Evento>()))
+            .Throws(new Exception("Falha ao inserir"));
+
+        // Act
+        var result = _controller.criarEvento(evento);
+
+        // Assert
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTES de obterEventos
+    // =====================================================================
+
     [Fact]
     public void When_ListarEventosFuturosExistem_Then_RetornaOk()
     {
-        // Triple A - AAA - Arrange / Assert / Act
-
+        // Arrange
         var eventos = new List<Evento>
         {
             new Evento { Id = 1, Nome = "Show", Data_Evento = DateTime.Now.AddDays(1) },
@@ -54,16 +96,13 @@ public class EventoControllerTests
         Xunit.Assert.IsType<OkObjectResult>(result);
     }
 
-    // =====================================================================
-    // TESTE 2 — Nenhum evento encontrado (retorna NotFound)
-    // =====================================================================
     [Fact]
     public void When_ListarEventosFuturosNaoExistem_Then_RetornaNotFound()
     {
         // Arrange
         _baseEventoMock
             .Setup(x => x.listarVariosPor(It.IsAny<Expression<Func<Evento, bool>>>()))
-            .Returns(new List<Evento>()); // vazio
+            .Returns(new List<Evento>());
 
         // Act
         var result = _controller.obterEventos();
@@ -72,19 +111,72 @@ public class EventoControllerTests
         Xunit.Assert.IsType<NotFoundObjectResult>(result);
     }
 
-    // =====================================================================
-    // TESTE 3 — Service lança exceção (retorna BadRequest)
-    // =====================================================================
     [Fact]
     public void When_ListarEventosFuturosErro_Then_RetornaBadRequest()
     {
         // Arrange
         _baseEventoMock
             .Setup(x => x.listarVariosPor(It.IsAny<Expression<Func<Evento, bool>>>()))
-            .Throws(new Exception("Erro de teste"));
+            .Throws(new Exception("Erro"));
 
         // Act
         var result = _controller.obterEventos();
+
+        // Assert
+        Xunit.Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    // =====================================================================
+    // TESTES de obterEventoPorID
+    // =====================================================================
+
+    [Fact]
+    public void When_ObterEventoPorIDExiste_Then_RetornaOk()
+    {
+        // Arrange
+        var evento = new Evento
+        {
+            Id = 10,
+            Nome = "Teste",
+            Data_Evento = DateTime.Now.AddDays(10)
+        };
+
+        _baseEventoMock
+            .Setup(x => x.listarPor(It.IsAny<Expression<Func<Evento, bool>>>()))
+            .Returns(evento);
+
+        // Act
+        var result = _controller.obterEventoPorID(10);
+
+        // Assert
+        Xunit.Assert.IsType<OkObjectResult>(result);
+    }
+
+    [Fact]
+    public void When_ObterEventoPorIDNaoExiste_Then_RetornaNotFound()
+    {
+        // Arrange
+        _baseEventoMock
+            .Setup(x => x.listarPor(It.IsAny<Expression<Func<Evento, bool>>>()))
+            .Returns((Evento)null);
+
+        // Act
+        var result = _controller.obterEventoPorID(5);
+
+        // Assert
+        Xunit.Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
+    public void When_ObterEventoPorIDErro_Then_RetornaBadRequest()
+    {
+        // Arrange
+        _baseEventoMock
+            .Setup(x => x.listarPor(It.IsAny<Expression<Func<Evento, bool>>>()))
+            .Throws(new Exception("erro"));
+
+        // Act
+        var result = _controller.obterEventoPorID(1);
 
         // Assert
         Xunit.Assert.IsType<BadRequestObjectResult>(result);

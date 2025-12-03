@@ -127,6 +127,7 @@ export default function RegistrationScreen() {
       const result = await response.text();
 
       if (!response.ok) {
+        console.log("❌ Erro do servidor:", response.status, result);
         Toast.show({
           type: "error",
           text1: "Erro ao cadastrar usuário",
