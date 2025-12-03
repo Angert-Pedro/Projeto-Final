@@ -126,27 +126,43 @@ namespace API.Validator.Controllers
             }
         }
 
-        [HttpPost("CriarCarteirinha")]
-        public async Task<IActionResult> CriarCarteirinha([FromBody] string cpf)
+        public class CriarCarteirinhaRequest
         {
-            try { 
+            public string cpf { get; set; }
+            public string matricula { get; set; }
+        }
+
+        [HttpPost("CriarCarteirinha")]
+        public async Task<IActionResult> CriarCarteirinha([FromBody] CriarCarteirinhaRequest validacao)
+        {
+            try
+            {
+                // Verifica se já existe uma carteirinha para o CPF informado
+                var pessoa = _baseServicePessoa.listarPor(x => x.Cpf == validacao.cpf);
+                if (pessoa == null)
+                    return BadRequest("O CPF não existe no nosso registro de dados!");
+
+                var carteirinhaExistente = _baseServiceCarteirinha.listarPor(x => x.Pessoa_id == pessoa.Id);
+                if (carteirinhaExistente != null)
+                    return BadRequest("Já existe uma carteirinha para este CPF!");
+
                 using var client = new HttpClient();
 
                 client.DefaultRequestHeaders.Add("User-Agent",
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0 Safari/537.36");
 
                 var response = await client.GetAsync(
-                    $"https://fesn-dne-digital.azurewebsites.net/app/{cpf}"
+                    $"https://fesn-dne-digital.azurewebsites.net/app/{validacao.cpf}"
                 );
 
-                Validacao validacao = new Validacao();
+                Validacao validacaoObj = new Validacao();
 
-                validacao.Data_hora = DateTime.Now;
-                validacao.Tipo_validacao = "criação";
+                validacaoObj.Data_hora = DateTime.Now;
+                validacaoObj.Tipo_validacao = "criação";
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    validacao.Status_validacao = "invalida";
+                    validacaoObj.Status_validacao = "invalida";
                     return BadRequest("Carteirinha não existe!");
                 }
 
@@ -154,11 +170,6 @@ namespace API.Validator.Controllers
 
                 if (result == null)
                     return BadRequest("Retorno inválido.");
-
-                var pessoa = _baseServicePessoa.listarPor(x => x.Cpf == result.cpf);
-
-                if (pessoa == null)
-                    return BadRequest("O CPF não existe no nosso registro de dados!");
 
                 Carteirinha carteirinha = new Carteirinha()
                 {
@@ -172,11 +183,12 @@ namespace API.Validator.Controllers
                     QRCode = result.qrcode,
                     Turno = result.shift,
                     CodigoUso = result.use_code,
-                    Validade = Convert.ToDateTime(result.validity)
+                    Validade = Convert.ToDateTime(result.validity),
+                    Matricula = validacao.matricula
                 };
 
-                validacao.Status_validacao = "valida";
-                CriarValidacao(validacao);
+                validacaoObj.Status_validacao = "valida";
+                CriarValidacao(validacaoObj);
                 _baseServiceCarteirinha.inserir(carteirinha);
                 return Ok(carteirinha);
             }
