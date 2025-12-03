@@ -53,7 +53,7 @@ namespace API.Validator.Controllers
         {
             try
             {
-                IEnumerable<Evento> listaEventos = _service.listarVariosPor(x => x.Data_Evento > DateTime.Now);
+                IEnumerable<Evento> listaEventos = _service.listarVariosPor(x => x.Data_Evento >= DateTime.Now);
                 if (listaEventos.Count() > 0)
                     return Ok(listaEventos);
                 else
