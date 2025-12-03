@@ -21,6 +21,7 @@ namespace API.Models
         public int Capacidade_Max { get; set; }
         public DateTime Horario_Inicio { get; set; }
         public DateTime Horario_Final { get; set; }
-        public double Preco_base { get; set; }
+        public decimal Preco_base { get; set; }
+        public string tipo { get; set; }
     }
 }

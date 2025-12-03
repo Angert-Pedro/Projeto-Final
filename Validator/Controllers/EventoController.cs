@@ -1,5 +1,6 @@
 using API.Models;
 using API.Services;
+using API.Services.Interfaces;
 using API.Validator.Request;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +12,9 @@ namespace API.Validator.Controllers
     [Route("[controller]")]
     public class EventoController : ControllerBase
     {
-        private readonly BaseService<Evento> _service;
-        private readonly BaseService<Localizacao> _localizacaoService;
-        public EventoController(BaseService<Evento> service, BaseService<Localizacao> localizacaoService)
+        private readonly IBaseService<Evento> _service;
+        private readonly IBaseService<Localizacao> _localizacaoService;
+        public EventoController(IBaseService<Evento> service, IBaseService<Localizacao> localizacaoService)
         {
             _service = service;
             _localizacaoService = localizacaoService;
@@ -52,7 +53,7 @@ namespace API.Validator.Controllers
         {
             try
             {
-                IEnumerable<Evento> listaEventos = _service.listar();
+                IEnumerable<Evento> listaEventos = _service.listarVariosPor(x => x.Data_Evento > DateTime.Now);
                 if (listaEventos.Count() > 0)
                     return Ok(listaEventos);
                 else

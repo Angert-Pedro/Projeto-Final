@@ -3,10 +3,11 @@ using API.Models;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
+using API.Services.Interfaces;
 
 namespace API.Services
 {
-    public class EventoService
+    public class EventoService : IEventoService
     {
         private readonly DAL<Evento> _dal;
 

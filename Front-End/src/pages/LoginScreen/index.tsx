@@ -44,6 +44,7 @@ const LoginScreen = () => {
       const result = await response.text();
 
       if (!response.ok) {
+        console.log("❌ Erro do servidor:", response.status, result);
         Toast.show({
           type: "error",
           text1: "Erro na tentativa de login",

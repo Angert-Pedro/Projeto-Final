@@ -127,6 +127,7 @@ export default function RegistrationScreen() {
       const result = await response.text();
 
       if (!response.ok) {
+        console.log("❌ Erro do servidor:", response.status, result);
         Toast.show({
           type: "error",
           text1: "Erro ao cadastrar usuário",
@@ -305,7 +306,7 @@ export default function RegistrationScreen() {
                 style={{ marginTop: 8, alignSelf: 'flex-start' }}
               >
                 <Text style={{ color: "#454B60", fontWeight: "600" }}>
-                  {showPasswords ? "Ocultar senha" : "Mostrar senha"}
+                  {showPasswords ? "Ocultar senha" : "Mostrar senhas"}
                 </Text>
               </TouchableOpacity>
             </View>

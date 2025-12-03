@@ -1,5 +1,6 @@
 using API.Models;
 using API.Services;
+using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -8,9 +9,9 @@ namespace API.Controllers
     [Route("[controller]")]
     public class PessoaController : ControllerBase
     {
-        private readonly BaseService<Pessoa> _service;
+        private readonly IBaseService<Pessoa> _service;
 
-        public PessoaController(BaseService<Pessoa> service)
+        public PessoaController(IBaseService<Pessoa> service)
         {
             _service = service;
         }

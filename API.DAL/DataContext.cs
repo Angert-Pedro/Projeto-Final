@@ -18,7 +18,12 @@ namespace API.DAL
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Validacao> Validacao { get; set; }
         public DbSet<Notificacao> Notificacao { get; set; }
+<<<<<<< HEAD
         private string connectionString = "Server=localhost;Database=Validator;Initial Catalog=Validator;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+=======
+        public DbSet<Carteirinha> Carteirinha { get; set; }
+        private string connectionString = "Data Source=(localdb)\\Local;Initial Catalog=Validator;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+>>>>>>> main
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,6 +38,13 @@ namespace API.DAL
                 .HasIndex(p => p.Cpf)
                 .IsUnique();
 
+            modelBuilder.Entity<Ingresso>()
+                .Navigation(i => i.Evento_)
+                .AutoInclude();
+
+            modelBuilder.Entity<Carteirinha>()
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
         }
 
         // Método de diagnóstico: tenta abrir a conexão e lança a exceção em caso de falha
