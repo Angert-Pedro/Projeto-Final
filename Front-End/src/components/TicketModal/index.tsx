@@ -23,13 +23,12 @@ export default function TicketModal({
 
   const [userId, setUserId] = useState<number | null>(null);
   const [loadingUser, setLoadingUser] = useState(false);
+  const [hasCarteirinha, setHasCarteirinha] = useState(false);
 
-  // 🔄 Carrega o usuário quando o modal abrir
   useEffect(() => {
     if (visible) loadUserData();
   }, [visible]);
 
-  // 🟦 Lógica igual ao EditProfileScreen (buscar userLogin → consultar API → pegar userId)
   async function loadUserData() {
     try {
       setLoadingUser(true);
@@ -42,8 +41,6 @@ export default function TicketModal({
         return;
       }
 
-      console.log("User login recuperado:", userLogin);
-
       const response = await fetch(`https://localhost:7221/Usuario/consultarUsuario?usuario=${userLogin}`);
 
       if (!response.ok) {
@@ -53,7 +50,16 @@ export default function TicketModal({
       }
 
       const usuario = await response.json();
-      console.log("Usuário carregado pela API:", usuario);
+
+      const carteirinhaResponse = await fetch(`https://localhost:7221/Validacao/listarValidacaoPorUsuario?usuario=${userLogin}`);
+
+      if (!carteirinhaResponse.ok) {
+        console.warn("Erro ao buscar carteirinha pela API.");
+        setLoadingUser(false);
+        return;
+      }
+
+      setHasCarteirinha(carteirinhaResponse.status === 200);
 
       if (usuario?.id) {
         setUserId(usuario.id);
@@ -123,13 +129,16 @@ export default function TicketModal({
               <Text>INTEIRA</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={[styles.btn, tipo === "MEIA_ESTUDANTE" && styles.selected]}
-              onPress={() => setTipo("MEIA_ESTUDANTE")}
-            >
-              <Text>MEIA ESTUDANTE</Text>
-            </TouchableOpacity>
+            {hasCarteirinha && (
+              <TouchableOpacity
+                style={[styles.btn, tipo === "MEIA_ESTUDANTE" && styles.selected]}
+                onPress={() => setTipo("MEIA_ESTUDANTE")}
+              >
+                <Text>MEIA ESTUDANTE</Text>
+              </TouchableOpacity>
+            )}
           </View>
+
 
           {/* Lote */}
           <Text style={styles.label}>Lote</Text>
