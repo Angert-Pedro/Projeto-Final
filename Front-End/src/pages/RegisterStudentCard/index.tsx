@@ -8,26 +8,20 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Image,
   Modal
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import Logo from "@/assets/logoValidator.svg";
 import FormField from "@/components/FormField";
-import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import { MaskedTextInput } from "react-native-mask-text";
+import Toast from "react-native-toast-message";
 
 export default function RegisterStudentCard() {
   const navigation = useNavigation();
-  const [nome, setNome] = useState("");
-  const [curso, setCurso] = useState("");
+  const [cpf, setCpf] = useState("");
   const [matricula, setMatricula] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [instituicao, setInstituicao] = useState("");
-  const [foto, setFoto] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [fotoTemp, setFotoTemp] = useState<string | null>(null);
 
   const handleCheckboxChange = () => {
     if (!isChecked) {
@@ -47,76 +41,50 @@ export default function RegisterStudentCard() {
     setModalVisible(false);
   };
 
-  const handleFotoChange = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      alert("Permissão para acessar a galeria é necessária!");
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setFotoTemp(result.assets[0].uri);
-      setModalVisible(true);
-    }
-  };
-
-  const confirmarFoto = () => {
-    setFoto(fotoTemp);
-    setFotoTemp(null);
-    setModalVisible(false);
-  };
-
-  const cancelarFoto = () => {
-    setFotoTemp(null);
-    setModalVisible(false);
-  };
-
   async function handleRegistrateStudentCard() {
-  try {
-    const validacao = {
-      data_hora: new Date().toISOString(), // pega a data/hora atual no formato ISO
-      local_validacao: "Evento Cultural - São Paulo", // exemplo
-      status_validacao: "Em análise",
-      ingresso_id: 1, // substitua conforme seu caso
-      validador_id: 2, // substitua conforme seu caso
-      foi_bem_sucedida: true
-    };
+    try {
+      const validacao = {
+        cpf: cpf,
+        matricula: matricula
+      };
 
-    const response = await fetch("https://10.0.2.2:7221/Validacao/criarValidacao", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(validacao),
-    });
+      const response = await fetch("https://localhost:7221/Validacao/CriarCarteirinha", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validacao),
+      });
 
-    const result = await response.text();
+      const result = await response.text();
 
-    if (!response.ok) {
-      alert("Erro: " + result);
-      return;
+      if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: "Atenção!",
+          text2: result
+        });
+        return;
+      }
+
+      Toast.show({
+        type: 'success',
+        text1: "Sucesso",
+        text2: "Validação criada com sucesso!"
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Erro:", error.message);
+        Toast.show({
+          type: 'error',
+          text1: "Atenção!",
+          text2: "Erro ao enviar requisição: " + error.message
+        });
+      }
     }
-
-    alert("Validação criada com sucesso!");
-  } catch (error) {
-  if (error instanceof Error) {
-    console.error("Erro:", error.message);
-    alert("Erro ao enviar requisição: " + error.message);
-  } else {
-    console.error("Erro desconhecido:", error);
-    alert("Erro desconhecido");
   }
-}
-}
 
-
-    return (
+  return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -135,74 +103,23 @@ export default function RegisterStudentCard() {
             </Text>
             <FormField
               label=""
-              placeholder="Nome Completo"
-              value={nome}
-              onChangeText={setNome}
+              placeholder="CPF"
+              value={cpf}
+              keyboardType="numeric"
+              onChangeText={(text) => {
+                const onlyNumbers = text.replace(/\D/g, "");
+
+                if (onlyNumbers.length <= 11) {
+                  setCpf(onlyNumbers);
+                }
+              }}
             />
             <FormField
               label=""
-              placeholder="Instituição de Ensino"
-              value={instituicao}
-              onChangeText={setInstituicao}
-            />
-            <FormField
-              label=""
-              placeholder="Curso"
-              value={curso}
-              onChangeText={setCurso}
-            />
-            <FormField
-              label=""
-              placeholder="Número da Matrícula"
+              placeholder="Matrícula"
               value={matricula}
               onChangeText={setMatricula}
             />
-            <View>
-              <Text style={styles.fotoLabel}>Foto do Estudante</Text>
-              <TouchableOpacity
-                style={[
-                  styles.uploadButton,
-                  foto && styles.uploadButtonDisabled,
-                ]}
-                onPress={handleFotoChange}
-                disabled={!!foto}
-              >
-                <Text style={styles.uploadButtonText}>
-                  {foto ? "Foto Selecionada" : "Selecionar Foto"}
-                </Text>
-              </TouchableOpacity>
-
-              {/* Modal de pré-visualização */}
-              <Modal
-                animationType="fade"
-                transparent
-                visible={modalVisible}
-                onRequestClose={cancelarFoto}
-              >
-                <View style={styles.modalOverlay}>
-                  <View style={styles.modalContent}>
-                    <Text style={styles.modalTitle}>Confirmar foto?</Text>
-                    {fotoTemp && (
-                      <Image source={{ uri: fotoTemp }} style={styles.modalImage} />
-                    )}
-                    <View style={styles.modalButtons}>
-                      <TouchableOpacity
-                        style={[styles.modalButton, styles.cancelButton]}
-                        onPress={cancelarFoto}
-                      >
-                        <Text style={styles.cancelText}>Cancelar</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={[styles.modalButton, styles.confirmButton]}
-                        onPress={confirmarFoto}
-                      >
-                        <Text style={styles.confirmText}>Confirmar</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              </Modal>
-            </View>
             <View style={styles.checkboxContainer}>
               <Checkbox
                 value={isChecked}

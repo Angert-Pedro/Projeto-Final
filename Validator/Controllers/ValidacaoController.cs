@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using API.Services;
 using API.Services.Interfaces;
+using API.Validator.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -127,16 +128,21 @@ namespace API.Validator.Controllers
         }
 
         [HttpPost("CriarCarteirinha")]
-        public async Task<IActionResult> CriarCarteirinha([FromBody] string cpf)
+        public async Task<IActionResult> CriarCarteirinha([FromBody] CriarCarteirinhaRequest carteirinhaRequest)
         {
             try { 
+                var pessoa = _baseServicePessoa.listarPor(x => x.Cpf == carteirinhaRequest.cpf);
+                
+                if (pessoa == null)
+                    return BadRequest("O CPF não existe no nosso registro de dados!");
+
                 using var client = new HttpClient();
 
                 client.DefaultRequestHeaders.Add("User-Agent",
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0 Safari/537.36");
 
                 var response = await client.GetAsync(
-                    $"https://fesn-dne-digital.azurewebsites.net/app/{cpf}"
+                    $"https://fesn-dne-digital.azurewebsites.net/app/{carteirinhaRequest.cpf}"
                 );
 
                 Validacao validacao = new Validacao();
@@ -155,11 +161,6 @@ namespace API.Validator.Controllers
                 if (result == null)
                     return BadRequest("Retorno inválido.");
 
-                var pessoa = _baseServicePessoa.listarPor(x => x.Cpf == result.cpf);
-
-                if (pessoa == null)
-                    return BadRequest("O CPF não existe no nosso registro de dados!");
-
                 Carteirinha carteirinha = new Carteirinha()
                 {
                     DataNascimento = Convert.ToDateTime(result.birth),
@@ -172,7 +173,8 @@ namespace API.Validator.Controllers
                     QRCode = result.qrcode,
                     Turno = result.shift,
                     CodigoUso = result.use_code,
-                    Validade = Convert.ToDateTime(result.validity)
+                    Validade = Convert.ToDateTime(result.validity),
+                    Matricula = carteirinhaRequest.matricula
                 };
 
                 validacao.Status_validacao = "valida";
