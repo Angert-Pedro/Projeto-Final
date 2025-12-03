@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { StyleSheet } from "react-native";
 import Toast from "react-native-toast-message";
 import Header from "@/components/Header/Header";
+import DatePicker from "@/components/DatePicker";
+import TimePicker from "@/components/TimePicker";
 
 export default function EditEvent() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
+  const [tipo, setTipo] = useState("EVENTO");
+  const [showTypeDropdown, setShowTypeDropdown] = useState(false);
 
   const [evento, setEvento] = useState({
     id: 0,
     nome: "",
     data_Evento: "",
+    data_EventoDate: null as Date | null,
     urlBanner: "",
     capacidade_Max: "",
     horario_Inicio: "",
+    horario_InicioTime: null as Date | null,
     horario_Final: "",
+    horario_FinalTime: null as Date | null,
     preco_base: "",
     localizacao_: {
       nome: "",
@@ -35,8 +41,21 @@ export default function EditEvent() {
         );
         const data = await res.json();
 
+        // Parse dates from ISO format
+        const parseDateTime = (dateTimeString: string): Date => {
+          if (!dateTimeString) return new Date();
+          return new Date(dateTimeString);
+        };
+
+        const dataEventoDate = parseDateTime(data.data_Evento);
+        const horarioInicioTime = parseDateTime(data.horario_Inicio);
+        const horarioFinalTime = parseDateTime(data.horario_Final);
+
         setEvento({
           ...data,
+          data_EventoDate: dataEventoDate,
+          horario_InicioTime: horarioInicioTime,
+          horario_FinalTime: horarioFinalTime,
           capacidade_Max: String(data.capacidade_Max),
           preco_base: String(data.preco_base),
           localizacao_: {
@@ -46,6 +65,7 @@ export default function EditEvent() {
           },
         });
 
+        setTipo(data.tipo || "EVENTO");
         setLoading(false);
 
       } catch (err) {
@@ -62,18 +82,34 @@ export default function EditEvent() {
 
   const handleUpdate = async () => {
     try {
+      const formatDateTime = (dateObj: Date | null, timeObj: Date | null) => {
+        if (!dateObj || !timeObj) return "";
+        const y = dateObj.getFullYear();
+        const m = String(dateObj.getMonth() + 1).padStart(2, "0");
+        const d = String(dateObj.getDate()).padStart(2, "0");
+        const h = String(timeObj.getHours()).padStart(2, "0");
+        const min = String(timeObj.getMinutes()).padStart(2, "0");
+        return `${y}-${m}-${d}T${h}:${min}`;
+      };
+
       const res = await fetch("https://localhost:7221/Evento/atualizarEvento", {
-        method: "PUT",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...evento,
-          capacidade_Max: Number(evento.capacidade_Max),
-          preco_base: Number(evento.preco_base),
+          id: evento.id,
+          nome: evento.nome,
+          data_Evento: formatDateTime(evento.data_EventoDate, new Date(0, 0, 0, 0, 0)),
           localizacao_: {
             nome: evento.localizacao_.nome,
             endereco: evento.localizacao_.endereco,
             capacidade: Number(evento.localizacao_.capacidade)
-          }
+          },
+          urlBanner: evento.urlBanner,
+          capacidade_Max: Number(evento.capacidade_Max),
+          horario_Inicio: formatDateTime(evento.data_EventoDate, evento.horario_InicioTime),
+          horario_Final: formatDateTime(evento.data_EventoDate, evento.horario_FinalTime),
+          preco_base: Number(evento.preco_base),
+          tipo: tipo
         }),
       });
 
@@ -85,7 +121,7 @@ export default function EditEvent() {
         text2: "Evento atualizado!"
       });
       
-      router.push(`/details-event?id=${id}`);
+      router.push("/home");
 
     } catch (err) {
       Toast.show({
@@ -110,40 +146,87 @@ export default function EditEvent() {
         onChangeText={(t) => setEvento({ ...evento, nome: t })}
       />
 
+      <Text>Tipo</Text>
+      {Platform.OS === "web" ? (
+        <select
+          value={tipo}
+          onChange={(e) => setTipo(e.target.value)}
+          style={{
+            padding: "12px 16px",
+            borderRadius: 8,
+            border: "1px solid #d1d1d6",
+            backgroundColor: "#FFFFFF",
+            fontSize: 16,
+            marginBottom: 12,
+            width: "100%",
+            boxSizing: "border-box",
+            color: "#000"
+          } as any}
+        >
+          <option value="EVENTO">Evento</option>
+          <option value="FILME">Filme</option>
+        </select>
+      ) : (
+        <View style={styles.pickerContainer}>
+          <TouchableOpacity
+            style={styles.pickerButton}
+            onPress={() => setShowTypeDropdown(!showTypeDropdown)}
+          >
+            <Text style={styles.pickerText}>
+              {tipo === "EVENTO" ? "Evento" : "Filme"}
+            </Text>
+          </TouchableOpacity>
+          {showTypeDropdown && (
+            <View style={styles.dropdownMenu}>
+              <TouchableOpacity
+                style={styles.dropdownOption}
+                onPress={() => {
+                  setTipo("EVENTO");
+                  setShowTypeDropdown(false);
+                }}
+              >
+                <Text style={styles.dropdownOptionText}>Evento</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.dropdownOption}
+                onPress={() => {
+                  setTipo("FILME");
+                  setShowTypeDropdown(false);
+                }}
+              >
+                <Text style={styles.dropdownOptionText}>Filme</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      )}
+
       <Text>Data do Evento</Text>
-      <TextInput
-        style={styles.input}
-        value={evento.data_Evento}
-        onChangeText={(t) => setEvento({ ...evento, data_Evento: t })}
+      <DatePicker
+        date={evento.data_EventoDate}
+        onChange={(date) =>
+          setEvento({ ...evento, data_EventoDate: date })
+        }
+        maxDate={new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate())}
+        placeholder="Data do Evento"
       />
 
-      <Text>URL do Banner</Text>
-      <TextInput
-        style={styles.input}
-        value={evento.urlBanner}
-        onChangeText={(t) => setEvento({ ...evento, urlBanner: t })}
-      />
-
-      <Text>Capacidade Máxima</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        value={evento.capacidade_Max}
-        onChangeText={(t) => setEvento({ ...evento, capacidade_Max: t })}
-      />
-
-      <Text>Horário Início</Text>
-      <TextInput
-        style={styles.input}
-        value={evento.horario_Inicio}
-        onChangeText={(t) => setEvento({ ...evento, horario_Inicio: t })}
+      <Text>Horário de Início</Text>
+      <TimePicker
+        time={evento.horario_InicioTime}
+        onChange={(time) =>
+          setEvento({ ...evento, horario_InicioTime: time })
+        }
+        label="Horário de Início"
       />
 
       <Text>Horário Final</Text>
-      <TextInput
-        style={styles.input}
-        value={evento.horario_Final}
-        onChangeText={(t) => setEvento({ ...evento, horario_Final: t })}
+      <TimePicker
+        time={evento.horario_FinalTime}
+        onChange={(time) =>
+          setEvento({ ...evento, horario_FinalTime: time })
+        }
+        label="Horário Final"
       />
 
       <Text>Preço Base</Text>
@@ -215,13 +298,49 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
+    borderColor: "#d1d1d6",
+    padding: 12,
+    paddingHorizontal: 16,
     borderRadius: 8,
     marginBottom: 12,
+    fontSize: 16,
+    backgroundColor: "#FFFFFF",
+    color: "#000"
+  },
+  pickerContainer: {
+    marginBottom: 12,
+  },
+  pickerButton: {
+    borderWidth: 1,
+    borderColor: "#d1d1d6",
+    padding: 12,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+  },
+  pickerText: {
+    fontSize: 16,
+    color: "#000",
+  },
+  dropdownMenu: {
+    borderWidth: 1,
+    borderColor: "#d1d1d6",
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+    marginTop: 4,
+  },
+  dropdownOption: {
+    padding: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#d1d1d6",
+  },
+  dropdownOptionText: {
+    fontSize: 16,
+    color: "#000",
   },
   btn: {
-    backgroundColor: "orange",
+    backgroundColor: "#007bff",
     padding: 16,
     borderRadius: 10,
     marginTop: 20,

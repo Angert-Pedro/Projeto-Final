@@ -1,6 +1,5 @@
 import styles from "./styles";
 import React, { useState, useEffect } from "react";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import {
   SafeAreaView,
   View,
@@ -19,6 +18,7 @@ import { styles as fieldStyles } from "@/components/FormField/styles";
 import { useNavigation } from "@react-navigation/native";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import validateRegister from "@/utils/validateRegister";
+import DatePicker from "@/components/DatePicker";
 
 export default function RegistrationScreen() {
   const navigation = useNavigation();
@@ -27,7 +27,6 @@ export default function RegistrationScreen() {
   const [cpf, setCpf] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [birthDate, setBirthDate] = useState<Date | null>(null);
-  const [showDatePicker, setShowDatePicker] = useState(false);
   const [senha, setSenha] = useState("");
   const [celular, setCelular] = useState("");
   const [username, setUsername] = useState("");
@@ -170,9 +169,6 @@ export default function RegistrationScreen() {
       >
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           {/* 1. Logo e Títulos */}
-          <View style={styles.logoContainer}>
-            <Logo />
-          </View>
 
           <Text style={styles.title}>Cadastro</Text>
 
@@ -196,60 +192,25 @@ export default function RegistrationScreen() {
             />
 
             {Platform.OS === "web" ? (
-              <View style={styles.datePickerWeb}>
-                <input
-                  id="realDateInput"
-                  type="date"
-                  placeholder="   Data de Nascimento"
-                  max={formatDateForInput(maxBirthDate)}
-                  value={birthDate ? formatDateForInput(birthDate) : ""}
-                  onChange={(e: any) => {
-                    const val = e.target.value;
-                    if (val) {
-                      const [y, m, d] = val.split("-");
-                      const dt = new Date(Number(y), Number(m) - 1, Number(d));
-                      setBirthDate(dt);
-                      setDataNascimento(`${d}/${m}/${y}`);
-                    } else {
-                      setBirthDate(null);
-                      setDataNascimento("");
-                    }
-                  }}
-                  style={styles.realDateInput as any}
-                />
-              </View>
+              <DatePicker
+                date={birthDate}
+                onChange={(date: Date) => {
+                  setBirthDate(date);
+                  setDataNascimento(formatDateDisplay(date));
+                }}
+                maxDate={maxBirthDate}
+                placeholder="Data de Nascimento"
+              />
             ) : (
-              <View>
-                <TouchableOpacity
-                  onPress={() => setShowDatePicker(true)}
-                  style={{
-                    paddingVertical: 12,
-                    paddingHorizontal: 16,
-                    borderRadius: 8,
-                    backgroundColor: "#f2f2f2",
-                    width: "100%",
-                  }}
-                >
-                  <Text style={styles.datePickerWeb}>
-                    {birthDate ? formatDateDisplay(birthDate) : "Data de Nascimento"}
-                  </Text>
-                </TouchableOpacity>
-                {showDatePicker && (
-                  <DateTimePicker
-                    value={birthDate || maxBirthDate}
-                    mode="date"
-                    display={Platform.OS === "ios" ? "spinner" : "default"}
-                    maximumDate={maxBirthDate}
-                    onChange={(event: any, selectedDate?: Date) => {
-                      setShowDatePicker(false);
-                      if (selectedDate) {
-                        setBirthDate(selectedDate);
-                        setDataNascimento(formatDateDisplay(selectedDate));
-                      }
-                    }}
-                  />
-                )}
-              </View>
+              <DatePicker
+                date={birthDate}
+                onChange={(date: Date) => {
+                  setBirthDate(date);
+                  setDataNascimento(formatDateDisplay(date));
+                }}
+                maxDate={maxBirthDate}
+                placeholder="Data de Nascimento"
+              />
             )}
             <FormField
               label=""

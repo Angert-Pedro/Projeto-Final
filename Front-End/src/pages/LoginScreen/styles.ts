@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Index from "../HomeScreen";
 
 const styles = StyleSheet.create({
   safeArea: {

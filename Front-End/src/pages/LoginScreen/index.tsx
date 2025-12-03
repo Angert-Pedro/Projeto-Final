@@ -17,6 +17,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
+const LogoMemo = React.memo(() => (
+  <View style={{ width: 150, height: 80 }}>
+    <Logo width={150} height={80} />
+  </View>
+));
+
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [login, setLogin] = useState("");
@@ -91,7 +97,7 @@ const LoginScreen = () => {
       >
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={styles.logoContainer}>
-            <Logo />
+            <LogoMemo />
           </View>
 
           <Text style={styles.title}>Login</Text>

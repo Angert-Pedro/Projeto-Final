@@ -1,6 +1,6 @@
 import { styles } from "./styles";
 import { Image } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import HeaderButton from "./HeaderButtons";
 import Logo from "../../assets/logoValidator.svg";
 import { FontAwesome } from "@expo/vector-icons";
@@ -8,10 +8,23 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Dimensions, Modal, TouchableOpacity, View, Text } from "react-native";
 
-export default function Header() {
+const LogoMemo = React.memo(() => (
+  <View style={{ width: 120, height: 50 }}>
+    <Logo width={120} height={50} />
+  </View>
+));
+
+function HeaderComponent() {
   const navigation = useNavigation();
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = Dimensions.get("window").width < 888;
+
+  // Memoize the logo to prevent unmounting during navigation
+  const logoComponent = useMemo(() => (
+    <View style={{ width: 120, height: 50 }}>
+      <Logo width={120} height={50} />
+    </View>
+  ), []);
 
   async function handleLogout() {
     const savedLogin = await AsyncStorage.getItem("userLogin");
@@ -54,7 +67,7 @@ export default function Header() {
   return (
     <View style={styles.headerContainerWeb}>
       {/* Logo */}
-      <Logo />
+      <LogoMemo />
 
       {isMobile ? (
         <>
@@ -136,3 +149,5 @@ export default function Header() {
     </View>
   );
 }
+
+export default React.memo(HeaderComponent);
